@@ -1,0 +1,490 @@
+﻿
+.nhan-hang {
+    width: 100%;
+    height: 100px;
+    display: flex; /* Sử dụng flexbox để căn giữa */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    overflow: hidden; /* Đảm bảo ảnh không vượt ra ngoài */
+}
+
+    .nhan-hang img {
+        margin: 80px 30px; /* Điều chỉnh khoảng cách giữa các ảnh */
+        width: auto;
+        border-radius: 5px;
+        padding: 10px;
+        transform: translateY(10px); /* Di chuyển ảnh xuống 10px */
+        transition: transform 0.3s, box-shadow 0.3s; /* Thêm hiệu ứng chuyển tiếp */
+    }
+        /* Tạo hiệu ứng bóng ảnh khi rê chuột vào */
+        .nhan-hang img:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Tạo bóng khi rê chuột vào */
+            transform: translateY( 5px ); /* Di chuyển ảnh lên một chút để tăng hiệu ứng 3D */
+            border-radius: 10px;
+        }
+
+/* GU NAO CUNG CO */
+.gunaocungco {
+    font-family: "Playfair Display", serif;
+    color: rgb(203, 180, 158);
+    text-align: center;
+    font-size: 45px;
+    margin-top: 0px; /* Điều chỉnh giá trị âm để đẩy văn bản lên trên */
+    width: 100%;
+}
+
+.body-anh div {
+    opacity: 0; /* Bắt đầu với độ mờ 0 để ẩn phần tử */
+    transform: translateY( 100px ); /* Di chuyển phần tử xuống để tạo hiệu ứng xuất hiện */
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out; /* Hiệu ứng chuyển tiếp */
+}
+
+    .body-anh div.show {
+        opacity: 1; /* Hiển thị phần tử */
+        transform: translateX(0); /* Di chuyển phần tử về vị trí ban đầu */
+    }
+
+.body-anh {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+    .body-anh img {
+        height: 300px;
+        width: auto;
+        transition: all 0.5s ease;
+    }
+
+        .body-anh img:hover {
+            transform: translateY(-20px);
+        }
+
+.caption {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.anh1,
+.anh3 {
+    margin-top: 50px;
+    margin: 50px; /* Adjust this value to control the distance */
+    width:100px;
+    height:100px
+}
+
+.anh2 {
+    margin-top: 0; /* Keep image 2 at the default position */
+}
+
+/* GMT Section */
+.anhtext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.anhgmt img {
+    max-width: 100%;
+    height: auto;
+}
+
+.textgmt {
+    text-align: center;
+    font-size: 45px;
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 600px;
+}
+
+.dangnhap button {
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 13px;
+    font-size: 16px;
+    opacity: 0.7; /* Độ mờ (giá trị từ 0 đến 1, 1 là không mờ, 0 là hoàn toàn trong suốt) */
+}
+
+    .dangnhap button:hover {
+        opacity: 1; /* Khi hover, độ mờ sẽ về 1 (rõ ràng) */
+        background-color: red; /* Màu nền khi hover */
+    }
+
+/**/
+/* Text animation: Slide in from the left */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Image animation: Slide in from the right */
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.text-animated {
+    opacity: 0;
+    animation: slideInFromLeft 2s ease-out forwards;
+}
+
+.image-animated {
+    opacity: 0;
+    animation: slideInFromRight 2s ease-out forwards;
+}
+
+.textgmt p {
+    margin: 0;
+    padding: 1rem;
+}
+
+/* VE DEP CUA SU TINH TE */
+.vedep {
+    font-family: "Playfair Display", serif;
+    color: rgb(203, 180, 158);
+    text-align: center;
+    font-size: 45px;
+    width: 100%;
+}
+
+/*<!--Mot so san pham--> */
+.text-center {
+    font-style: italic;
+    font: 35px;
+    margin-top: 60px;
+}
+/* General Styles */
+
+/* Slider Styles */
+.slider-container {
+    background-color: rgb(255, 255, 255);
+    padding: 12px;
+}
+
+.slider-items {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.slider-item {
+    width: 19%;
+    background-color: #ffffff;
+    padding: 50px 12px 50px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .slider-item img {
+        width: 100%;
+        transition: all 0.5s ease;
+    }
+
+    .slider-item:hover img {
+        transform: translateY(-20px);
+    }
+
+.slider-text {
+    padding: 15px;
+    text-align: center;
+    list-style: none;
+}
+
+    .slider-text li {
+        margin-bottom: 6px;
+    }
+
+        .slider-text li:nth-child(1):hover {
+            color: #fb6e2e;
+        }
+
+        .slider-text li:nth-child(4) {
+            font-weight: bold;
+        }
+
+        .slider-text li:nth-child(3) a {
+            text-decoration: line-through;
+            color: black;
+        }
+
+        .slider-text li:last-child {
+            color: #fb6e2e;
+        }
+
+/* Slider Controls */
+.slider-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-controls {
+    position: absolute;
+    top: 60%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 20px;
+}
+
+    .slider-controls i {
+        color: #020202;
+        font-size: 30px;
+        height: 45px;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-50%);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+        .slider-controls i:hover {
+            opacity: 1;
+        }
+
+.slider-wrapper-content {
+    position: relative;
+    height: 500px;
+    transition: all 0.8s ease;
+}
+
+.slider-items {
+    position: absolute;
+    display: flex;
+    width: 100%;
+}
+
+    .slider-items:nth-child(2) {
+        transform: translateX(100%);
+    }
+
+    .slider-items:nth-child(3) {
+        transform: translateX(200%);
+    }
+
+/* Styles for the second slider */
+.slider-product-two .slider-controls {
+    top: 60%;
+}
+
+.slider-product-two .fa-chevron-left-two,
+.slider-product-two .fa-chevron-right-two {
+    color: #020202;
+    font-size: 30px;
+    height: 45px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+    .slider-product-two .fa-chevron-left-two:hover,
+    .slider-product-two .fa-chevron-right-two:hover {
+        opacity: 1;
+    }
+
+.slider-product-two .slider-items {
+    position: absolute;
+    display: flex;
+    width: 100%;
+}
+
+    .slider-product-two .slider-items:nth-child(2) {
+        transform: translateX(100%);
+    }
+
+    .slider-product-two .slider-items:nth-child(3) {
+        transform: translateX(200%);
+    }
+
+/* Cửa hàng đồng hồ */
+.strwatchst1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background-color: #000000;
+    width: 100%;
+}
+
+.strwatchst1__r {
+    background-color: #000000;
+}
+
+    .strwatchst1__r img {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+.strwatchst1__l {
+    text-align: center;
+    background-color: #000000;
+}
+
+.strwatchsr1__logo {
+    margin: 0px 0px 80px 0px;
+    background-color: #000000;
+}
+
+.strwatchsr1__title {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fdaf17;
+}
+
+.strwatchsr1__des {
+    color: rgb(177, 171, 171);
+}
+
+.view__more3 a {
+    text-decoration: none;
+    color: rgb(253, 247, 247);
+    font-size: 15px;
+    padding: 8px 17px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.view__more3:hover {
+    color: #fdaf17;
+}
+/*footer*/
+.wrapper {
+    max-width: 1500px;
+    margin: auto;
+}
+
+.flex-row {
+    display: flex;
+    background-color: #000000;
+    flex-wrap: wrap;
+}
+
+.no-bullets {
+    list-style: none;
+}
+
+.footer-section {
+    background-color: #ffffff;
+    padding: 30px 10px;
+}
+
+.footer-column {
+    width: 25%;
+    padding: 0px 25px;
+    background-color: #000000;
+}
+
+    .footer-column h4 {
+        margin-left: 30px;
+        margin-top: 20px;
+        font-size: 18px;
+        color: #fdaf17;
+        text-transform: capitalize;
+        background-color: #000000;
+        font-weight: 500px;
+        position: relative;
+    }
+
+        .footer-column h4::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+
+    .footer-column ul {
+        background-color: #000000;
+    }
+
+        .footer-column ul li {
+            background-color: #000000;
+        }
+
+.social-icons a i {
+    background-color: #000000;
+}
+
+.footer-column ul li:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.footer-column ul li a {
+    background-color: #000000;
+    font-size: 17px;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-weight: 300;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+    .footer-column ul li a:hover {
+        color: #fdaf17;
+        padding-left: 8px;
+    }
+
+.footer-column .social-icons a {
+    display: inline-block;
+    height: 20px;
+    width: 50px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 5px 10px 20px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+    .footer-column .social-icons a:hover {
+        color: #fdaf17;
+    }
+/*responsive*/
+@media (max-width: 767px) {
+    .footer-column {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 574px) {
+    .footer-column {
+        width: 100%;
+    }
+}

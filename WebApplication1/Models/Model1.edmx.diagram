@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9978140427ff456089b6c02e4248cdb5" Name="Diagram1">
+        <EntityTypeShape EntityType="WatchStoreModel.Admin" Width="1.5" PointX="3.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Brand" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Category" Width="1.5" PointX="3.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Customer" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Detail" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.district" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Feedback" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Images_Certification" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Images_Default" Width="1.5" PointX="8.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Images_Reality" Width="1.5" PointX="8.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Order" Width="1.5" PointX="9" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.OrderItem" Width="1.5" PointX="11.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.OTP" Width="1.5" PointX="8.25" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Product" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.province" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Supplier" Width="1.5" PointX="3.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Video" Width="1.5" PointX="8.25" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.Voucher" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatchStoreModel.wards" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="WatchStoreModel.FK__Product__Created__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Images_Ce__Brand__02084FDA" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Product__BrandID__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Product__Categor__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Feedback__Custom__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Order__Note__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__OTP__CustomerID__2180FB33" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Detail__ProductI__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK_District_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK_Wards_District" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Feedback__Produc__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Images_De__Produ__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Images_Re__Produ__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__OrderItem__Order__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__OrderItem__Produ__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Product__Supplie__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="WatchStoreModel.FK__Video__ProductID__7C4F7684" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

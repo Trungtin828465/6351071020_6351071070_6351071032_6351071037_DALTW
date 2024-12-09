@@ -1,0 +1,600 @@
+﻿﻿
+@model IEnumerable<WebApplication1.Models.Product>
+@{
+    ViewBag.Title = "Admin_";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@{
+    var labels = ViewBag.Labels as List<string>;
+    var salesData = ViewBag.SalesData as List<int>;
+    int index = 1;
+}
+<style>
+    .price-container {
+        position: relative; /* Để tooltip định vị theo phần tử cha */
+        display: inline-block; /* Cần để align đúng */
+    }
+
+    .pricee {
+        max-width: 7ch; /* Giới hạn hiển thị 7 ký tự */
+        overflow: hidden; /* Ẩn phần dư */
+        white-space: nowrap; /* Không cho xuống dòng */
+        text-overflow: ellipsis; /* Thêm dấu "..." */
+        display: inline-block; /* Đảm bảo các thuộc tính hoạt động đúng */
+        cursor: pointer; /* Hiển thị con trỏ tay */
+    }
+
+    .tooltip-content {
+        display: none; /* Ẩn tooltip mặc định */
+        position: absolute; /* Định vị so với `.price-container` */
+        top: 100%; /* Hiển thị bên dưới phần tử */
+        left: 0;
+        padding: 5px;
+        border-radius: 4px;
+        white-space: nowrap; /* Không cho xuống dòng */
+        z-index: 100; /* Hiển thị trên các phần tử khác */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        font-size: 14px; /* Kích thước chữ */
+    }
+
+    .price-container:hover .tooltip-content {
+        display: block; /* Hiển thị tooltip khi hover */
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted" style="width:150px">Tổng doanh thu</p>
+                                <div class="price-container">
+                                    <h2 class="m-b-0 price pricee">@ViewBag.TotalRevenue</h2>
+                                    <div class="tooltip-content price">@ViewBag.TotalRevenue</div>
+                                </div>
+                            </div>
+
+                            <br />
+                            <span class="badge badge-pill badge-cyan font-size-12" style="margin-left:-30px">
+                                <i class="anticon anticon-arrow-up"></i>
+                                <span class="font-weight-semibold m-l-1" >6.71%</span>
+                            </span>
+                        </div>
+                        <div class="m-t-40">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge badge-primary badge-dot m-r-10"></span>
+                                    <span class="text-gray font-weight-semibold font-size-13">Monthly Goal</span>
+                                </div>
+                                <span class="text-dark font-weight-semibold font-size-13">70% </span>
+                            </div>
+                            <div class="progress progress-sm w-100 m-b-0 m-t-10">
+                                <div class="progress-bar bg-primary" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Số hóa đơn</p>
+                                <h2 class="m-b-0">@ViewBag.TotalOrders</h2>
+                            </div>
+                            <span class="badge badge-pill badge-red font-size-12">
+                                <i class="anticon anticon-arrow-down"></i>
+                                <span class="font-weight-semibold m-l-5">3.26%</span>
+                            </span>
+                        </div>
+                        <div class="m-t-40">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge badge-success badge-dot m-r-10"></span>
+                                    <span class="text-gray font-weight-semibold font-size-13">Monthly Goal</span>
+                                </div>
+                                <span class="text-dark font-weight-semibold font-size-13">60% </span>
+                            </div>
+                            <div class="progress progress-sm w-100 m-b-0 m-t-10">
+                                <div class="progress-bar bg-success" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Số khách đã mua</p>
+                                <h2 class="m-b-0">@ViewBag.TotalCustomers</h2>
+                            </div>
+                            <span class="badge badge-pill badge-red font-size-12">
+                                <i class="anticon anticon-arrow-down"></i>
+                                <span class="font-weight-semibold m-l-5">2.71%</span>
+                            </span>
+                        </div>
+                        <div class="m-t-40">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge badge-warning badge-dot m-r-10"></span>
+                                    <span class="text-gray font-weight-semibold font-size-13">Monthly Goal</span>
+                                </div>
+                                <span class="text-dark font-weight-semibold font-size-13">45% </span>
+                            </div>
+                            <div class="progress progress-sm w-100 m-b-0 m-t-10">
+                                <div class="progress-bar bg-warning" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+
+                                <p class="m-b-0 text-muted">Tổng sản phẩm bán ra</p>
+                                <h2 class="m-b-0">@ViewBag.TotalSoldQuantity</h2>
+
+                            </div>
+                            <span class="badge badge-pill badge-gold font-size-12">
+                                <i class="anticon anticon-arrow-up"></i>
+                                <span class="font-weight-semibold m-l-5">N/A</span>
+                            </span>
+                        </div>
+                        <div class="m-t-40">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge badge-secondary badge-dot m-r-10"></span>
+                                    <span class="text-gray font-weight-semibold font-size-13">Monthly Goal</span>
+                                </div>
+                                <span class="text-dark font-weight-semibold font-size-13">50% </span>
+                            </div>
+                            <div class="progress progress-sm w-100 m-b-0 m-t-10">
+                                <div class="progress-bar bg-secondary" style="width: 50%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Thống kê top sản phẩm</h5>
+                    <div class="dropdown dropdown-animated scale-left">
+                        <a class="text-gray font-size-18" href="javascript:void(0);" data-toggle="dropdown">
+                            <i class="anticon anticon-ellipsis"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item" type="button">
+                                <i class="anticon anticon-printer"></i>
+                                <span class="m-l-10">Print</span>
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="anticon anticon-download"></i>
+                                <span class="m-l-10">Download</span>
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="anticon anticon-file-excel"></i>
+                                <span class="m-l-10">Export</span>
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="anticon anticon-reload"></i>
+                                <span class="m-l-10">Refresh</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-t-50">
+                    <canvas class="chart top-product-chart" id="productChart" style="height: 205px"> </canvas>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var productNames = @Html.Raw(ViewBag.ProductNames);
+    var productPrices = @Html.Raw(ViewBag.ProductPrices);
+
+    var formattedPrices = productPrices.map(price => parseFloat(price.replace(/[^0-9.-]+/g, "")));
+
+    // Cắt nhãn nếu dài hơn 10 ký tự và thêm "..."
+    var shortLabels = productNames.map(name => name.length > 7 ? name.substring(0, 7) + '...' : name);
+
+    // Vẽ biểu đồ Bar
+    var ctx = document.getElementById('productChart').getContext('2d');
+    var productChart = new Chart(ctx, {
+        type: 'bar', // Loại biểu đồ là Bar
+        data: {
+            labels: shortLabels, // Nhãn ngắn là tên sản phẩm
+            datasets: [{
+                label: 'Price (VND)', // Tên cho trục giá
+                data: formattedPrices, // Dữ liệu là giá sản phẩm
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Màu nền cho các cột
+                borderColor: 'rgba(54, 162, 235, 1)', // Màu viền của cột
+                borderWidth: 1,
+                barThickness: 30 // Đặt độ rộng cột là 30px
+            }]
+        },
+        options: {
+            responsive: true, // Cho phép biểu đồ co giãn với màn hình
+            scales: {
+                x: {
+                    ticks: {
+                        callback: function(value, index) {
+                            return shortLabels[index]; // Hiển thị nhãn ngắn trên trục X
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true, // Đảm bảo trục Y bắt đầu từ 0
+                    ticks: {
+                        callback: function(value) {
+                            return value.toLocaleString(); // Định dạng giá trị theo kiểu số có dấu phân cách
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(context) {
+                            return productNames[context[0].dataIndex]; // Hiển thị tên đầy đủ khi rê chuột vào
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+
+
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Thống kê </h5>
+
+                </div>
+                <div class="m-t-30">
+                    <div class="d-md-flex">
+                        <div class="pr-4 m-v-10 border-right border-hide-md">
+                            <p class="m-b-0">Giá trung bình trên hóa đơn</p>
+                            <h3 class="m-b-0">
+                                <span>@ViewBag.AveragePrice</span>
+                                <span class="text-success m-l-10 font-size-14">+6.71%</span>
+                            </h3>
+                        </div>
+                        <div class="px-md-4 m-v-10 border-right border-hide-md">
+                            <p class="m-b-0">Sản phẩm đánnh giá cao nhất</p>
+                            <h3 class="m-b-0">
+                                <span>@ViewBag.TopRatedProduct</span>
+                                <span class="text-danger m-l-10 font-size-14">+1.82%</span>
+                            </h3>
+                        </div>
+                        <div class="px-md-4 m-v-10">
+                            <p class="m-b-0">Sản phẩm dánh giá thấp nhất</p>
+                            <h3 class="m-b-0">
+                                <span>@ViewBag.LowestRatedProductName</span>
+                                <span class="text-success m-l-10 font-size-14">+11.2%</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-t-50" style="height: 400px">
+                    <canvas class="chart " id="revenueChart"></canvas>
+                    @*<ul>
+                            @for (int i = 0; i < ViewBag.Quarterss.Count; i++)
+                            {
+                                <li>@ViewBag.Quarterss[i] - @ViewBag.Revenuess[i]</li>
+                            }
+                        </ul>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    // Lấy dữ liệu từ ViewBag
+    var quarters = @Html.Raw(ViewBag.Quarters);  // Quý và năm
+    var revenues = @Html.Raw(ViewBag.Revenues);  // Doanh thu dưới dạng tiền tệ đã được định dạng
+
+    // Biến dữ liệu cho biểu đồ
+    var labels = quarters; // Nhãn trục X: Tên quý và năm
+    var data = revenues.map(function(item) {
+        // Loại bỏ dấu phân cách hàng nghìn (dấu chấm) và chuyển thành số
+        return parseFloat(item.replace(/\./g, '').replace(/,/g, '.'));
+    });
+
+    // Vẽ biểu đồ miền (Area Chart)
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctx, {
+        type: 'line', // Loại biểu đồ là line (để tạo biểu đồ miền)
+        data: {
+            labels: labels, // Nhãn của trục X
+            datasets: [{
+                label: 'Total Revenue (VND)', // Nhãn của biểu đồ
+                data: data, // Dữ liệu doanh thu
+                backgroundColor: 'rgba(0,0,0,0)', // Màu nền cho vùng biểu đồ
+                borderColor: '#886CFF', // Màu viền cho biểu đồ
+                borderWidth: 2,
+                fill: true, // Đảm bảo biểu đồ có hiệu ứng "fill" (miền)
+                tension: 0.4, // Mức độ cong của đường biểu đồ
+
+            }]
+        },
+        options: {
+            responsive: true, // Cho phép biểu đồ co giãn với màn hình
+            scales: {
+                y: {
+                    beginAtZero: true, // Đảm bảo trục Y bắt đầu từ 0
+                    ticks: {
+                        callback: function(value) {
+                            // Định dạng giá trị trục Y với dấu phân cách là dấu chấm
+                            return value.toLocaleString('de-DE'); // Sử dụng định dạng số kiểu Đức (dấu chấm là phân cách hàng nghìn)
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Top sản phẩm bán ra</h5>
+                    <div>
+                        <a href="@Url.Action("ExportToPDF_TopSP","Adimin")" class="btn btn-sm btn-default">Xuất PDF</a>
+                    </div>
+                </div>
+                <div class="m-t-30">
+                    <ul class="list-group list-group-flush">
+                        @foreach (var item in (IEnumerable<dynamic>)ViewBag.TopProducts)
+                        {
+                            <li class="list-group-item p-h-0">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-image m-r-15">
+                                            <!-- Hiển thị ảnh sản phẩm -->
+                                            
+                                            <img src="~/Content/img/@item.BrandName/@item.ProductName/@item.ImageUrl" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="m-b-0">
+                                                <!-- Hiển thị tên sản phẩm -->
+                                                <a href="#" class="text-dark">@item.ProductName</a>
+                                            </h6>
+                                            <span class="text-muted font-size-13">@item.BrandName</span>
+                                        </div>
+                                    </div>
+                                    <span class="badge badge-pill badge-cyan font-size-12">
+                                        <!-- Hiển thị phần trăm tăng trưởng (Giả sử bạn có dữ liệu này) -->
+                                        <span class="font-weight-semibold m-l-5">+12.7%</span>
+                                    </span>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-12 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                @*Bieu do thong ke duyet don*@
+                <h5 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Khách hàng </font></font></h5>
+                @*<div class="container mt-5">
+                    <h2 class="text-center">Thống kê đơn hàng đã bán và chưa bán</h2>*@
+                <canvas id="genderChart" width="900" height="800"></canvas>
+                @*</div>*@
+
+                <div class="row border-top p-t-25">
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="media align-items-center">
+                                <span class="badge badge-success badge-dot m-r-10"></span>
+                                <div class="m-l-5">
+                                    <h4 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.MaleCount</font></font></h4>
+                                    <p class="m-b-0 muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nam</font></font></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="media align-items-center">
+                                @*<span class="badge badge-secondary badge-dot m-r-10"></span>*@
+                                <div class="m-l-5">
+                                    <h4 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></h4>
+                                    <p class="m-b-0 muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="media align-items-center">
+                                <span class="badge badge-warning badge-dot m-r-10"></span>
+                                <div class="m-l-5">
+                                    <h4 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.FemaleCount</font></font></h4>
+                                    <p class="m-b-0 muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nữ</font></font></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @{
+        ViewBag.Title = "Customer Gender Distribution";
+    }
+
+    <!-- Add Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve gender count data from ViewBag
+        var genderCounts = @Html.Raw(Json.Encode(ViewBag.GenderCounts));
+
+        // Prepare the labels and data for the Doughnut Chart
+        var labels = genderCounts.map(function (item) { return item.Gender; });
+        var data = genderCounts.map(function (item) { return item.TotalCustomers; });
+
+        // Define colors for each gender
+        var colors = [
+            'rgba(75, 192, 192, 1)',  // Male (light green)
+            '#FFC107',  // Female (red)
+            'rgba(255, 206, 86, 1)'   // Unknown (yellow)
+        ];
+
+        // Create the Doughnut chart
+        var ctx = document.getElementById('genderChart').getContext('2d');
+        var genderChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,  // Gender labels (Male, Female, Unknown)
+                datasets: [{
+                    label: 'Total Customers by Gender',
+                    data: data,  // The customer count data
+                    backgroundColor: colors,  // Background colors for each gender
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,  // Make the chart responsive
+                cutout: '80%',  // Create a hole in the center for the doughnut
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + ' customers';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+    </script>
+
+
+
+
+
+
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Top khách hàng</h5>
+                    <div>
+                        <a href="@Url.Action("ExportToPDF_TopCustomer","Adimin")" class="btn btn-sm btn-default">Xuất PDF</a>
+                    </div>
+                </div>
+                <div class="m-t-30">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Address</th>
+                                    <th>Total Spent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in (IEnumerable<dynamic>)ViewBag.TopCustomers)
+                                {
+                                    <tr>
+                                        <td>@index</td>
+                                        <td>
+
+                                            <div class="d-flex align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar avatar-image" style="height: 30px; min-width: 30px; max-width: 30px">
+                                                        <img src="~/Content/img_customer/@item.ImageUrl" alt="Customer Avatar">
+                                                    </div>
+                                                    <h6 class="m-l-10 m-b-0">@item.FullName</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@item.Address</td>
+                                        <td class="price">
+                                            @item.TotalSpent
+                                        </td>
+                                    </tr>
+
+                                    index++;
+                                }
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function formatCurrency(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Định dạng giá hiển thị cho từng phần tử có class "price"
+        const priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            const price = parseInt(element.innerText.replace(/\D/g, '')); // Chuyển nội dung sang số và bỏ các ký tự không phải số
+            if (!isNaN(price)) {
+                element.innerText = formatCurrency(price); // Đặt lại nội dung theo định dạng
+            }
+        });
+    });
+</script>

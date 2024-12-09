@@ -1,0 +1,613 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+<div class="page-header">
+    <h2 class="header-title">Danh sách Admin</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" href="#">Ứng dụng</a>
+            <a class="breadcrumb-item" href="#">Quản lý</a>
+            <span class="breadcrumb-item active">Danh sách Admin</span>
+        </nav>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-12 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tổng doanh thu</font></font></h5>
+                    <div>
+                        <div class="btn-group">
+                            <select id="yearSelector" class="form-control">
+                                <option value="">Tất cả</option> <!-- Tuỳ chọn không lọc theo năm -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <canvas id="revenueChart" width="800" height="400"></canvas>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                @*Bieu do thong ke duyet don*@
+                <h5 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Thông tin duyệt đơn 2024</font></font></h5>
+                @*<div class="container mt-5">
+                    <h2 class="text-center">Thống kê đơn hàng đã bán và chưa bán</h2>*@
+                <canvas id="orderStatusChart" width="900" height="800"></canvas>
+                @*</div>*@
+
+                <div class="row border-top p-t-25">
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="media align-items-center">
+                                <span class="badge badge-success badge-dot m-r-10"></span>
+                                <div class="m-l-5">
+                                    <h4 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.PendingCount</font></font></h4>
+                                    <p class="m-b-0 muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pending</font></font></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="media align-items-center">
+                                <span class="badge badge-secondary badge-dot m-r-10"></span>
+                                <div class="m-l-5">
+                                    <h4 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.ApprovedCount</font></font></h4>
+                                    <p class="m-b-0 muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Approved</font></font></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="media align-items-center">
+                                <span class="badge badge-warning badge-dot m-r-10"></span>
+                                <div class="m-l-5">
+                                    <h4 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.RejectedCount</font></font></h4>
+                                    <p class="m-b-0 muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rejected</font></font></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Doanh thu trung bình</font></font></h5>
+                    </div>
+
+                    <select id="yearSelect" onchange="loadChartData()">
+                        <option value="">Chọn năm</option>
+                        <!-- Year options will be populated dynamically -->
+                    </select>
+                </div>
+                @*Doanh thu trung binh*@
+
+                <canvas id="profitChart" width="800" height="1100"></canvas>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    @*danh sach co doanh thu ssan pham cao nhat*@
+                    <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Top khách hàng chi tiêu nhiều nhất </font></font></h5>
+                    <div>
+                        <a href="@Url.Action("ExportToPDF_TopProductByIncome","Sales")" class="btn btn-sm btn-default"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In PDF</font></font></a>
+                    </div>
+                </div>
+                <div class="m-t-30">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    @*<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">STT</font></font></th>*@
+                                    <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ten khach hang</font></font></th>
+                                    <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sản phẩm</font></font></th>
+                                    <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Số lượng</font></font></th>
+                                    <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Doanh thu</font></font></th>
+
+                                    @*<th style="max-width: 70px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Thu nhập</font></font></th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.TopProductsByIncome != null)
+                                {
+                                    int index = 1;
+                                    foreach (var item in ViewBag.TopProductsByIncome)
+                                    {
+                                        <tr>
+
+                                            @*<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@index</font></font></td>*@
+                                            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.CustomerName</font></font></td>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <div class="avatar avatar-image rounded">
+                                                        <img src="~/Content/img/@item.brandName/@item.ProductName/@item.URL" alt="">
+                                                    </div>
+                                                    <div class="m-l-10">
+                                                        <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.ProductName</font></font></span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Quantity</font></font></td>
+                                            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Income.ToString("C")</font></font></td>
+
+
+                                        </tr>
+                                        index++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sản phẩm bán nhiều nhất</font></font></h5>
+                    <div>
+                        <a href="@Url.Action("ExportToPDF_topSellingProducts","Sales")" class="btn btn-sm btn-default"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In PDF</font></font></a>
+                    </div>
+                </div>
+
+                @*danh sach*@
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            @*<th>STT</th>*@
+                            <th>Tên sản phẩm</th>
+                            <th>Tổng số lượng bán</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.TopSellingProducts != null)
+                        {
+                            int index = 1;
+                            foreach (var item in ViewBag.TopSellingProducts)
+                            {
+                                <tr>
+                                    @*<td>@index</td>*@
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="avatar avatar-image rounded">
+                                                <img src="~/Content//img/@item.brandName/@item.ProductName/@item.URL" alt="">
+                                            </div>
+                                            <div class="m-l-10">
+                                                <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.ProductName</font></font></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>@item.TotalQuantitySold</td>
+                                </tr>
+                                index++;
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sản phẩm có doanh thu ít nhất</font></font></h5>
+                    <div>
+                        <a href="@Url.Action("ExportToPDF_top5LowestRevenueProducts","Sales")" class="btn btn-sm btn-default"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Xuất PDF</font></font></a>
+                    </div>
+                </div>
+
+                @*danh sach*@
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            @*<th>STT</th>*@
+                            <th>Tên sản phẩm</th>
+                            <th>Doanh thu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.Top5LowestRevenueProducts != null)
+                        {
+                            int index = 1;
+                            foreach (var item in ViewBag.Top5LowestRevenueProducts)
+                            {
+
+                                <tr>
+                                    @*<td>@index</td>*@
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="avatar avatar-image rounded">
+                                                <img src="~/Content//img/@item.brandName/@item.ProductName/@item.URL" alt="">
+                                            </div>
+                                          
+                                            <div class="m-l-10">
+                                                <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.ProductName</font></font></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>@item.TotalRevenue.ToString("C")</td> <!-- Hiển thị doanh thu dưới dạng tiền -->
+                                </tr>
+                                index++;
+                            }
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tổng số khách hàng trong tháng </font></font></h5>
+                    </div>
+
+
+                </div>
+                <canvas id="monthlyCustomerChart" width="800" height="1270"></canvas>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@*Khach hàng*@
+
+<script>
+    // Gọi API từ server và vẽ biểu đồ
+    fetch('/Sales/GetMonthlyCustomerCount') // Thay 'Sales' bằng tên controller của bạn
+        .then(response => response.json())
+        .then(data => {
+            // Trích xuất dữ liệu từ JSON trả về
+            const labels = data.map(item => item.Month); // Các tháng (yyyy-MM)
+            const counts = data.map(item => item.CustomerCount); // Số lượng khách hàng
+
+            // Vẽ biểu đồ cột (bar chart)
+            const ctx = document.getElementById('monthlyCustomerChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar', // Loại biểu đồ
+                data: {
+                    labels: labels, // Nhãn (tháng)
+                    datasets: [{
+                        label: 'Số lượng khách hàng duy nhất',
+                        data: counts, // Dữ liệu (số lượng khách hàng)
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)', // Màu nền
+                        borderColor: 'rgba(54, 162, 235, 1)', // Màu viền
+                        borderWidth: 1 // Độ rộng viền
+                    }]
+                },
+                options: {
+                    responsive: true, // Biểu đồ phản hồi theo kích thước màn hình
+                    scales: {
+                        y: {
+                            beginAtZero: true // Trục Y bắt đầu từ 0
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true, // Hiển thị chú thích
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Lỗi khi tải dữ liệu:', error);
+            alert('Không thể tải dữ liệu biểu đồ.');
+        });
+</script>
+
+
+
+
+@*doanh thu*@
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let chart; // Biến toàn cục lưu trữ biểu đồ để cập nhật khi thay đổi năm
+
+    // Tải danh sách năm
+    fetch('/Sales/GetYears')
+        .then(response => response.json())
+        .then(years => {
+            const yearSelector = document.getElementById('yearSelector');
+            years.forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelector.appendChild(option);
+            });
+        });
+
+    // Tải dữ liệu doanh thu và hiển thị biểu đồ
+    function loadRevenueChart(year = null) {
+        const url = year ? `/Sales/GetMonthlyRevenue?year=${year}` : '/Sales/GetMonthlyRevenue';
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(item => `${item.Month}/${item.Year}`);
+                const revenue = data.map(item => item.TotalRevenue);
+
+                // Xoá biểu đồ cũ nếu tồn tại
+                if (chart) chart.destroy();
+
+                // Tạo biểu đồ mới
+                const ctx = document.getElementById('revenueChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Doanh thu (VNĐ)',
+                            data: revenue,
+                            borderColor: 'rgba(255, 0, 0, 1)',
+                            backgroundColor: 'rgba(0, 0, 0, 0)',
+
+                            borderWidth: 2,
+                            fill: true
+                        }]
+                    },
+                    options:
+                    {
+                        responsive: true,
+                        plugins:
+                        {
+                            legend:
+                            {
+                                position: 'top',
+                                display: true
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false // Tắt grid trên trục X
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false // Tắt grid trên trục Y
+                                },
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Lỗi khi tải dữ liệu:', error));
+    }
+
+    // Xử lý khi người dùng chọn năm
+    document.getElementById('yearSelector').addEventListener('change', function () {
+        const selectedYear = this.value;
+        loadRevenueChart(selectedYear || null); // Nếu không chọn năm, hiển thị tất cả
+    });
+
+    // Tải biểu đồ lần đầu
+    loadRevenueChart();
+</script>
+
+@*ĐƠN DUYỆT*@
+<script>
+    // Gọi API để lấy dữ liệu và vẽ biểu đồ tròn
+    fetch('/Sales/GetOrderStatusCounts')
+        .then(response => response.json())
+        .then(data => {
+            // Lấy tên trạng thái và số lượng
+            const labels = data.map(item => item.Status);
+            const counts = data.map(item => item.Count);
+
+            // Vẽ biểu đồ tròn
+            const ctx = document.getElementById('orderStatusChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut', // Biểu đồ tron
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Số lượng đơn hàng',
+                        data: counts,
+                        backgroundColor: ['#886CFF', '#00C9A7', '#FFC107'], // Màu cho từng trạng thái
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top', // Hiển thị chú thích ở phía trên
+                            display: true // Hiển thị chú thích
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw + ' đơn hàng';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Lỗi khi tải dữ liệu:', error));
+</script>
+
+
+@*SỐ HÓA ĐƠN ĐÃ BÁN CHƯUA BÁN*@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gọi API để lấy dữ liệu và vẽ biểu đồ donut
+    fetch('/Sales/GetSalesStatusCounts')
+        .then(response => response.json())
+        .then(data => {
+            // Số lượng đơn hàng đã bán và chưa bán
+            const labels = ['Đã bán', 'Chưa bán'];
+            const counts = [data.Sold, data.NotSold];
+
+            // Vẽ biểu đồ donut
+            const ctx = document.getElementById('salesStatusChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'polarArea', // Biểu đồ dạng donut
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Số lượng đơn hàng',
+                        data: counts,
+                        backgroundColor: ['#4CAF50', '#FFC107'], // Màu cho từng trạng thái
+                        borderWidth: 0.2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    cutout: '85%', // Tạo khoảng trống ở giữa để thành dạng donut
+                    plugins: {
+
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw + ' đơn hàng';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Lỗi khi tải dữ liệu:', error));
+
+
+</script>
+
+
+@*Doanh thu trung bình *@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let currentChart; // Global variable to store the current chart instance
+
+    // Populate the year select dropdown dynamically (e.g., 2023, 2024)
+    const years = [2023, 2024]; // Replace with actual years from your data or API
+    const yearSelect = document.getElementById('yearSelect');
+
+    // Add options for each specific year
+    years.forEach(year => {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    });
+
+    // Load chart data based on the selected year
+    function loadChartData() {
+        const selectedYear = yearSelect.value;
+
+        // Fetch data for the selected year or all years if none is selected
+        const fetchUrl = selectedYear
+            ? `/Sales/GetMonthlyProfit?year=${selectedYear}`
+            : `/Sales/GetMonthlyProfit`; // No year means fetch all data
+
+        fetch(fetchUrl)
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(item => `${item.Month}/${item.Year}`);
+                const revenues = data.map(item => item.AverageRevenue); // Use AverageRevenue (or correct field)
+
+                const ctx = document.getElementById('profitChart').getContext('2d');
+
+                // Destroy existing chart instance if it exists
+                if (currentChart) {
+                    currentChart.destroy();
+                }
+
+                // Create a new chart instance and store it in the global variable
+                currentChart = new Chart(ctx, {
+                    type: 'bar', // Bar chart type
+                    data: {
+                        labels: labels, // Labels for each month/year
+                        datasets: [{
+                            label: 'Doanh thu TB (VNĐ)', // Chart label
+                            data: revenues, // Data for each month's revenue
+                            borderColor: 'rgba(255, 165, 0, 1)', // Border color of bars
+                            backgroundColor: 'rgba(255, 220, 150, 0.2)', // Background color of bars
+                            borderWidth: 2 // Border width of bars
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                display: true
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false } // Hide the grid on X axis
+                            },
+                            y: {
+                                grid: { display: true },
+                                beginAtZero: true // Ensure the Y axis starts from zero
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Lỗi khi tải dữ liệu:', error)); // Handle errors
+    }
+
+    // Load combined data by default when the page loads
+    loadChartData();
+
+    // Event listener for the dropdown
+    yearSelect.addEventListener('change', loadChartData);
+</script>
+
+
+
+
+
+
+
+
+

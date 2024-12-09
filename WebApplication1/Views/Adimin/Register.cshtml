@@ -1,0 +1,164 @@
+﻿﻿@model WebApplication1.Models.Admin
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from www.themenate.net/enlink-bs/dist/sign-up-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Mar 2021 00:39:50 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Enlink - Admin Dashboard Template</title>
+
+    <link rel="shortcut icon" href="~/Content/assets/images/logo/favicon.png">
+
+
+    <!-- page css -->
+    <!-- Core css -->
+    <link href="~/Content/assets/css/app.min.css" rel="stylesheet">
+
+</head>
+
+
+<body>
+    <div class="app">
+        <div class="container-fluid p-h-0 p-v-20 bg full-height d-flex" style="background-image: url('@Url.Content("~/Content/assets/images/others/login-3.png")')">
+            <div class="d-flex flex-column justify-content-between w-100">
+                <div class="container d-flex h-100">
+                    <div class="row align-items-center w-100">
+                        <div class="col-md-7 col-lg-5 m-h-auto">
+                            <div class="card shadow-lg">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between m-b-30">
+                                        <img class="img-fluid" alt="" src="~/Content/assets/images/logo/logo.png">
+                                        <h2 class="m-b-0">Sign Up</h2>
+                                    </div>
+                                    @using (Html.BeginForm("Register", "Adimin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                <div class="form-horizontal">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <!-- Full Name -->
+                                    <div class="form-group">
+                                        <label style="margin-right: 75%; color: rgb(83, 83, 95)" for="FullName">Name:</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Fullname", style = "width: 100%; height: 40px; border-color:rgb(114, 157, 236); border-radius: 10px; color:rgb(83, 83, 95)" } })
+                                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="form-group">
+                                        <label style="margin-right: 65%; color: rgb(83, 83, 95)" for="Password">Password:</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", style = "width: 100%; height: 40px; border-color:rgb(114, 157, 236); border-radius: 10px; color:rgb(83, 83, 95)" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="form-group">
+                                        <label style="margin-right: 75%; color: rgb(83, 83, 95)" for="Email">Email:</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email", style = "width: 100%; height: 40px; border-color:rgb(114, 157, 236); border-radius: 10px; color:rgb(83, 83, 95)" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone -->
+                                    <div class="form-group">
+                                        <label style="margin-right: 70%; color: rgb(83, 83, 95)" for="Phone">Phone:</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone", style = "width: 100%; height: 40px; border-color:rgb(114, 157, 236); border-radius: 10px; color:rgb(83, 83, 95)" } })
+                                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <!-- Gender -->
+                                    <div class="form-group">
+                                        <label style="margin-right: 70%; color: rgb(83, 83, 95)" for="Gender">Gender:</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control", placeholder = "Gender", style = "width: 100%; height: 40px; border-color:rgb(114, 157, 236); border-radius: 10px; color:rgb(83, 83, 95)" } })
+                                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <!-- Address -->
+                                    <div class="form-group">
+                                        <label style="margin-right: 70%; color: rgb(83, 83, 95)" for="Address">Adminname:</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Adminname, new { htmlAttributes = new { @class = "form-control", placeholder = "Adminname", style = "width: 100%; height: 40px; border-color:rgb(114, 157, 236); border-radius: 10px; color:rgb(83, 83, 95)" } })
+                                            @Html.ValidationMessageFor(model => model.Adminname, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label style="margin-right: 70%; color: rgb(83, 83, 95)" for="Address">Role:</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Role, new { htmlAttributes = new { @class = "form-control", placeholder = "Role", style = "width: 100%; height: 40px; border-color:rgb(114, 157, 236); border-radius: 10px; color:rgb(83, 83, 95)" } })
+                                            @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <!-- Upload Image -->
+                                    <div class="form-group">
+                                        <label style="margin-right: 70%; color: rgb(83, 83, 95)" for="Image">Upload Image:</label>
+                                        <div class="col-md-10">
+                                            <input type="file" name="Images" id="Images" class="form-control" style="width: 100%; height: 40px; border-color:rgb(114, 157, 236); border-radius: 10px; color:rgb(83, 83, 95)">
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Checkbox for agreement -->
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <div class="checkbox">
+                                                <input id="checkbox" type="checkbox" />
+                                                <label for="checkbox">
+                                                    <span>I have read the <a href="#">agreement</a></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit button -->
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Sign Up" class="btn btn-default" style="background-color: rgb(73, 160, 148); border: none; border-radius: 10px; " />
+                                        </div>
+                                    </div>
+                                </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-md-flex p-h-40 justify-content-between">
+                    <span class="">© 2019 ThemeNate</span>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a class="text-dark text-link" href="#">Legal</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="text-dark text-link" href="#">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

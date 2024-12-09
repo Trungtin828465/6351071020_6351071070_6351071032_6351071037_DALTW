@@ -1,0 +1,65 @@
+﻿﻿@model WebApplication1.Models.Customer
+
+@{
+    ViewBag.Title = "Customer Details";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="page-header no-gutters has-tab">
+    <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+        <div class="media align-items-center m-b-15">
+            <div class="avatar avatar-image rounded" style="height: 70px; width: 70px;">
+                <img src="~/Content/img_customer/@Model.ImgCustomer " alt="Customer Avatar">
+            </div>
+            <div class="m-l-15">
+                <h4 class="m-b-0">@Model.FullName</h4>
+                <p class="text-muted m-b-0">Code: #@Model.CustomerID</p>
+            </div>
+        </div>
+        <div class="m-b-15">
+            <a href="@Url.Action("Edit", "Customers", new { id = Model.CustomerID })" class="btn btn-primary btn-tone m-r-5">
+                <i class="anticon anticon-edit"></i>
+                <span>Edit</span>
+            </a>
+            <a href="@Url.Action("Index", "Customers")" class="btn btn-secondary btn-tone">Back to List</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-overview">
+            <!-- Basic Info Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Basic Info</h4>
+                    <table class="product-info-table m-t-20">
+                        <tbody>
+                            <tr>
+                                <td>Email:</td>
+                                <td class="text-dark font-weight-semibold">@Model.Email</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>@Model.Phone</td>
+                            </tr>
+                            <tr>
+                                <td>Gender:</td>
+                                <td>@Model.Gender</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td class="text-dark font-weight-semibold">@Model.Address</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Back Button at Bottom for Convenience -->
+<div class="m-t-20">
+    <a href="@Url.Action("Index", "Customers")" class="btn btn-primary btn-tone">Back to List</a>
+</div>

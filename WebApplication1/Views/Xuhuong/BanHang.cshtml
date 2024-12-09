@@ -1,0 +1,793 @@
+﻿﻿@model WebApplication1.Controllers.XuhuongController.YourViewModel
+
+@{
+    ViewBag.Title = "BanHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Nếu sử dụng Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+<link href="~/Content/BanHang.css" rel="stylesheet" />
+
+@*<p> đường dẫn :@Model.PageID:</p>
+
+<p> đường dẫn tab : @Model.tab</p>
+<p> đường dẫn tabChild : @Model.tabChild</p>*@
+
+
+@*@foreach (var product in Model.Producttab)
+    {
+    @product.ProductName
+    }*@
+<!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1500">
+    <!-- 3000ms = 3 seconds -->
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="5"></button>
+    </div>
+
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Content/img_default/6.png" alt="Los Angeles" class="d-block" style="width:100%">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/img_default/1.png" alt="New York" class="d-block" style="width:100%">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/img_default/2.png" alt="New York" class="d-block" style="width:100%">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/img_default/3.png" alt="New York" class="d-block" style="width:100%">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/img_default/4.png" alt="New York" class="d-block" style="width:100%">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/img_default/5.png" alt="New York" class="d-block" style="width:100%">
+        </div>
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<div class="box-filter">
+    <div class="container">
+        <div class="category-top">
+            <h1 class="cate-title">Đồng hồ @Model.PageID</h1>
+            <div class="cate-topr">
+                <img src="~/Content/img_default/authentic.png" class="auth-img" alt="">
+                <p style="padding-top: 15px">100% chính hãng</p>
+            </div>
+        </div>
+
+        <div class="filter-all-cate" style=" overflow-x:auto">
+            <div class="filter-item show-content1" data-target="brand-filter">
+                <span class="filter-text" style="margin-bottom: 0; margin-top: 10px;"> Hãng</span>
+                <div>
+                    <i class="fa-solid fa-sort-down"></i>
+                </div>
+            </div>
+            <div class="filter-item show-content2" data-target="brand-filter">
+                <span class="filter-text" style="margin-bottom: 0; margin-top: 10px;"> Đối tượng</span>
+                <div>
+                    <i class="fa-solid fa-sort-down"></i>
+                </div>
+            </div>
+            <div class="filter-item show-content3" data-target="brand-filter">
+                <span class="filter-text" style="margin-bottom: 0; margin-top: 10px;"> Giá</span>
+                <div>
+                    <i class="fa-solid fa-sort-down"></i>
+                </div>
+            </div>
+            <div class="filter-item show-content4" data-target="brand-filter">
+                <span class="filter-text" style="margin-bottom: 0; margin-top: 10px;"> Loại đồng hồ</span>
+                <div>
+                    <i class="fa-solid fa-sort-down"></i>
+                </div>
+            </div>
+            <div class="filter-item show-content5" data-target="brand-filter">
+                <span class="filter-text" style="margin-bottom: 0; margin-top: 10px;"> Mặt đồng hồ</span>
+                <div>
+                    <i class="fa-solid fa-sort-down"></i>
+                </div>
+            </div>
+            <div class="filter-item show-content6" data-target="brand-filter">
+                <span class="filter-text" style="margin-bottom: 0; margin-top: 10px;"> Chất liệu dây</span>
+                <div>
+                    <i class="fa-solid fa-sort-down"></i>
+                </div>
+            </div>
+            <div class="filter-item show-content7" data-target="brand-filter">
+                <span class="filter-text" style="margin-bottom: 0; margin-top: 10px;"> Xuất xứ</span>
+                <div>
+                    <i class="fa-solid fa-sort-down"></i>
+                </div>
+            </div>
+        </div>
+        <div class="filter-content filter-content4">
+            <div class="content2-item" onclick="filterProducts('Automatic')">Automatic</div>
+            <div class="content2-item" onclick="filterProducts('Quartz')">Quartz</div>
+            <div class="content2-item" onclick="filterProducts('Solar')">Solar</div>
+            <div class="content2-item" onclick="filterProducts('Cơ')">Cơ</div>
+            <div class="content2-item" onclick="filterProducts('Mechanical')">Mechanical</div>
+
+        </div>
+        <div class="filter-content filter-content2">
+            <div class="content2-item" onclick="filterProducts('Nam')">Nam</div>
+            <div class="content2-item" onclick="filterProducts('Nu')">Nữ</div>
+            <div class="content2-item" onclick="filterProducts('Unisex')">Cả nam và nữ</div>
+        </div>
+        <div class="filter-content filter-content3">
+            <div class="content2-item" onclick="filterProducts('Duoi1Trieu')">Dưới 1 triệu</div>
+            <div class="content2-item" onclick="filterProducts('Tu1Den2Trieu')">Từ 1 - 2 triệu</div>
+            <div class="content2-item" onclick="filterProducts('Tu2Den4Trieu')">Từ 2 - 4 triệu</div>
+            <div class="content2-item" onclick="filterProducts('Tren4Trieu')">Trên 4 triệu</div>
+        </div>
+        <div class="filter-content filter-content4">
+            <div class="content2-item" onclick="filterProducts('Automatic')">Automatic</div>
+            <div class="content2-item" onclick="filterProducts('Quartz')">Quartz</div>
+            <div class="content2-item" onclick="filterProducts('Solar')">Solar</div>
+            <div class="content2-item" onclick="filterProducts('Cơ')">Cơ</div>
+            <div class="content2-item" onclick="filterProducts('Mechanical')">Mechanical</div>
+        </div>
+        <div class="filter-content filter-content5">
+            <h6 style="display: block; flex: 1 1 100%;"><b>Chất liệu kính</b></h6>
+            <div class="content2-item" onclick="filterProducts('Sapphire')">Sapphire</div>
+            <div class="content2-item" onclick="filterProducts('Mineral')">Mineral</div>
+            <div class="content2-item" onclick="filterProducts('Hardlex')">Hardlex</div>
+            <div class="content2-item" onclick="filterProducts('Kính Khoáng')">Kính Khoáng</div>
+
+            <h6 style="display: block; flex: 1 1 100%;"><b>Đường kính mặt</b></h6>
+            <div class="content2-item" onclick="filterProducts('36mm')">36mm</div>
+            <div class="content2-item" onclick="filterProducts('37mm')">37mm</div>
+            <div class="content2-item" onclick="filterProducts('38mm')">38mm</div>
+            <div class="content2-item" onclick="filterProducts('39mm')">39mm</div>
+            <div class="content2-item" onclick="filterProducts('40mm')">40mm</div>
+            <div class="content2-item" onclick="filterProducts('41mm')">41mm</div>
+            <div class="content2-item" onclick="filterProducts('42mm')">41mm</div>
+            <div class="content2-item" onclick="filterProducts('43mm')">43mm</div>
+            <div class="content2-item" onclick="filterProducts('45mm')">45mm</div>
+            <div class="content2-item" onclick="filterProducts('50mm')">50mm</div>
+        </div>
+        <div class="filter-content filter-content6">
+            @*<div class="content2-item" onclick="filterProducts('Dây Cao Su')">Dây Cao Su</div>*@
+            <div class="content2-item" onclick="filterProducts('Dây Kim Loại')">Dây Kim Loại</div>
+            <div class="content2-item" onclick="filterProducts('Dây Da')">Dây Da</div>
+            <div class="content2-item" onclick="filterProducts('Dây Nhựa')">Dây Nhựa</div>
+            <div class="content2-item" onclick="filterProducts('Dây Thép')">Dây Thép</div>
+            <div class="content2-item" onclick="filterProducts('Dây Bạc')">Dây Bạc</div>
+            <div class="content2-item" onclick="filterProducts('Dây Inox')">Dây Inox</div>
+
+        </div>
+        <div class="filter-content filter-content7">
+            <div class="content2-item" onclick="filterProducts('Nhật Bản')">Nhật Bản</div>
+            @*<div class="content2-item" onclick="filterProducts('Switzerland')">Switzerland</div>*@
+            <div class="content2-item" onclick="filterProducts('Đức')">Đức</div>
+            @*<div class="content2-item" onclick="filterProducts('Anh')">Anh</div>*@
+            <div class="content2-item" onclick="filterProducts('Ba Lan')">Ba Lan</div>
+            <div class="content2-item" onclick="filterProducts('Hàn Quốc')">Hàn Quốc</div>
+            <div class="content2-item" onclick="filterProducts('Pháp')">Pháp</div>
+            @*<div class="content2-item" onclick="filterProducts('Trung Quốc')">Trung Quốc</div>*@
+            <div class="content2-item" onclick="filterProducts('Hoa Kỳ')">Hoa Kỳ</div>
+            <div class="content2-item" onclick="filterProducts('Thụy Sỹ')">Thụy Sỹ</div>
+        </div>
+        <div class="filter-content filter-content1">
+            @Html.Action("partialBrand")
+
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(Model.PageID))
+        {
+            <div class="type-watch">
+
+                <span>Dòng sản phẩm  @Model.PageID.</span>
+                <div class="intro-brand">Tìm hiểu thương hiệu @Model.PageID</div>
+                <i class="fa-solid fa-exclamation"></i>
+                <div class="mota-brand" style=" left: 20%;">
+                    <ul id="brand-description">
+                    </ul>
+                </div>
+
+                @*<div class="type-watch-list" style="overflow-y: auto; overflow-x: auto">
+                    <a href="#!" class="type-watch-item" onclick="filterProducts('Nam')">
+                        <img src="~/Content/img_default/@Model.PageID/1.jpg" class="type-img" alt="">
+                        <div class="type-title"> @Model.PageID Nam</div>
+                    </a>
+                    <a href="#!" class="type-watch-item" onclick="filterProducts('Nu')">
+                        <img src="~/Content/img_default/@Model.PageID/2.jpg" class="type-img" alt="">
+                        <div class="type-title"> @Model.PageID Nữ</div>
+                    </a>
+                    <a href="#!" class="type-watch-item" onclick="filterProducts('Unisex')">
+                        <img src="~/Content/img_default/@Model.PageID/3.jpg" class="type-img" alt="">
+                        <div class="type-title">@Model.PageID Unisex</div>
+                    </a>
+                    <a href="#!" class="type-watch-item " onclick="filterProducts('TheThao')">
+                        <img src="~/Content/img_default/@Model.PageID/4.jpg" class="type-img" alt="">
+                        <div class="type-title">Thể thao</div>
+                    </a>
+                    <a href="#!" class="type-watch-item" onclick="filterProducts('ThoiTrang')">
+                        <img src="~/Content/img_default/@Model.PageID/5.jpg" class="type-img" alt="">
+                        <div class="type-title">Sang Trọng</div>
+                    </a>
+                </div>*@
+
+            </div>
+        }
+        <div class="simplebar-content1">
+            <p style="margin-top:15px">Phổ biến:</p>
+            <a href="#!" class="quick-price" onclick="filterProducts('Duoi1Trieu')">Dưới 1 triệu</a>
+            <a href="#!" class="quick-price" onclick="filterProducts('Tu1Den2Trieu')">Từ 1 - 2 triệu</a>
+            <a href="#!" class="quick-price" onclick="filterProducts('Tu2Den4Trieu')">Từ 2 - 4 triệu</a>
+            <a href="#!" class="quick-price" onclick="filterProducts('Tren4Trieu')">Trên 4 triệu</a>
+        </div>
+        <div class="filter-cate-checkbox">
+            <div class="item1"><button class="item1-txt" onclick="filterProducts('NoiBat')"><i class="fa-solid fa-fire"></i> Nổi bật</button></div>
+            <div class="item1"><button class="item1-txt" onclick="filterProducts('SaleLon')"><i class="fa-solid fa-percent"></i> SALE LỚN</button></div>
+            <div class="item1"><button class="item1-txt" onclick="filterProducts('DanhGiaNhieu')"><i class="fa-regular fa-star"></i> Đánh giá nhiều</button></div>
+            <div class="item1"><button class="item1-txt" onclick="filterProducts('GiaGiamDan')"><i class="fa-solid fa-arrow-down-wide-short"></i> Giá giảm dần</button></div>
+            <div class="item1"><button class="item1-txt" onclick="filterProducts('GiaTangDan')"><i class="fa-solid fa-arrow-up-short-wide"></i> Giá tăng dần</button></div>
+        </div>
+        <script>
+        function filterProducts(filterType) {
+            // Chuyển hướng đến action BanHang với tham số filterType
+            window.location.href = '@Url.Action("BanHang", "XuHuong")?filterType=' + filterType;
+        }
+        </script>
+
+        <div class="container1">
+            <div class="row no-gutters">
+                <div class="container1">
+                    <div class="row no-gutters">
+                        @*@if (Model.PageID != "")*@
+                        @if (!string.IsNullOrWhiteSpace(Model.PageID))
+
+                        {
+                            @*<p>chinh</p>*@
+                            foreach (var product in Model.Product)
+                            {
+                                if (product.StockQuantity > 0)
+                                {
+                                    var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+                                    var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+
+                                    // Kiểm tra AverageRating có thể null không và xử lý
+
+
+                                    <div class="col-md-3">
+                                        <div class="card card-tin" style="width: 100%;">
+                                            <div class="image-container" style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                                                <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                                    <img class="img_card" src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="Product Image" style="max-width: 100%; height: 180px;" />
+                                                </a>
+                                            </div>
+                                            <i class="bi bi-heart heart-icon heart-icon-tin"></i>
+                                            <div class="card-body">
+                                                <div>
+                                                    <strong style="font-size: 18px;">@product.ProductName</strong>
+                                                    <p class="card-text price" style="color: red;">@discountedPrice</p>
+                                                    <p class="card-text price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price</p>
+                                                    <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                                    <div>
+                                                        <li style="list-style-type:none">
+                                                            @{
+                                                                double rating = product.AverageRating ?? 0.0;
+
+                                                                int fullStars = (int)Math.Floor(rating);
+
+                                                                bool hasHalfStar = (rating - fullStars) > 0;
+                                                            }
+                                                            @*<p>Số sao: @product.AverageRating</p>*@
+                                                            @for (int i = 1; i <= 5; i++)
+                                                            {
+                                                                if (i <= fullStars)
+                                                                {
+                                                                    // In sao đầy
+                                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                                }
+                                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                                {
+                                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                                }
+                                                                else
+                                                                {
+                                                                    // In sao rỗng
+                                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                                }
+                                                            }
+
+                                                        </li>
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+if (!string.IsNullOrWhiteSpace(Model.tabChild))
+                        {
+                            @*<p>tab</p>*@
+                            foreach (var product in Model.Producttab)
+                            {
+                                if (product.StockQuantity > 0 && product.Check_Remove==1)
+                                {
+                                    var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+                                    var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+
+                                    // Kiểm tra AverageRating có thể null không và xử lý
+
+
+                                    <div class="col-md-3">
+                                        <div class="card card-tin" style="width: 100%;">
+                                            <div class="image-container" style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                                                <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                                    <img class="img_card" src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="Product Image" style="max-width: 100%; height: 180px;" />
+                                                </a>
+                                            </div>
+                                            <i class="bi bi-heart heart-icon heart-icon-tin"></i>
+                                            <div class="card-body">
+                                                <div>
+                                                    <strong style="font-size: 18px;">@product.ProductName</strong>
+                                                    <p class="card-text price" style="color: red;">@discountedPrice</p>
+                                                    <p class="card-text price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price</p>
+                                                    <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                                    <div>
+                                                        <li style="list-style-type: none;">
+                                                            @{
+                                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                                double rating = product.AverageRating ?? 0.0;
+
+                                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                                int fullStarss = (int)Math.Floor(rating);
+
+                                                                // Kiểm tra có cần nửa sao không (phần thập phân > 0)
+                                                                bool hasHalfStar = (rating - fullStarss) > 0;
+                                                            }
+                                                            @*<p> số sao: @rating</p>*@
+                                                            @for (int i = 1; i <= 5; i++)
+                                                            {
+                                                                if (i <= fullStarss)
+                                                                {
+                                                                    // In sao đầy
+                                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                                }
+                                                                else if (i == fullStarss + 1 && hasHalfStar)
+                                                                {
+                                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                                    hasHalfStar = false; // Đảm bảo chỉ in một nửa sao
+                                                                }
+                                                                else
+                                                                {
+                                                                    // In sao rỗng
+                                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                                }
+                                                            }
+                                                        </li>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.PageID))
+
+                {
+                    <!-- Phân trang -->
+                    <div class="pagination" style="display: flex; justify-content: center; margin-top: 20px;">
+                        <!-- Nút "Trang trước" -->
+                        @if (ViewBag.CurrentPage > 1)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = ViewBag.CurrentPage - 1, filterType = ViewBag.FilterType })">&laquo;</a>
+                        }
+
+                        <!-- Nút số trang -->
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = i, filterType = ViewBag.FilterType })" class="@(ViewBag.CurrentPage == i ? "active" : "")">@i</a>
+                        }
+
+                        <!-- Nút "Trang sau" -->
+                        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = ViewBag.CurrentPage + 1, filterType = ViewBag.FilterType })">&raquo;</a>
+                        }
+                    </div>
+
+                }
+                else if (!string.IsNullOrWhiteSpace(Model.tabChild))
+
+                {
+                    <!-- Phân trang -->
+                    <div class="pagination" style="display: flex; justify-content: center; margin-top: 20px;">
+                        <!-- Nút "Trang trước" -->
+                        @if (ViewBag.CurrentPage > 1)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = ViewBag.CurrentPage - 1, filterType = ViewBag.FilterType })">&laquo;</a>
+                        }
+
+                        <!-- Nút số trang -->
+                        @for (int i = 1; i <= ViewBag.TotalPagesTab; i++)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = i, filterType = ViewBag.FilterType })" class="@(ViewBag.CurrentPage == i ? "active" : "")">@i</a>
+                        }
+
+                        <!-- Nút "Trang sau" -->
+                        @if (ViewBag.CurrentPage < ViewBag.TotalPagesTab)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = ViewBag.CurrentPage + 1, filterType = ViewBag.FilterType })">&raquo;</a>
+                        }
+                    </div>
+
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.Search as string))
+                {
+                    <!-- Phân trang -->
+                    <div class="pagination" style="display: flex; justify-content: center; margin-top: 20px;">
+                        <!-- Nút "Trang trước" -->
+                        @if (ViewBag.CurrentPage > 1)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = ViewBag.CurrentPage - 1, search = ViewBag.Search })">&laquo;</a>
+                        }
+
+                        <!-- Nút số trang -->
+                        @for (int i = 1; i <= ViewBag.TotalPagesSearch; i++)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = i, search = ViewBag.Search })" class="@(ViewBag.CurrentPage == i ? "active" : "")">@i</a>
+                        }
+
+                        <!-- Nút "Trang sau" -->
+                        @if (ViewBag.CurrentPage < ViewBag.TotalPagesSearch)
+                        {
+                            <a href="@Url.Action("BanHang", new { page = ViewBag.CurrentPage + 1, search = ViewBag.Search })">&raquo;</a>
+                        }
+                    </div>
+                }
+
+                <script>
+                    function formatCurrency(price) {
+                        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ";
+                    }
+
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Định dạng giá hiển thị cho từng phần tử có class "price"
+                        const priceElements = document.querySelectorAll(".price");
+
+                        priceElements.forEach(function (element) {
+                            const price = parseInt(element.innerText.replace(/\D/g, '')); // Chuyển nội dung sang số và bỏ các ký tự không phải số
+                            if (!isNaN(price)) {
+                                element.innerText = formatCurrency(price); // Đặt lại nội dung theo định dạng
+                            }
+                        });
+                    });
+                </script>
+
+                @{
+                    var noProductsMessage = ViewBag.NoProductsMessage as string;
+                }
+
+                <!-- Hiển thị thông báo nếu không có sản phẩm -->
+                @if (!string.IsNullOrEmpty(noProductsMessage))
+                {
+                    <div class="alert alert-info" role="alert">
+                        @noProductsMessage
+                    </div>
+                }
+
+                <style>
+                    /* CSS cho phân trang */
+                    .pagination a {
+                        color: black;
+                        padding: 8px 16px;
+                        text-decoration: none;
+                        transition: background-color .3s;
+                        margin: 0 4px;
+                        border-radius: 5px;
+                    }
+
+                        .pagination a.active {
+                            background-color: #4CAF50;
+                            color: white;
+                        }
+
+                        .pagination a:hover:not(.active) {
+                            background-color: #ddd;
+                        }
+                </style>
+                <div class="container2">
+                    <div class="cate-bottom" style="width:100%">
+                        <p class="cate-bottom-text"><strong>Đồng hồ Casio </strong>ĐẸP, RẺ, BỀN dành cho giới trẻ năng động, tự tin phối đồ theo nhiều phong cách. Khám phá ngay lý do khiến những model Casio Nhật Bản tại WatchStore có sức hút mạnh mẽ với người dùng hiện đại.</p>
+                        <img src="~/Content/img_default/casio.jpg" class="cate-bottom-img" alt="">
+                        <div id="content" class="hidden-content">
+                            <h2>Tại sao nên mua đồng hồ Casio tại WatchStore?</h2>
+                            <p>Có 8 lý do nên mua đồng hồ Casio tại WatchStore như sau:</p>
+                            <ul>
+                                <li><a href="#!">WatchStore</a> là đại lý uỷ quyền cấp 1 chính hãng của thương hiệu đồng hồ Casio tại Việt Nam.</li>
+                                <li><b>Giá rẻ so với chất lượng</b>, phù hợp cho phân khúc bình dân, chủ yếu từ vài trăm ngàn đồng đến vài triệu đồng hoặc hơn chục triệu đồng.</li>
+                                <li><b>Mẫu mã đa dạng</b>, nhiều phong cách linh hoạt sử dụng với các đối tượng khách hàng: nam, nữ, trẻ em, người trung niên, người già,...</li>
+                                <li><b>Tuổi thọ cao</b> nhờ chất liệu kính khoáng hoặc Sapphire chống xước cao, dây đeo bằng nhựa, da, cao su, thép không gỉ ít hư hại.</li>
+                                <li><b>Khả năng chống nước tốt</b>từ 3ATM - 20ATM cho phép người dùng có thể thoải mái mang theo khi đi mưa, rửa tay, bơi, tắm, lặn,...</li>
+                                <li><b>Máy Quartz hoạt động ổn định</b>, đo giờ chính xác, vượt qua quy trình kiểm duyệt nghiêm ngặt Nhật Bản với thời hạn sử dụng bền bỉ 5 - 10 năm.</li>
+                                <li><b>Chức năng phong phú</b> như tự động cập nhật giờ GMT, kết nối Bluetooth, đèn LED, báo thức, hẹn giờ, bấm giờ,...</li>
+                                <li><b>Đầy đủ giấy tờ chứng nhận nguồn gốc, xuất xứ sản phẩm</b>với các chính sách bảo hành dài hạn, trọn gói lên tới 5 năm.</li>
+                            </ul>
+                            <img src="~/Content/img_default/chung_nhan.jpeg" class="cate-bottom-img" alt="">
+                            <h2>Đồng hồ Casio giá bao nhiêu?</h2>
+                            <p><b>Giá đồng hồ Casio chính hãng</b> tại WatchStore từ 311.000đ - 114.000.000đ, tùy mẫu mã và dòng sản phẩm. Cụ thể:</p>
+                            <ul>
+                                <li>Giá đồng hồ <a href="#!">Casio nam</a> từ 311.000đ - 114.000.000đ</li>
+                                <li>Giá đồng hồ <a href="#!">Casio nữ</a> từ 311.000đ - 40.806.000đ</li>
+                                <li>Giá đồng hồ <a href="#!">Casio năng lượng mặt trời</a> từ 816.000đ - 114.000.000đ</li>
+                                <li>Giá đồng hồ <a href="#!">Casio máy pin Quartz</a> từ 311.000đ - 52.434.000đ</li>
+                                <li>Giá đồng hồ <a href="#!">Casio điện tử</a> từ 349.000đ - 16.992.000đ</li>
+                                <li>Giá đồng hồ <b>Casio giá rẻ</b> từ 311.000đ</li>
+                                <li>Giá đồng hồ <a href="#!">Casio Edifice</a> từ 1.650.000đ - 18.876.000đ</li>
+                                <li>Giá đồng hồ <a href="#!">Casio G-Shock</a> từ 1.499.000đ - 114.000.000đ</li>
+                                <li>Giá đồng hồ <a href="#!">Casio Baby-G</a> từ 1.189.000đ - 6.785.000đ</li>
+                                <li>Giá đồng hồ <b>Casio Sheen</b> từ 2.400.000đ - 14.480.000đ</li>
+                            </ul>
+                            <h2>Các dòng đồng hồ Casio đẹp đang được bán chạy tại WatchStore</h2>
+                            <p>
+                                Mặc dù không "lão làng" bằng nhiều thương hiệu nhưng Casio vẫn đủ "chín muồi" để góp mặt trong bộ tứ quyền lực của
+                                <a href="#!">đồng hồ Nhật Bản</a> và sánh vai cùng hàng loạt cái tên đình đám như <a href="#!">Orient, Seiko, Citizen</a>
+                                . Mỗi lần tung ra một dòng sản phẩm thì hãng đều nhận được sự chú ý không nhỏ đến từ các tín đồ yêu thích <a href="#!">đồng hồ</a>
+                                trên toàn thế giới, nổi bật nhất là 8 dòng sau.
+                            </p>
+                            <h3>Casio Edifice</h3>
+                            <p>Ra mắt lần đầu năm 2000, <a href="#!"> Casio Edifice </a>được xem như sự lựa chọn số 1 của mọi anh em mong muốn một chiếc đồng hồ bền bỉ có thiết kế hiện đại, trẻ trung, khỏe khoắn. Cách nhà sản xuất kết hợp hoàn hảo giữa chức năng siêu việt và công nghệ tiên tiến với kỹ thuật chuẩn xác đã tạo nên một siêu phẩm được bao người săn lùng ráo riết.</p>
+                            <img src="~/Content/img_default/casio2.jpg" class="cate-bottom-img" alt="">
+                            <strong>Các đặc điểm chính của Casio Edifice:</strong>
+                            <ul>
+                                <li>Thiết kế mặt tròn với các cọc số góc cạnh sắc nét, bộ kim chỉ nổi bật trên bề mặt phá cách.</li>
+                                <li>Size mặt phổ biến từ 37mm - 45mm (có mẫu trên 45mm) phù hợp cho nam có kích cỡ cổ tay 16cm - 21.5cm.</li>
+                                <li>Chất liệu chế tác hoàn toàn từ thép không gỉ cao cấp, trang bị 2 loại kính là kính cứng hoặc Sapphire chống trầy xước tốt, kèm dây đeo đa dạng bằng da, nhựa/cao su và kim loại.</li>
+                                <li>Nhiều tính năng cao cấp như đo nhiệt độ, xác định phương hướng, kết nối Bluetooth với điện thoại, GMT của 300 thành phố, hiển thị giờ AM/PM, tự điều chỉnh vị trí trục kim, Chronograph,...</li>
+                            </ul>
+                            <strong>Giá các sản phẩm Casio Edifice:</strong>
+                            <ul>
+                                <li>Các model Casio Edifice điện tử có giá 2.820.000 - 4.500.000 đồng.</li>
+                                <li>Giá Casio Edifice máy năng lượng mặt trời từ 4.830.000 - 18.310.000 đồng.</li>
+                                <li>Những mẫu Casio Edifice pin Quartz được bán với giá 330.000 - 46.980.000 đồng.</li>
+                            </ul>
+                            <h2>Casio G-Shock</h2>
+                            <p>Được sinh ra từ ước mơ của kỹ sư Kikuo Ibe về "chiếc đồng hồ không thể phá vỡ, ngay cả khi bị rơi xuống", G-Shock trình làng lần đầu năm 1983 thực sự là một trong những dòng sản phẩm bền bỉ nhất thế giới.</p>
+                            <img src="~/Content/img_default/casio3.jpg" class="cate-bottom-img" alt="">
+                            <p>Mẫu phụ kiện đeo tay này sở hữu những lợi thế phù hợp cho giới trẻ năng động, cá tính và ưa thích khám phá. Bất kể bạn là nam hay nữ thì đều có thể trải nghiệm cũng như thể hiện bản sắc cá nhân thông qua G-Shock mà không cần lo lắng về tuổi thọ hay quá trình vận hành của sản phẩm.</p>
+                            <strong>Các đặc điểm chính của Casio G-Shock:</strong>
+                            <ul>
+                                <li>Thiết kế to bản theo phong cách bụi bặm, hầm hố với vỏ G-Shock dạng rỗng được trang bị cấu trúc nhiều lớp đặc biệt.</li>
+                                <li>Size mặt lớn chủ yếu từ 37mm - 45mm hoặc hơn 45mm, vừa với cổ tay nam/nữ to có kích thước 16cm - 21.5cm.</li>
+                                <li>Chất liệu chủ yếu làm dây đeo, vỏ và khung đồng hồ là Urathane, nhựa hoặc cao su; phần mặt thường sử dụng kính cứng.</li>
+                                <li>Đa dạng chức năng như chống sốc, chống nước lặn sâu đến 200m, bấm giờ, báo thức, định dạng 12/24 giờ, lịch tự động cập nhật, đồng hồ đếm ngược, đèn nền (EL hoặc LED), giờ thế giới,…</li>
+                            </ul>
+                            <strong>Giá các sản phẩm Casio G-Shock:</strong>
+                            <ul>
+                                <li>Sản phẩm G-Shock điện tử có giá bán từ 1.590.000 - 31.760.000 đồng.</li>
+                                <li>Giá các mẫu G-Shock Pin/Quartz từ 2.560.000 - 31.760.000 đồng.</li>
+                            </ul>
+                        </div>
+                        <div class="hide">
+                            <button id="toggleButton" class="toggle-btn" onclick="toggleContent()">Xem thêm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+    document.querySelectorAll('.fa-heart').forEach(icon => {
+        icon.addEventListener('click', function () {
+            this.classList.toggle('liked');
+        });
+    });
+
+    function toggleContent() {
+        //Ẩn hiện nội dung
+        var content = document.getElementById("content");
+        var button = document.getElementById("toggleButton");
+
+        if (content.style.display === "none" || content.style.display === "") {
+            content.style.display = "block";
+            button.textContent = "Thu gọn";
+        } else {
+            content.style.display = "none";
+            button.textContent = "Xem thêm";
+        }
+    }
+    document.querySelectorAll('.fa-heart1').forEach(icon => {
+        icon.addEventListener('click', function () {
+            this.classList.toggle('liked');
+        });
+    });
+
+    function toggleContent() {
+        //Ẩn hiện nội dung
+        var content = document.getElementById("content");
+        var button = document.getElementById("toggleButton");
+
+        if (content.style.display === "none" || content.style.display === "") {
+            content.style.display = "block";
+            button.textContent = "Thu gọn";
+        } else {
+            content.style.display = "none";
+            button.textContent = "Xem thêm";
+        }
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterItems = document.querySelectorAll(".filter-item");
+
+        filterItems.forEach(function (item) {
+            item.addEventListener("click", function (event) {
+                // Dừng sự kiện click này để không bị đóng khi nhấn vào filter-item
+                event.stopPropagation();
+
+                const className = this.classList[1];
+                const contentClass = `.filter-content${className.replace('show-content', '')}`;
+                const content = document.querySelector(contentClass);
+
+                // Nếu nội dung đang active, hủy bỏ và gỡ bỏ active-item
+                if (content && content.classList.contains("active")) {
+                    content.classList.remove("active");
+                    this.classList.remove("active-item");
+                    return;
+                }
+
+                // Xóa class 'active' từ tất cả nội dung và 'active-item' từ tất cả filter-item
+                const allContents = document.querySelectorAll('[class^="filter-content"]');
+                const allItems = document.querySelectorAll(".filter-item");
+
+                allContents.forEach(function (content) {
+                    content.classList.remove("active");
+                });
+
+                allItems.forEach(function (item) {
+                    item.classList.remove("active-item");
+                });
+
+                // Thêm class 'active' cho nội dung tương ứng và 'active-item' cho filter-item
+                if (content) {
+                    content.classList.add("active");
+                    this.classList.add("active-item");
+                }
+            });
+        });
+
+        // Thêm sự kiện click vào document để ẩn các filter-content và gỡ bỏ active-item
+        document.addEventListener("click", function () {
+            const allContents = document.querySelectorAll('[class^="filter-content"]');
+            const allItems = document.querySelectorAll(".filter-item");
+
+            allContents.forEach(function (content) {
+                content.classList.remove("active");
+            });
+
+            allItems.forEach(function (item) {
+                item.classList.remove("active-item");
+            });
+        });
+    });
+    function updateBrandDescription(brand) {
+    const descriptionList = document.getElementById('brand-description');
+
+    switch (brand) {
+        case "Casio":
+            descriptionList.innerHTML = `
+                <li>Casio là thương hiệu đồng hồ Nhật Bản nổi tiếng ra đời vào năm 1946.</li>
+                <li>Dẫn đầu phân khúc đồng hồ điện tử và pin/quartz giá rẻ.</li>
+                <li>Thiết kế hiện đại, thể thao, có cấu trúc chống sốc Casio bền bỉ độc quyền.</li>
+                <li>Tuổi thọ pin 2 - 10 năm.</li>
+                <li>Đạt 6 giải thưởng thiết kế IF 2024</li>
+            `;
+            break;
+        case "Citizen":
+            descriptionList.innerHTML = `
+                <li>Citizen là thương hiệu đồng hồ Nhật Bản nổi tiếng với công nghệ Eco-Drive sử dụng năng lượng mặt trời.</li>
+                <li>Chuyên sản xuất đồng hồ năng lượng mặt trời, đồng hồ thể thao và đồng hồ cao cấp.</li>
+                <li>Citizen luôn chú trọng vào việc bảo vệ môi trường với công nghệ tiết kiệm năng lượng hiệu quả.</li>
+            `;
+            break;
+        case "Bentley":
+            descriptionList.innerHTML = `
+                <li>Bentley là thương hiệu đồng hồ Thụy Sĩ nổi bật với sự kết hợp giữa sự sang trọng và chất lượng tuyệt vời.</li>
+                <li>Được biết đến với các mẫu đồng hồ cao cấp, có thiết kế sang trọng và đẳng cấp.</li>
+                <li>Bentley là lựa chọn của những người yêu thích sự tinh tế và thanh lịch.</li>
+            `;
+            break;
+        case "Olym Pianus":
+            descriptionList.innerHTML = `
+                <li>Olym Pianus là thương hiệu đồng hồ đến từ Nhật Bản, chuyên cung cấp các mẫu đồng hồ cơ, tự động và quartz với chất lượng vượt trội.</li>
+                <li>Thương hiệu nổi bật với thiết kế thanh lịch và giá trị vượt trội cho mọi đối tượng người dùng.</li>
+            `;
+            break;
+        case "G-Shock":
+            descriptionList.innerHTML = `
+                <li>G-Shock, thuộc thương hiệu Casio, nổi bật với các mẫu đồng hồ chống sốc, bền bỉ và rất thích hợp cho những người yêu thích thể thao.</li>
+                <li>Thiết kế năng động, hiện đại và khả năng chịu lực tuyệt vời, G-Shock là người bạn đồng hành lý tưởng cho các hoạt động ngoài trời.</li>
+            `;
+            break;
+        case "Orient":
+            descriptionList.innerHTML = `
+                <li>Orient là thương hiệu đồng hồ Nhật Bản nổi tiếng với các mẫu đồng hồ cơ, tự động và quartz, mang đến sự bền bỉ và chính xác.</li>
+                <li>Orient cung cấp các mẫu đồng hồ với thiết kế cổ điển, tinh tế, và giá trị tuyệt vời cho những người yêu thích đồng hồ cơ.</li>
+            `;
+            break;
+        case "Seiko":
+            descriptionList.innerHTML = `
+                <li>Seiko là thương hiệu đồng hồ Nhật Bản lâu đời với các dòng sản phẩm đồng hồ cơ, tự động và quartz chính xác.</li>
+                <li>Seiko nổi bật với các mẫu đồng hồ đẳng cấp, không chỉ về mặt thiết kế mà còn về tính năng và độ bền.</li>
+            `;
+            break;
+        case "Tissot":
+            descriptionList.innerHTML = `
+                <li>Tissot là thương hiệu đồng hồ Thụy Sĩ nổi tiếng với thiết kế sang trọng và tinh tế.</li>
+                <li>Chuyên sản xuất đồng hồ cơ khí, tự động và đồng hồ thể thao cao cấp.</li>
+                <li>Với chất liệu cao cấp và độ chính xác tuyệt đối, Tissot luôn được yêu thích.</li>
+            `;
+            break;
+        default:
+            // Mô tả mặc định nếu không tìm thấy thương hiệu
+            descriptionList.innerHTML = `
+
+                <li>4 con GÀ CON</li>
+            `;
+            break;
+        }
+    }
+
+    window.onload = function () {
+    var brandName = "@Model.PageID"; // Lấy giá trị thương hiệu từ Model
+    updateBrandDescription(brandName); // Cập nhật mô tả
+    };
+
+    function formatCurrency(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Định dạng giá hiển thị cho từng phần tử có class "price"
+        const priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            const price = parseInt(element.innerText.replace(/\D/g, '')); // Chuyển nội dung sang số và bỏ các ký tự không phải số
+            if (!isNaN(price)) {
+                element.innerText = formatCurrency(price); // Đặt lại nội dung theo định dạng
+            }
+        });
+    });
+        </script>

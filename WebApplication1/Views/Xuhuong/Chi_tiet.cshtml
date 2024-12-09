@@ -1,0 +1,1863 @@
+﻿@*@model IEnumerable<WebApplication1.Models.Product>*@
+@model WebApplication1.Controllers.XuhuongController.YourViewModel
+
+
+
+@{
+    ViewBag.Title = "Chi_tiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Nếu sử dụng Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+
+
+
+
+<div>
+
+    <div class="d-inline">  <a href="@Url.Action("Xuhuong", "Xuhuong")"><i class='bx bx-home-smile'></i></a></div>
+    <div class="d-inline" style="text-decoration:none"><i class='bx bxs-chevron-left'></i></div>
+    <div class="d-inline" style="text-decoration:none">
+        <a style="text-decoration:none" href="#" onclick="twotab('', '@Model.BrandName')">
+
+            @Model.BrandName
+        </a>
+    </div>
+    @foreach (var product in Model.Product)
+
+    {
+        // Kiểm tra điều kiện ProductId
+        if (product.ProductID == Model.ProductId)
+        {
+
+            <div class="d-inline"><i class='bx bxs-chevron-left'></i></div>
+            <div class="d-inline">
+                @product.ProductName
+            </div>
+        }
+    }
+    <div class="flex-container">
+        @{
+            var averageRating1 = ViewBag.AverageRating ?? 0;
+            var fullStars1 = Math.Floor(averageRating1); // Số sao đầy đủ (4)
+            var halfStar1 = (averageRating1 % 1) > 0 ? 1 : 0; // 1 nếu có 0.5 sao, 0 nếu không
+            var emptyStars1 = 5 - (fullStars1 + halfStar1); // Số sao trống
+        }
+
+        <strong class="cmt_danh_gia">
+
+            @for (var i = 0; i < fullStars1; i++)
+            {
+                <i class="fas fa-star yellow-star-tin"></i>
+            }
+            @if (halfStar1 == 1)
+            {
+                <i class="bi bi-star-half yellow-star-tin"></i>
+            }
+            @for (var i = 0; i < emptyStars1; i++)
+            {
+                @*<i class="fas fa-star"></i>*@
+                <i class="far fa-star yellow-star-tin"></i>
+            }
+
+        </strong>
+        <!--<div style="font-weight:bold" class="d-inline"></div>
+        <div class="d-inline star" onclick="toggleStar(this)"> <i class='bx bx-star'></i></div>
+        <div class="d-inline star" onclick="toggleStar(this)"> <i class='bx bx-star'></i></div>
+        <div class="d-inline star" onclick="toggleStar(this)"> <i class='bx bx-star'></i></div>
+        <div class="d-inline star" onclick="toggleStar(this)"> <i class='bx bx-star'></i></div>
+        <div class="d-inline star" onclick="toggleStar(this)"> <i class='bx bx-star'></i></div>
+        <style>
+            .star i {
+                font-size: 24px;
+                color: gray;
+                cursor: pointer;
+            }
+
+            .star.active i {
+                color: gold;
+            }
+        </style>-->
+        <!-- JavaScript -->
+        <!--<script>
+            function toggleStar(element) {
+                element.classList.toggle('active');
+            }
+        </script>-->
+        <div class="d-inline">Lượt đánh giá  @ViewBag.TotalFeedbacks lượt</div>
+
+    </div>
+
+    @*<div style="display:flex">
+            <div class="d-inline heat" onclick="toggleStar(this)"><i class='bx bx-heart heart-icon-1 '>Yêu thích</i></div>
+            <style>
+                .heat i {
+                    color: gray;
+                    cursor: pointer;
+                }
+
+                .heat.active i {
+                    color: red;
+                }
+            </style>
+            <div class="d-inline text-info"><i class='bx bx-plus-circle'></i>So sánh</div>
+        </div>*@
+
+</div>
+<script>
+    function twotab(tab, tabChild) {
+        var currentPage = window.location.pathname.split('/').pop();
+        //alert('Tab đang click: ' + tab);
+        //alert('TabChild đang click: ' + tabChild);
+
+        // Ghép các tham số thành một đối tượng URLSearchParams
+        var data = new URLSearchParams();
+        data.append('tab', tab);
+        data.append('tabChild', tabChild);
+
+        // Gửi yêu cầu fetch
+        fetch('/XuHuong/XuHuong2', {
+            method: 'POST',
+            body: data, // Dữ liệu gửi đi
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+            .then(response => response.json()) // Chuyển phản hồi thành JSON
+            .then(result => {
+                console.log('Kết quả trả về:', result); // Hiển thị kết quả trả về từ server
+
+                // Chuyển hướng tới trang BanHang
+                window.location.href = '/XuHuong/BanHang?tab=' + encodeURIComponent(result.tab) +
+                    '&tabChild=' + encodeURIComponent(result.tabChild);
+            })
+            .catch(error => {
+                console.error('Lỗi:', error); // Xử lý lỗi
+            });
+    }
+</script>
+@*<h1>~/Content/img/@Model.BrandName/@Model.BrandName</h1>*@
+<div class="container mt-auto">
+    <div class="row">
+        <!-- Bên trái: Carousel ảnh lớn -->
+        <div class="col-sm-6">
+
+
+            <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" style="margin-top:20px; width:100%;height:496.828px;">
+                @*style="margin-top:20px; width:496.8px;height:496.828px;*@
+                <div class="carousel-inner" style="border-radius:10px; height:100%; width:100%">
+                    <div class="carousel-item active carousel-item-big">
+
+                        <img src="~/Content/img/@Model.BrandName/@Model.ProductName/@Model.ImageUrl" class="d-block w-100" style="border-radius:10px;" alt="..." />
+                    </div>
+                    @foreach (var product in Model.Images_Default.Skip(1))
+                    {
+                        //if (product.ProductID == Model.ProductId)   tại controller đã cài đk rồi
+                        {
+                            <div class="carousel-item  carousel-item-big">
+                                <img src="~/Content/img/@Model.BrandName/@Model.ProductName/@Model.ProductName Default/@product.URL_Images_Default" class="d-block w-100" style="border-radius:10px; " alt="..." />
+                            </div>
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color:black"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color:black"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            @*<p>~/Content/img/@Model.BrandName/@Model.ProductName/@foreach (var img in Model.Product)
+                {@img.ImageUrl}</p>*@
+            <div class="Button_img d-flex justify-content-center" style="display:flex;gap:20px; ">
+                <!-- Thêm class và data-slide-to vào button -->
+                <div class="text-center">
+                    <button id="img_Sp" style="margin-right: 10px">
+                        @*icon nhỏ nhỏ các modal*@
+                        <img src="~/Content/img/@Model.BrandName/@Model.ProductName/@foreach (var img in Model.Product) {
+                            if (Model.ProductId == img.ProductID) {
+                            @img.ImageUrl} } " style="width:70px; height:70px" />
+                    </button>
+
+                    <p>Hình ảnh sản phẩm</p>
+
+                </div>
+                @*sai*@
+                <div class="text-center">
+                    <button id="videoButton" style="margin-left: 10%">
+                        <video controls="controls" style="width:70px; height:70px;" src="@foreach (var video in Model.Videos ) {@video.URLVideo
+                        } ">
+                        </video>
+
+                    </button>
+
+                    <p>Video</p>
+
+                </div>
+
+                <div class="text-center">
+                    <button id="thongsoSP" style="margin-left:25%">
+                        <img src="~/Content/img_default/button_img3.png" style="width:0px;height:0px" />
+                        <img src="~/Content/img_default/button_img3.png" style="width:70px; height:70px" />
+
+                    </button>
+                    <p style="margin-left:25%">Thông số sản phẩm</p>
+                </div>
+                <div class="text-center">
+                    <button id="chungnhanDL">
+                        @*looix*@
+                        <img src="~/Content/img_default/button_img4.png" style="width:70px; height:70px" />
+                    </button>
+                    <p>Chứng nhận đại lý</p>
+                </div>
+            </div>
+
+            <!-- Modal dài 610 rông1140 -->
+            <div class="modal fade" id="fullContentModal-modal" tabindex="-1" aria-labelledby="fullContentModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-modal" id="modal-dialog-modal" style="width:1000px; height:600px">
+                    <div class="modal-content" id="modal-content-modal">
+                        <div class="modal-header modal-header-modal" id="modal-header-modal">
+                            <div class="btn-toolbar d-flex justify-content-center gap-3 w-100">
+                                @*imgSP*@
+                                <button type="button" class="btn btn-light" data-bs-target="#carouselImages">Hình ảnh sản phẩm</button>
+                                @*imgThucTe*@
+                                <button type="button" class="btn btn-light" data-bs-target="#thongTinSP">Thông tin sản phẩm</button>
+                                @*thongTinSP*@
+                                <button type="button" class="btn btn-light" data-bs-target="#carouselVideos">Video sản phẩm</button>
+                                <button type="button" class="btn btn-light" data-bs-target="#chungNhan">Chứng nhận thực tế</button>
+                            </div>
+                        </div>
+                        <div class="modal-body modal-body-modal" id="modal-body-modal" style="max-height:600px;max-width:1000px">
+                            <!-- Nội dung của các tab -->
+                            <div id="carouselImages" class="tab-content text-animated text-center">
+                                <div id="myCarousel-modal" class="carousel slide" data-bs-ride="carousel">
+                                    <ol class="carousel-indicators " style="background-color: transparent">
+                                        <li data-bs-target="#myCarousel-modal" data-bs-slide-to="0" class="active"></li>
+                                        <li data-bs-target="#myCarousel-modal" data-bs-slide-to="1"></li>
+                                        <li data-bs-target="#myCarousel-modal" data-bs-slide-to="2"></li>
+                                        <li data-bs-target="#myCarousel-modal" data-bs-slide-to="3"></li>
+                                        <li data-bs-target="#myCarousel-modal" data-bs-slide-to="4"></li>
+                                        <li data-bs-target="#myCarousel-modal" data-bs-slide-to="5"></li>
+                                    </ol>
+                                    <div class="carousel-inner text-center" style="height:450px; width:50%; margin-left:25%">
+                                        <div class="carousel-item active">
+                                            <img src="~/Content/img/@Model.BrandName/@Model.ProductName/@Model.ImageUrl" class="d-block w-100" alt="..." />
+                                        </div>
+                                        @foreach (var product in Model.Images_Default.Skip(1))
+                                        {
+                                            {
+                                                <div class="carousel-item ">
+                                                    <img src="~/Content/img/@Model.BrandName/@Model.ProductName/@Model.ProductName Default/@product.URL_Images_Default" class="d-block w-100" alt="..." />
+                                                </div>
+                                            }
+                                        }
+
+                                    </div>
+                                    <a class="carousel-control-prev" href="#myCarousel-modal" role="button" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color:black"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#myCarousel-modal" role="button" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true" style="background-color:black"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div id="thongTinSP" class="tab-content d-none text-center" style="height: 450px; width: auto">
+
+                                @foreach (var Detail in Model.Detail)
+                                {
+                                    <div>
+                                        <h2 style="font-size:24px">Thông số sản phẩm-@Model.ProductName</h2>
+                                    </div>
+                                    <div>
+                                        <table class="table table-striped" style="width:100%">
+                                            <tr>
+                                                <td>Thương hiệu: @Model.BrandName</td>
+                                                <td>Xuất xứ: @Detail.Origin</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Đối tượng: @Detail.GenderObject</td>
+                                                <td>Loại máy: @Detail.Typeof</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Chất liệu kính: @Detail.GlassMaterial</td>
+                                                <td>Chất liệu dây: @Detail.Material</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Size mặt: @Detail.FaceSize </td>
+                                                <td>Độ dày: @Detail.Thickness</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kháng nước: @Detail.Waterproof</td>
+                                                <td>Tiện ích: Dạ quang, Lịch thứ, Lịch ngày</td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+                                }
+
+
+
+                            </div>
+
+                            <div id="carouselVideos" class="tab-content d-none">
+                                <div id="myCarouselVideos" class="carousel slide" data-bs-ride="carousel">
+                                    <ol class="carousel-indicators carousel-indicators-modal" style="background-color:transparent">
+                                        <li data-bs-target="#myCarouselVideos" data-bs-slide-to="0" class="active active-modal"></li>
+
+                                    </ol>
+                                    <div class="carousel-inner carousel-inner-modal text-center" style="width:auto; height:auto">
+                                        <div class="carousel-item active">
+                                            @foreach (var video in Model.Videos)
+                                            {
+                                                string embedUrl = video.URLVideo.Contains("shorts/")
+                                                    ? video.URLVideo.Replace("shorts/", "embed/")
+                                                    : video.URLVideo.Replace("watch?v=", "embed/");
+
+                                                <iframe width="750" height="500" src="@embedUrl"
+                                                        title="Video"
+                                                        frameborder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        referrerpolicy="strict-origin-when-cross-origin"
+                                                        allowfullscreen>
+                                                </iframe>
+                                            }
+                                        </div>
+
+
+
+                                    </div>
+                                    @*<a class="carousel-control-prev" href="#myCarouselVideos" role="button" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color:black"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#myCarouselVideos" role="button" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color:black"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </a>*@
+                                </div>
+                            </div>
+
+                            <div id="chungNhan" class="tab-content d-none text-center" style=" width:100%; max-height:550px; overflow-y:auto; margin-top:-5px">
+                                <img src="~/Content/img/@Model.BrandName/@foreach (var ImagesCertification in Model.images_Certifications) {
+                                    @ImagesCertification.URL_Images_Certification
+                                    }" style="width: 650px  ;" />
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- JavaScript của bạn -->
+
+            <script>
+                // Mở modal khi nhấn vào nút video
+                document.getElementById('img_Sp').addEventListener('click', function () {
+                    const modal = new bootstrap.Modal(document.getElementById('fullContentModal-modal'));
+                    modal.show();
+                });
+
+                // Chuyển đổi giữa các tab khi nhấn vào các nút trong modal
+                document.querySelectorAll('.modal-header-modal .btn-light').forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        // Lấy giá trị của data-bs-target
+                        const targetId = this.getAttribute('data-bs-target');
+
+                        // Ẩn tất cả các nội dung tab
+                        document.querySelectorAll('.tab-content').forEach(function (tabContent) {
+                            tabContent.classList.add('d-none');
+                        });
+
+                        // Hiển thị nội dung tab được chọn
+                        document.querySelector(targetId).classList.remove('d-none');
+                    });
+                });
+            </script>
+            <script>
+                document.getElementById('videoButton').addEventListener('click', function () {
+                    const modal = new bootstrap.Modal(document.getElementById('fullContentModal-modal'));
+                    modal.show();
+                });
+
+                // Chuyển đổi giữa các tab khi nhấn vào các nút trong modal
+                document.querySelectorAll('.modal-header-modal .btn-light').forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        // Lấy giá trị của data-bs-target
+                        const targetId = this.getAttribute('data-bs-target');
+
+                        // Ẩn tất cả các nội dung tab
+                        document.querySelectorAll('.tab-content').forEach(function (tabContent) {
+                            tabContent.classList.add('d-none');
+                        });
+
+                        // Hiển thị nội dung tab được chọn
+                        document.querySelector(targetId).classList.remove('d-none');
+                    });
+                });
+
+            </script>
+            <script>
+                // Mở modal khi nhấn vào nút video
+                document.getElementById('thongsoSP').addEventListener('click', function () {
+                    const modal = new bootstrap.Modal(document.getElementById('fullContentModal-modal'));
+                    modal.show();
+                });
+
+                // Chuyển đổi giữa các tab khi nhấn vào các nút trong modal
+                document.querySelectorAll('.modal-header-modal .btn-light').forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        // Lấy giá trị của data-bs-target
+                        const targetId = this.getAttribute('data-bs-target');
+
+                        // Ẩn tất cả các nội dung tab
+                        document.querySelectorAll('.tab-content').forEach(function (tabContent) {
+                            tabContent.classList.add('d-none');
+                        });
+
+                        // Hiển thị nội dung tab được chọn
+                        document.querySelector(targetId).classList.remove('d-none');
+                    });
+                });
+            </script>
+            <script>
+                // Mở modal khi nhấn vào nút video
+                document.getElementById('chungnhanDL').addEventListener('click', function () {
+                    const modal = new bootstrap.Modal(document.getElementById('fullContentModal-modal'));
+                    modal.show();
+                });
+
+                // Chuyển đổi giữa các tab khi nhấn vào các nút trong modal
+                document.querySelectorAll('.modal-header-modal .btn-light').forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        // Lấy giá trị của data-bs-target
+                        const targetId = this.getAttribute('data-bs-target');
+
+                        // Ẩn tất cả các nội dung tab
+                        document.querySelectorAll('.tab-content').forEach(function (tabContent) {
+                            tabContent.classList.add('d-none');
+                        });
+
+                        // Hiển thị nội dung tab được chọn
+                        document.querySelector(targetId).classList.remove('d-none');
+                    });
+                });
+            </script>
+
+            <div style="margin-left:45px">
+                <button class="btn btn-outline-secondary" style="color:black" onclick="showContent('content1') ">Chi tiết sản phẩm</button>
+                <button class="btn btn-outline-secondary" style="color:black" onclick="showContent('content2')">Chính sách bảo hành</button>
+                <button class="btn btn-outline-secondary" style="color:black" onclick="showContent('content3')">Hướng dẫn chọn size</button>
+            </div>
+
+            <div id="content1" class="content" style="margin-top:10px">
+
+                @foreach (var Detail in Model.Detail)
+                {
+                    <div>
+                        <h2 style="font-size:24px">Thông số sản phẩm-@Model.ProductName</h2>
+                    </div>
+                    <div>
+                        <table class="table table-striped" style="width:100%">
+                            <tr>
+                                <td>Thương hiệu: @Model.BrandName</td>
+                                <td>Xuất xứ: @Detail.Origin</td>
+                            </tr>
+                            <tr>
+                                <td>Đối tượng: @Detail.GenderObject</td>
+                                <td>Loại máy: @Detail.Typeof</td>
+                            </tr>
+
+                            <tr>
+                                <td>Chất liệu kính: @Detail.GlassMaterial</td>
+                                <td>Chất liệu dây: @Detail.Material</td>
+                            </tr>
+                            <tr>
+                                <td>Size mặt: @Detail.FaceSize </td>
+                                <td>Độ dày: @Detail.Thickness</td>
+                            </tr>
+                            <tr>
+                                <td>Kháng nước: @Detail.Waterproof</td>
+                                <td>Tiện ích: Dạ quang, Lịch thứ, Lịch ngày</td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+                }
+
+
+            </div>
+            <div id="content2" class="content" style="display:none">
+                <div>
+
+                    <div>
+                        <p>
+                            Đồng hồ chính hãng khác với đồng hồ Fake ở chỗ là nó luôn đi kèm với 1 chiếc THẺ hoặc 1 SỔ BẢO HÀNH toàn cầu có giá trị bảo hành theo từng thời gian quy định của từng hãng.
+                            <br />
+                            THẺ hoặc SỔ BẢO HÀNH chính thức này được WatchStore ghi đầy đủ và chính xác các thông tin của đồng hồ như: mã đồng hồ, nơi bán, ngày mua hàng.
+                            <br />
+                            Thời gian bảo hành được tính từ ngày mua hàng được ghi trên THẺ hoặc SỔ BẢO HÀNH.
+                        </p>
+                        <p>   <strong>DUY NHẤT TẠI WATCHSTORE</strong></p>
+                        <p>
+                            1: Bạn sẽ được&nbsp;<strong>bảo hành trọn gói 5 năm</strong>&nbsp;tính từ ngày mua tại WatchStore, (đã bao gồm cả thời gian bảo hành quốc tế của từng hãng).<br>
+                            2: WatchStore.vn sẽ không có bất cứ quy định khắt khe và không thu bất cứ khoản phí nào trong suốt 5 năm bảo hành, đồng hồ của bạn có bất cứ lỗi nào từ nhà sản xuất bạn mang qua sẽ được bảo hành.
+                        </p>
+                        <p>   <strong>ĐIỀU KIỆN BẢO HÀNH</strong></p>
+                        <p>1:&nbsp;WatchStore.vn&nbsp;sẽ chỉ bảo hành miễn phí cho các lỗi của nhà sản xuất như: hư hỏng các linh kiện bên trong của đồng hồ, có thể được đổi sang 1 chiếc đồng hồ mới (trong vòng 7 ngày tính từ ngày nhận hàng) tuỳ theo mức độ hỏng hóc của linh kiện.</p>
+                        <p>
+                            2: Ngoài ra Pin của đồng hồ bạn mua tại hệ thống của&nbsp;WatchStore.vn&nbsp;sẽ được thay thế miễn phí và lau dầu cũng miễn phí trong suốt thời gian bảo hành (không áp dụng pin năng lượng từ ánh sáng (Eco-Drive), loại pin này sẽ áp dụng theo các chính sách bảo hành kèm theo của hãng). Riêng đồng hồ Casio sẽ được miễn phí thay pin trọn đời.<br>
+                            3: WatchStore.vn chỉ chấp nhận bảo hành khi bạn còn giữ THẺ hoặc SỔ BẢO HÀNH liên quan tới chiếc đồng hồ của bạn.
+                        </p>
+                        <p>   <strong>KHÔNG BẢO HÀNH</strong></p>
+                        <p>
+                            1. Không bảo hành dây, vỏ vì các bộ phận bên ngoài này sẽ bị hao mòn và lão hoá theo thời gian ví dụ như: vỏ máy bị móp méo do va đập, bị trầy xước, phai màu, bong tróc, nứt vỡ, hỏng khoá dây.<br>
+                            2. Không bảo hành cho những hậu quả gián tiếp của việc sử dụng không đúng cách của người sử dụng như: đeo đồng hồ trong khi xông hơi, tắm nước nóng, để đồng hồ tiếp xúc với các loại hóa chất, axít, chất tẩy rửa có độ ăn mòn cao…<br>
+                            3. Không bảo hành cho những đồng hồ đã bị sửa chữa tại những nơi không phải là trung tâm bảo hành được các hãng đồng hồ ủy quyền chính thức hoặc tại WatchStore.vn, đặc biệt trường hợp kháchh tự sửa chữa sẽ từ chối bảo hành ngay lập tức.<br>
+                            4. Không bảo hành cho đồng hồ bị hư hỏng do ảnh hưởng của thiên tai, hỏa hoạn, lũ lụt, tai nạn hoặc cố tình gây hư hỏng.
+                        </p>
+                        <p>Nếu bạn muốn đọc chi tiết hơn, vui lòng tham khảo tại đường&nbsp;<a href="https://www.watchstore.vn/blogs/news/chinh-sach-bao-hanh-tai-watchstore-vn-6" rel="noopener" target="_blank">link này</a></p>
+                    </div>
+
+                </div>
+            </div>
+            <div id="content3" class="content" style="display:none">
+                <p>
+                    Sở thích của mỗi người là khác nhau, có người tay nhỏ nhưng lại thích đeo đồng hồ size to, có người tay to nhưng lại thích đeo đồng hồ size nhỏ, nhưng để đeo 1 chiếc đồng hồ mang tính thẩm mỹ nhất thì bạn cũng nên tham khảo cách lựa size đồng hồ dưới đây nhé:<br>
+                    <br>
+                    <strong>Bước 1:</strong>&nbsp;Đo size cổ tay (chu vi cổ tay)<br>
+                    <br>
+                    <img alt="Chọn size mặt đồng hồ phù hợp nhất với tay - Ảnh 1" src="https://i.imgur.com/Q9lydDN.png"><br>
+                    <br>
+                    <strong>Bước 2:</strong>&nbsp;Tham chiếu size cổ tay của bạn để chọn size mặt đồng hồ phù hợp dưới đây<br>
+                    <img alt="Chọn size mặt đồng hồ phù hợp nhất với tay - Ảnh 2" src="https://i.imgur.com/VAOlz7D.png">
+                </p>
+
+            </div>
+
+
+
+
+            <script>
+                function showContent(contentId) {
+                    // Ẩn tất cả nội dung
+                    var contents = document.getElementsByClassName('content');
+                    for (var i = 0; i < contents.length; i++) {
+                        contents[i].style.display = 'none';
+                    }
+
+                    // Hiển thị nội dung được chọn
+                    document.getElementById(contentId).style.display = 'block';
+                }
+                window.onload = function () {
+                    showContent('content1');
+                }
+            </script>
+
+            <div class="bg-article" id="bg-article-xem-them">
+                <img style="max-height:70%;max-width:90%;" src="~/Content/img/@Model.BrandName/@Model.ProductName/@Model.ImageUrl" />
+                <div class="btn-overlay" id="btn-overlay-xem-them" data-bs-toggle="modal" data-bs-target="#fullContentModal">
+                    Xem thêm <i class="bi bi-chevron-down"></i>
+                </div>
+            </div>
+
+        </div>
+
+
+        <style>
+
+            .price_current {
+                color: #ED1C24;
+                font-size: 22px;
+                line-height: 28px;
+                font-weight: bold;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+
+            .price_old {
+                color: #999;
+                font-size: 16px;
+                line-height: 20px;
+                text-decoration-line: line-through;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+
+            .discount {
+                background: #f9e9e2;
+                border-radius: 2px;
+                color: #ef5555;
+                margin-left: 10px;
+                padding: 2px;
+                font-size: 12px;
+                font-weight: 700;
+            }
+
+            .box-promo {
+                border: 1px solid #6C6C6C;
+                border-radius: 8px;
+            }
+        </style>
+
+        @*Bên phải: Thông tin chi tiết*@
+        <div class="col-sm-6">
+            @foreach (var price in Model.Product)
+            {
+                if (price.ProductID == Model.ProductId)
+                {
+                    var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == price.BrandID)?.BrandName ?? "Unknown Brand";
+                    var discountedPrice = price.Price - (price.Price * price.Discount / 100);
+
+
+                    //content = "@price.Price"
+                    <div class="price_current d-inline price" id="price">
+                        @discountedPrice đ
+                    </div>
+                    <div class="price_old d-inline price" id="price_old">@price.Price₫</div>
+                    <div class="discount d-inline" id="discount">-@price.Discount%</div>}
+            }
+            <div class="more_detail">
+                <span class="cate_name">
+                    Chính hãng từ: <strong>@Model.BrandName</strong>
+                </span>
+                <span class="text_ext">
+                    Xuất xứ: @foreach (var Detail in Model.Detail)
+                    {@Detail.Origin}<strong></strong>
+                </span>
+            </div>
+            <div class="box-promo" style="border-color:red;">
+                <div class="pr-top" style="background:red"> Khuyến Mại từ 11/11/2024 đến 31/12/2024 </div>
+                <div>
+                    <ul class="pr-content" style="font-size:14px">
+                        <li class="kmhx kmhxma kmhxma-41">
+                            <span class="d-block">Nhập mã <span>GG200K</span> Mã giảm giá 200k</span>
+                            <span class="d-block text_ad">áp dụng cho đơn trên 6.000.000₫ trở lên</span>
+                        </li>
+                        <div class="border-dashed border-top border-secondary my-3" style="width: 95%; border-color: #d3d3d3;"></div>
+                        <li class="kmhx kmhxma kmhxma-41">
+                            <span class="d-block">Nhập mã <span>GG300K</span> Mã giảm giá 300k</span>
+                            <span class="d-block text_ad">áp dụng cho đơn trên 10.000.000₫ trở lên</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <style>
+                .notification-toast {
+                    position: fixed;
+                    top: 1rem;
+                    right: 1rem;
+                    z-index: 1055; /* Đảm bảo toast nằm trên các thành phần khác */
+                    color: red;
+                }
+            </style>
+
+            <div class="input_buy">
+                <form action="@Url.Action("AddOrderItem", "Xuhuong")" method="post" id="orderForm">
+                    <input type="hidden" name="productId" value="@Model.ProductId" />
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="notification-toast-btn" style="width:100%; line-height:20px; display:block;">
+                        <div class="notification-toast top-right" id="notification-toast"></div>
+                        <font style="font-size: 14px; display:block;">Liên hệ đặt hàng</font>
+                        <span style="font-size: 12px; display: block;">Chúng tôi báo giá tốt nhất dành cho bạn</span>
+                    </button>
+                </form>
+            </div>
+
+            <script>
+                function showToastAndSubmit() {
+                    // Ngăn chặn submit mặc định
+                    event.preventDefault();
+
+                    var toastHTML = `
+                      <div class="toast fade hide align-items-center border-0 mb-2" data-bs-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
+                      <div class="toast-header">
+                      <i class="bi bi-info-circle-fill text-primary me-2"></i>
+                      <strong class="me-auto">Watch Store</strong>
+                      <small>Vài giây trước</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                      </div>
+                      <div class="toast-body">
+                      Đặt hàng thành công! Đang chuyển hướng...
+                      </div>
+                    </div>`;
+  
+                    // Thêm thông báo vào container
+                    $('#notification-toast').append(toastHTML);
+
+                    // Hiển thị thông báo
+                    const newToast = $('#notification-toast .toast').last();
+                    const toast = new bootstrap.Toast(newToast[0]);
+                    toast.show();
+
+                    // Sau 3 giây, thực hiện submit form
+                    setTimeout(function () {
+                        newToast.remove();
+                        $('#orderForm').submit();
+                    }, 1500);
+                }
+
+                // Gán sự kiện click cho nút
+                $(document).ready(function () {
+                    $('#notification-toast-btn').on('click', showToastAndSubmit);
+                });
+
+            </script>
+
+
+            <p class="text-center" style="margin-top:-2px;">Gọi mua hàng: <span style="color: #007cff; ">093 189 2222 - 097 189 3333</span></p>
+
+
+            <!--<p class="quick-link-title" style="display: block; height: 30px; margin: 0; line-height: 34px; font-size: 16px">Sản phẩm theo mức giá: </p>
+
+            <a style=" font-size: 14px; color: #007cff;">Dưới 1 triệu,</a>-->
+            <!--  bỏ link đồng hồ dưới 1 triệu vào-->
+            <!--<a style=" font-size: 14px; color: #007cff;">Từ 1 - 3 triệu,</a>--> <!--  bỏ link đồng hồ Từ 1-3 triệu vào-->
+            <!--<a style=" font-size: 14px; color: #007cff;">Từ 3 - 6 triệu,</a>--> <!--  bỏ link đồng hồ Từ 3-6 triệu vào-->
+            <!--<a style=" font-size: 14px; color: #007cff;">Từ 6 - 9 triệu,</a>--> <!--  bỏ link đồng hồ Từ 6-9 triệu vào-->
+            <!--------------------------------------------------------------------------->
+            <div class="container box-promo">
+                <div class="row" style="height: 190px; line-height: 2">
+                    <div class="col-sm-12 text-center" style="background: #333; color: #FDAF17; margin-top: 0; font-weight:bold ">CAM KẾT CỦA WATCHSTORE.VN</div>
+                    <div class="col-sm-6 text-center " style="margin-top: -2px; "><i class='bx bxs-check-shield'></i> Bảo hành máy 5 năm toàn quốc, thủ tục nhanh gọn</div><!--ghi chính sách bảo hành vào-->
+                    <div class="col-sm-6 text-center" style="margin-top: -2px "><i class='bx bx-sync'></i>Không bán hàng fake, chỉ bán hàng chính hãng</div>
+                    <div class="col-sm-6 text-center" style="margin-top: -5px "><i class='bx bx-cube'></i> Sẵn hàng - quay chụp hình thực tế gửi khách xem</div>
+                    <div class="col-sm-6 text-center" style="margin-top: -5px "> <i class='bx bxs-ship'></i>Freeship toàn quốc, thanh toán khi nhận hàng</div>
+                </div>
+            </div>
+
+            <div class="store" style="line-height: 0.5;margin-top:5px">
+                <div style="display:flex; gap:15px">
+                    <p style="font-size:18px; color:black; font-weight:bold">Các Cửa Hàng</p>
+                    <p class="time" style="font-size:15px">(mở cửa từ 8h:00-22h:00)</p>
+                </div>
+                <p style="font-size: 15px; color: #999999; ">Vui lòng liên hệ trước để WatchStore chuẩn bị sẵn hàng</p>
+            </div>
+
+            <div class="diachi_store container box-promo" style="width:100%; height:400px">
+
+
+                <div class="row-cols-sm-2" style="font-size: 15px; line-height: 1.5; border-bottom: 1px solid #E0E0E0;">
+                    <div>97 Trần Đại Nghĩa, HBT, Hà Nội </div>
+                    <div style="display:flex; gap:10px;">
+                        <p><i class='bx bx-phone'></i> 093 189 2222 </p>
+                        <p>
+                            <i class='bx bx-map'></i>
+                            <a style="font-size:15px" class="icont icon_location" href="https://goo.gl/maps/bCrqSUZgrUVfNWDN7" target="_blank" title="WatchStore Trần Đại Nghĩa">Chỉ đường</a>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="row-cols-sm-2" style="font-size: 15px; line-height: 1.5; border-bottom: 1px solid #E0E0E0;">
+                    <div>58 Trần Đăng Ninh, Cầu Giấy, Hà Nội</div>
+                    <div style="display:flex; gap:10px;">
+                        <p><i class='bx bx-phone'></i> 093 188 2222 </p>
+                        <p>
+                            <i class='bx bx-map'></i>
+                            <a style="font-size:15px" class="icont icon_location" href="https://goo.gl/maps/c7QvgddZgdtJ9fKW9" target="_blank" title="WatchStore Trần Đăng Ninh">Chỉ đường</a>
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="row-cols-sm-2" style="font-size: 15px; line-height: 1.5; border-bottom: 1px solid #E0E0E0;">
+                    <div>90 Lê Văn Sỹ, P11, Phú Nhuận, HCM</div>
+                    <div style="display:flex; gap:10px;">
+                        <p><i class='bx bx-phone'></i> 093 187 2222 </p>
+                        <p>
+                            <i class='bx bx-map'></i>
+                            <a style="font-size:15px" class="icont icon_location" href="https://goo.gl/maps/Hsi8dhnpfwGgC4s36" target="_blank" title="WatchStore Lê Văn Sỹ">Chỉ đường</a>
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div class="row-cols-sm-2" style="font-size: 15px; line-height: 1.5; border-bottom: 1px solid #E0E0E0;">
+                    <div>61 Quang Trung, P10, Gò Vấp, HCM</div>
+                    <div style="display:flex; gap:10px;">
+                        <p><i class='bx bx-phone'></i> 093 186 2222 </p>
+                        <p>
+                            <i class='bx bx-map'></i>
+                            <a style="font-size:15px" class="icont icon_location" href="https://goo.gl/maps/J88jtv1u9NfZGFAh6" target="_blank" title="WatchStore Quang Trung">Chỉ đường</a>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="row-cols-sm-2" style="font-size: 15px; margin-top: 10px; line-height: 1.5; border-bottom: 1px solid #E0E0E0;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Kho Hàng Online, Ship toàn quốc </span>
+                        @*<span style="display: flex; ">
+                                <span class="status-dot" style="width: 5px; height: 5px; border-radius: 50%; margin-right: 5px; background-color: green;"></span>
+                                Còn hàng
+                            </span>*@
+                    </div>
+
+                    <div style="display:flex; gap:10px;">
+                        <p><i class='bx bx-phone'></i> 093 185 2222 </p>
+
+                    </div>
+                </div>
+
+                <div class="row-cols-sm-2" style="display: flex; background: #FFFBE5; font-size: 15px; line-height: 1.5;">
+                    Tất cả các cửa hàng của WatchStore đều có giấy chứng nhận đại lý ủy quyền của Anh Khuê Watch (Casio Việt Nam). Xem chứng nhận tại đây
+                </div>
+
+
+
+            </div>
+            <div style="background: #999 ">Khách mua Sỉ, CTV - liên hệ Mr.Long: 0797.23.9999</div>
+
+
+        </div>
+
+
+
+
+        @*TIN*@
+
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            #comment {
+                margin: 20px 0;
+            }
+
+            .rating-stars {
+                display: flex;
+                align-items: center;
+                gap: 10px; /* Khoảng cách giữa các sao và nút */
+            }
+
+                .rating-stars i {
+                    color: gold; /* Màu của sao */
+                }
+
+                .rating-stars button {
+                    margin-left: 10px;
+                    padding: 5px 10px;
+                    background-color: #4caf50; /* Màu nền của nút */
+                    color: white; /* Màu chữ của nút */
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+
+            .rating-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+
+            .progress-container {
+                background-color: #ddd; /* Màu nền của thanh tiến độ */
+                border-radius: 5px;
+                /*    overflow: hidden;*/
+                height: 20px; /* Chiều cao của thanh tiến độ */
+                width: 40%;
+            }
+
+            .progress-bar {
+                height: 100%;
+                background-color: red;
+                transition: width 0.5s ease;
+                /*    Màu của thanh đã được đánh giá transition: width 0.5s ease;*/
+            }
+
+
+
+            #btn-overlay-xem-them {
+                position: absolute;
+                bottom: 0;
+                right: 10px;
+                background-color: rgba(255, 255, 255, 0.8); /* Nền trắng trong suốt */
+                border: 1px solid #ddd;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+
+
+
+            #bg-article-xem-them {
+                padding-top: 20px;
+                max-height: 400px; /* Giới hạn chiều cao */
+                overflow: hidden; /* Ẩn nội dung vượt quá */
+                position: relative;
+                padding-bottom: 40px; /* Dành không gian cho nút "Xem thêm" */
+            }
+
+            #btn-overlay-xem-them {
+                background-color: white; /* Nền tối cho nút */
+                color: dodgerblue;
+                cursor: pointer;
+                padding-left: 37%; /*căn chữ xme thêm*/
+                text-align: center;
+                width: 100%;
+                display: flex; /* Ẩn nút mặc định */
+                border: none;
+                border-left: 20px;
+            }
+
+            #bg-article-xem-them.show-more {
+                max-height: none; /* Bỏ giới hạn chiều cao khi mở rộng */
+            }
+
+
+            .modal-custom-width {
+                width: 900px;
+            }
+
+            .carousel-indicators li {
+                background-color: aqua; /* Thay đổi màu chấm thành màu đen */
+            }
+
+            .carousel-indicators .active {
+                background-color: red; /* Chấm hiển thị slide hiện tại có màu đỏ */
+            }
+
+            .nut_hinh {
+                color: red;
+            }
+
+            .carousel-item-tin img {
+                max-width: 50%; /* Co dãn ảnh xuống còn 50% chiều rộng của phần tử chứa */
+                max-height: 450px; /* Giới hạn chiều cao */
+                margin-left: 25%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                object-fit: contain; /* Đảm bảo hình ảnh giữ đúng tỉ lệ */
+            }
+
+            .carousel {
+                padding-bottom: 10px; /* Tạo thêm khoảng trống ở phía dưới để có không gian cho indicator */
+            }
+
+
+
+
+
+            #modal-dialog-modal-tin {
+                margin-left: 220px;
+                margin-top: 5px;
+                margin-bottom: 5px; /* Xóa khoảng cách mặc định của modal */
+                max-height: 600px;
+            }
+
+            #modal-content-modal-tin {
+                height: 600px; /* Đặt chiều cao cố định */
+                top: 0; /* Đặt phần nội dung modal sát cạnh trên */
+                position: absolute; /* Sử dụng thuộc tính position để cố định modal */
+                width: 1000px; /* Đặt chiều rộng là 100% */
+            }
+
+            #modal-header-modal-tin {
+                border-bottom: 1px solid #dee2e6; /* Thêm đường viền để phân cách header */
+                padding: 15px; /* Đặt khoảng cách bên trong header */
+                /*        max-height: 600px;*/
+            }
+
+            .thongTinCT_tin {
+                margin-top: 5px;
+                max-width: 910px;
+                margin-left: 40px;
+                max-height: 80vh; /* Giới hạn chiều cao */
+                overflow-y: auto; /* Chỉ có thanh cuộn dọc */
+                overflow-x: hidden; /* Loại bỏ thanh cuộn ngang */
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            /*        chữ header modal*/
+            .btn-light-tin {
+                font-size: 14px;
+            }
+
+            /*icon*/
+            .carousel-control-prev-icon-tin,
+            .carousel-control-next-icon-tin {
+                background-color: rgba(128, 128, 128, 0.5); /* Màu xám với độ trong suốt 50% */
+                border-radius: 50%; /* Làm cho icon có dạng tròn */
+                padding: 10px; /* Tạo khoảng cách giữa icon và viền */
+                transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền */
+            }
+
+            .carousel-control-prev:hover .carousel-control-prev-icon-tin,
+            .carousel-control-next:hover .carousel-control-next-icon-tin {
+                background-color: rgba(96, 96, 96, 0.5); /* Màu nền khi hover */
+            }
+
+            .carousel-control-prev-tin,
+            .carousel-control-next-tin {
+                filter: none; /* Loại bỏ bất kỳ bộ lọc màu nào (như màu trắng) */
+            }
+
+
+            #video_short_tin {
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            .img_chi_tiet_tin {
+                margin-left: 70px;
+                /*max-height: 500px;*/ /* Thay đổi giá trị này tùy theo yêu cầu của bạn */
+                overflow-y: auto;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            .thongTinCT_noidungdongho {
+                max-height: auto;
+                font-size: 18px;
+                margin: 5px;
+                text-align: left;
+                margin-left: 100px;
+            }
+
+            #chungNhan_tin {
+                max-width: 910px;
+                margin-left: 40px;
+                max-height: 80vh; /* Giới hạn chiều cao */
+                overflow-y: auto; /* Chỉ có thanh cuộn dọc */
+                overflow-x: hidden; /* Loại bỏ thanh cuộn ngang */
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            /*        .bi bi-star{
+                         background-color:yellow;
+                     }*/
+            .img_danh_gia_tin {
+                max-height: 85px;
+                max-width: 85px;
+            }
+            /*đổ màu like*/
+            .bi-hand-thumbs-up-tin.liked {
+                color: #fccb00;
+            }
+            /*nét gạch đứt*/
+            .small-dashed-line-tin {
+                border-top: 1px dashed black; /* Màu sắc có thể tùy chỉnh */
+                width: 50%; /* Độ dài đường nét */
+                margin: 20px 0; /* Khoảng cách trên dưới */
+            }
+
+            .btn_sao_tin {
+                margin-right: 20px;
+                font-size: 50px;
+                background-color: transparent;
+                border: none;
+                padding: 0;
+                cursor: pointer;
+            }
+                /*        đổ màu*/
+                .btn_sao_tin.liked {
+                    color: #fccb00;
+                }
+            /*       card */
+            .card-tin {
+                margin-bottom: 0;
+                height: 440px;
+            }
+            /* Loại bỏ khoảng cách giữa các cột trong hàng */
+            .no-gutters-tin {
+                margin-right: 0;
+                margin-left: 0;
+            }
+
+                .no-gutters-tin .col,
+                .no-gutters-tin [class*="col-"] {
+                    padding-right: 0;
+                    padding-left: 0;
+                }
+
+            .img_card {
+                max-height: 250px;
+                max-width: 250px;
+                object-fit: cover; /*đè icon */
+                /*       đổ màu icon     */
+            }
+
+            .heart-icon-tin {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 24px; /* Kích thước biểu tượng */
+                color: red;
+                cursor: pointer; /* Con trỏ chuột khi di chuột qua */
+                transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+                /*border: 2px solid blue;*/ /* Viền đen */
+                text-shadow: 0 0 0 2px red;
+                /*border-radius: 50%;*/ /* Tạo hình tròn cho viền */
+                padding: 5px; /* Khoảng cách giữa viền và nội dung */
+                background-color: rgba(255, 255, 255, 0.5); /* Nền trắng mờ để làm nổi bật viền */
+            }
+            /*        đổ màu trái tim*/
+            /*                    .heart-icon-tin.liked {
+                        color: red;
+                    }*/
+
+
+            .card-text {
+                margin-bottom: auto;
+            }
+
+            .yellow-star-tin {
+                color: rgb(247, 144, 9);
+                list-style-type: none;
+            }
+
+            .card-tin:hover {
+                transform: translateY(-5px); /* Khi hover, thẻ sẽ nổi lên */
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow sâu hơn khi hover */
+            }
+
+            .nut_huy_tin {
+                width: 150px;
+                text-align: center;
+            }
+
+            .nut_danh_gia_tin {
+                width: 300px;
+                text-align: center;
+            }
+        </style>
+
+
+        <!-- Modal dài 610 rông1140 -->
+        <div class="modal fade" id="fullContentModal" tabindex="-1" aria-labelledby="fullContentModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" id="modal-dialog-modal-tin">
+                <div class="modal-content" id="modal-content-modal-tin">
+                    <div class="modal-header" id="modal-header-modal-tin">
+                        <div class="btn-toolbar d-flex justify-content-center gap-3 w-100">
+                            @*dung id de click*@
+
+                            <button type="button" class="btn btn-light btn-light-tin" data-bs-target="carouselImages_tin">Hình ảnh sản phẩm</button>
+
+                            <button type="button" class="btn btn-light btn-light-tin" data-bs-target="thongTinSP_tin">Thông tin sản phẩm</button>
+                            <button type="button" class="btn btn-light btn-light-tin" data-bs-target="carouselVideos_tin">Video sản phẩm</button>
+                            <button type="button" class="btn btn-light btn-light-tin" data-bs-target="chungNhan_tin">Chứng nhận thực tế</button>
+                        </div>
+                    </div>
+                    <div class="modal-body" id="modal-body-modal-tin">
+                        <!-- Nội dung của các tab -->
+                        <div id="carouselImages_tin" class="tab-content">
+                            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <ol class="carousel-indicators carousel-indicators-anhDongHo" style="background-color: transparent">
+                                    <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active nut_hinh"></li>
+                                    <li data-bs-target="#myCarousel" data-bs-slide-to="1" class="nut_hinh"></li>
+                                    <li data-bs-target="#myCarousel" data-bs-slide-to="2" class="nut_hinh"></li>
+                                    <li data-bs-target="#myCarousel" data-bs-slide-to="3" class="nut_hinh"></li>
+                                    <li data-bs-target="#myCarousel" data-bs-slide-to="4" class="nut_hinh"></li>
+                                    <li data-bs-target="#myCarousel" data-bs-slide-to="5" class="nut_hinh"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active carousel-item-tin">
+                                        <img src="~/Content/img/@Model.BrandName/@Model.ProductName/@Model.ImageUrl" class="d-block w-100" style="border-radius:10px;" alt="..." />
+
+                                    </div>
+                                    @foreach (var product in Model.Images_Default.Skip(1))
+                                    {
+                                        {
+                                            <div class="carousel-item  carousel-item-tin">
+                                                <img src="~/Content/img/@Model.BrandName/@Model.ProductName/@Model.ProductName Default/@product.URL_Images_Default" class="d-block w-100" alt="..." />
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon carousel-control-prev-icon-tin" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon carousel-control-next-icon-tin" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                        @*carouselVideos*@
+                        <div id="thongTinSP_tin" class="tab-content d-none  text-center">
+
+
+                            @foreach (var Detail in Model.Detail)
+                            {
+                                <div>
+                                    <h2 style="font-size:24px">Thông số sản phẩm-@Model.ProductName</h2>
+                                </div>
+                                <div>
+                                    <table class="table table-striped" style="width:100%">
+                                        <tr>
+                                            <td>Thương hiệu: @Model.BrandName</td>
+                                            <td>Xuất xứ: @Detail.Origin</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Đối tượng: @Detail.GenderObject</td>
+                                            <td>Loại máy: @Detail.Typeof</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Chất liệu kính: @Detail.GlassMaterial</td>
+                                            <td>Chất liệu dây: @Detail.Material</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Size mặt: @Detail.FaceSize </td>
+                                            <td>Độ dày: @Detail.Thickness</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kháng nước: @Detail.Waterproof</td>
+                                            <td>Tiện ích: Dạ quang, Lịch thứ, Lịch ngày</td>
+                                        </tr>
+
+
+                                    </table>
+                                </div>
+                            }
+
+
+
+                        </div>
+
+                        <div id="carouselVideos_tin" class="tab-content d-none">
+                            <div id="myCarousel1" class="carousel slide" data-bs-ride="carousel">
+                                <ol class="carousel-indicators" style="background-color: transparent">
+                                    <li data-bs-target="#myCarousel1" data-bs-slide-to="0" class="active"></li>
+                                    @*<li data-bs-target="#myCarousel1" data-bs-slide-to="1"></li>*@
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active carousel-item-tin" style="margin-left:110px;">
+
+                                        <iframe width="750" height="500" src="@foreach (var video in Model.Videos ) {@video.URLVideo
+}" title="2 TRIỆU THÌ MUA ĐƯỢC ĐỒNG HỒ NÀO? TOP ĐỒNG HỒ XỊN TRONG TẦM GIÁ 2 TRIỆU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                                    </div>
+
+                                </div>
+                                @*<a class="carousel-control-prev" href="#myCarousel1" role="button" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon carousel-control-prev-icon-tin" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#myCarousel1" role="button" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon carousel-control-next-icon-tin" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </a>*@
+                            </div>
+
+
+                        </div>
+
+                        @{
+                            // Tạo biến brandID từ ProductID
+                            var product0 = Model.Product.FirstOrDefault(p => p.ProductID == Model.ProductId);
+                            int? brandID = product0?.BrandID; // Lấy BrandID dựa trên ProductID nếu tồn tại
+                        }
+                        @foreach (var ImagesCertification in Model.images_Certifications)
+                        {
+                            if (brandID == ImagesCertification.BrandID)
+                            {
+
+
+                                <div id="chungNhan_tin" class="tab-content d-none" style="width: 100%; max-height: 450px; overflow-y: auto; margin-top: -5px;">
+                                    <img src="~/Content/img/@Model.BrandName/@ImagesCertification.URL_Images_Certification" style=" width: 650px " />
+                                </div>
+                            }
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <style>
+            .image-upload-container {
+                gap: 10px;
+            }
+
+            .image-upload-box {
+                width: 80px;
+                height: 80px;
+                border: 2px dashed #ccc;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                border-radius: 8px;
+            }
+
+                .image-upload-box:hover {
+                    border-color: #007bff;
+                }
+
+            .btn-upload {
+                background-color: transparent;
+                border: none;
+                font-size: 24px;
+                color: #007bff;
+            }
+
+            .image-preview {
+                position: relative;
+                width: 80px;
+                height: 80px;
+                border-radius: 8px;
+                overflow: hidden;
+                margin-right: 10px;
+                border: 1px solid #ddd;
+            }
+
+                .image-preview img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+            .btn-remove {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background-color: #ff4d4f;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+        </style>
+
+
+
+
+        <h5>Đánh giá review @Model.BrandName - @Model.ProductName</h5>
+        <div id="comment">
+
+            @{
+                var averageRating = ViewBag.AverageRating ?? 0;
+                var fullStars = Math.Floor(averageRating); // Số sao đầy đủ (4)
+                var halfStar = (averageRating % 1) >= 0.5 ? 1 : 0; // 1 nếu có 0.5 sao, 0 nếu không
+                var emptyStars = 5 - (fullStars + halfStar); // Số sao trống
+            }
+
+            <strong class="cmt_danh_gia">
+                @averageRating
+                @for (var i = 0; i < fullStars; i++)
+                {
+                    <i class="fas fa-star yellow-star-tin"></i>
+                }
+                @if (halfStar == 1)
+                {
+                    <i class="bi bi-star-half yellow-star-tin"></i>
+                }
+                @for (var i = 0; i < emptyStars; i++)
+                {
+                    <i class="far fa-star yellow-star-tin"></i>
+                }
+                <button type="button" class="btn btn-outline-primary" style="margin-bottom:5px" data-bs-toggle="modal" data-bs-target="#fullContentModal_danh_gia">Viết đánh giá</button>
+
+            </strong>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="fullContentModal_danh_gia" tabindex="-1" data-bs-backdrop="false" aria-labelledby="fullContentModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullContentModalLabel">Phản hồi sản phẩm</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Thông tin sản phẩm -->
+                            <div style="font-size:14px;">
+                                Đánh giá @Model.BrandName - @Model.ProductName<br />
+                                <strong>Đánh giá của bạn</strong>
+                            </div>
+
+                            <!-- Nút đánh giá sao -->
+                            <div class="btn_sao">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <button type="button" class="border-0 btn_sao_tin" data-value="@i">
+                                        <i class="bi bi-star"></i>
+                                    </button>
+                                }
+                            </div>
+
+                            <!-- Script xử lý đánh giá sao -->
+                            <script>
+                                const starButtons = document.querySelectorAll('.btn_sao_tin');
+                                let selectedRating = 0; // Giá trị sao được chọn
+
+                                // Xử lý sự kiện click ngôi sao
+                                starButtons.forEach((button, index) => {
+                                    button.addEventListener('click', () => {
+                                        selectedRating = index + 1;
+                                        // Đổ màu các ngôi sao đã chọn
+                                        starButtons.forEach((btn, idx) => {
+                                            const starIcon = btn.querySelector('i');
+                                            if (idx < selectedRating) {
+                                                starIcon.classList.remove('bi-star');
+                                                starIcon.classList.add('bi-star-fill', 'text-warning');
+                                            } else {
+                                                starIcon.classList.remove('bi-star-fill', 'text-warning');
+                                                starIcon.classList.add('bi-star');
+                                            }
+                                        });
+                                        // Lưu giá trị đánh giá vào input hidden
+                                        document.getElementById('ratingInput').value = selectedRating;
+                                    });
+                                });
+                            </script>
+
+                            @*@using (Html.BeginForm("SubmitFeedback", "XuHuong", FormMethod.Post))*@
+                            @using (Html.BeginForm("SubmitFeedback", "XuHuong", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+                            {
+                                <!-- Thêm ProductId vào form dưới dạng trường ẩn -->
+                                @Html.Hidden("ProductId", @Model.ProductId)
+
+                                <!-- Input ẩn lưu giá trị đánh giá sao -->
+                                @Html.Hidden("Rating", "", new { id = "ratingInput" })
+
+                                <div class="mb-3">
+                                    @Html.TextBox("ChiaSe", "", new
+                                    {
+                                        @class = "form-control",
+                                        placeholder = "Chia sẻ cảm nhận về sản phẩm của bạn ...",
+                                        required = "required"
+                                    })
+                                    @Html.ValidationMessage("ChiaSe", "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @Html.TextBox("HoTen", "", new
+                                            {
+                                                @class = "form-control",
+                                                placeholder = "Họ và Tên",
+                                                required = "required"
+                                            })
+                                            @Html.ValidationMessage("HoTen", "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.TextBox("SDT", "", new
+                                            {
+                                                @class = "form-control",
+                                                placeholder = "Số điện thoại",
+                                                type = "tel",
+                                                pattern = "[0-9]{10,11}",
+                                                title = "Vui lòng nhập số điện thoại hợp lệ (10-11 chữ số)",
+                                                required = "required"
+                                            })
+                                            @Html.ValidationMessage("SDT", "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Thêm nút chọn hình ảnh -->
+                                <div class="mb-3">
+                                    <label class="form-label">Hình chụp thực tế sản phẩm</label>
+                                    <div class="image-upload-container d-flex">
+                                        <!-- Nút chọn hình ảnh -->
+                                        <div class="image-upload-box" id="uploadBox">
+                                            <input type="file" id="fileUpload" name="ImageFile" accept="image/*" style="display:none;">
+                                            <button type="button" class="btn btn-upload" onclick="document.getElementById('fileUpload').click();">
+                                                <i class="bi bi-plus-lg"></i>
+                                            </button>
+                                        </div>
+                                        <!-- Khu vực hiển thị hình ảnh đã chọn -->
+                                        <div id="previewContainer" class="d-flex flex-wrap"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Huỷ</button>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <ul>
+                @foreach (var rating in ViewBag.RatingCounts)
+                {
+                    var ratingValue = rating.Key;
+                    var ratingCount = rating.Value;
+                    var ratingPercentage = ViewBag.RatingPercentages[ratingValue];
+
+                    <li class="rating-item">
+                        <div>@ratingValue <i class='bx bx-star'></i></div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width:@ratingPercentage%; background-color:red;"></div>
+                        </div>
+                        <div>@ratingCount đánh giá</div>
+                    </li>
+                }
+            </ul>
+
+            <ul>
+                <li>
+                    <i class='bx bxs-badge-check'></i>
+                    WatchStore cam kết 100% đánh giá đều đến từ khách đã mua hàng
+                </li>
+            </ul>
+
+            <ul>
+                <li>
+                    <div class="d-flex align-items-center justify-content-between" style="list-style-type: none;">
+                        <div>@ViewBag.TotalFeedbacks đánh giá</div>
+                        <div class="dropdown" data-bs-theme="light">
+                            <button class="btn btn-secondary dropdown-toggle" style="margin-right: 920px ; border-radius:20px" type="button" id="dropdownMenuButtonLight" data-bs-toggle="dropdown" aria-expanded="false">
+                                Lọc đánh giá
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenutButtonLight" style="list-style-type: none;">
+                                @foreach (var rating in ViewBag.RatingCounts)
+                                {
+                                    var ratingValue = rating.Key;
+                                    var ratingPercentage = ViewBag.RatingPercentages[ratingValue];
+
+                                    <li>
+                                        @for (var i = 0; i < ratingValue; i++)
+                                        {
+                                            <i class="fas fa-star yellow-star-tin"></i>
+                                        }
+                                        @ratingPercentage%
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+
+        </div>
+
+
+
+        <div class="small-dashed-line small-dashed-line-tin"></div>
+
+        <div id="feedbackContainer">
+            @Html.Partial("_FeedbackPartial", (IEnumerable<WebApplication1.Models.Feedback>)ViewBag.Feedbacks)
+
+
+        </div>
+        <button id="loadMoreButton" onclick="loadMoreFeedbacks()" class="btn " style="width: 100px; height: 30px; background-color: rgb(146, 180, 201); font-size:13px ">Xem thêm</button>
+        <script>
+    var skip = 4; // Bắt đầu với 4 đánh giá đã hiển thị
+    var productId = @Model.ProductId; // Thêm productId vào View
+function loadMoreFeedbacks() {
+    $.ajax({
+        url: '@Url.Action("LoadMoreFeedback", "XuHuong")',
+        data: { productId: productId, skip: skip },
+        type: 'GET',
+        success: function (data) {
+            $('#feedbackContainer').append(data);
+            skip += 2; // Mỗi lần tải thêm 2 đánh giá nữa
+
+            // Kích hoạt lại việc hiển thị sao cho các phần tử mới
+            initializeStarRatings();
+
+            // Nếu không có thêm đánh giá, ẩn nút "Xem thêm"
+            if (data.trim() == "") {
+                $('#loadMoreButton').text('Đã hết');
+            }
+        }
+    });
+}
+
+        </script>
+
+
+        @*// JavaScript để hiển thị đánh giá sao cho tất cả các phần tử*@
+        <script>
+            function initializeStarRatings() {
+                const starContainers = document.querySelectorAll('.star-rating');
+
+                starContainers.forEach(container => {
+                    // Kiểm tra nếu đã hiển thị sao, bỏ qua
+                    if (container.getAttribute('data-initialized') === 'true') return;
+
+                    const starCount = container.getAttribute('data-rating'); // Lấy rating từ data attribute
+                    container.innerHTML = renderStars(starCount);
+
+                    // Đánh dấu phần tử đã được xử lý
+                    container.setAttribute('data-initialized', 'true');
+                });
+
+                function renderStars(count) {
+                    let starsHtml = '';
+                    for (let i = 0; i < count; i++) {
+                        starsHtml += "<i class='fas fa-star yellow-star-tin'></i>";
+                    }
+                    return starsHtml;
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+                initializeStarRatings();
+            });
+
+        </script>
+
+        <br />
+        <br />
+        <strong>
+            Bạn cũng có thể thích
+        </strong>
+        @*@model IEnumerable<Product>*@
+        @*<img src="~/Content/img/@Model.BrandName/@Model.ProductName/@Model.ProductName Default/@product.URL_Images_Default"*@
+        <div class="container">
+            <div class="row no-gutters no-gutters-tin">
+                @foreach (var product in Model.Product.OrderBy(x => Guid.NewGuid()).Take(8)) // Lấy ngẫu nhiên 8 sản phẩm
+                {
+                    if (product.StockQuantity > 0)
+                    {
+                        var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+                        var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+
+                        <div class="col-md-3">
+                            <div class="card card-tin" style="width: 100%;">
+                                <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                    <div class="image-container" style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                                        <img class="img_card" src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="Product Image" style="max-width: 100%; max-height: 100%;" />
+                                    </div>
+                                </a>
+                                @*<i class="bi bi-heart heart-icon heart-icon-tin"></i>*@
+                                <i class="bi bi-heart heart-icon heart-icon-tin"></i>
+
+                                <div class="card-body">
+                                    <div>
+                                        <strong style="font-size: 18px;">@product.ProductName</strong>
+                                        <p class="card-text price" style="color: red;">@discountedPrice</p>
+                                        <p class="card-text price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price</p>
+                                        <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        <div>
+                                            <li style="list-style-type: none;">
+                                                @{
+                                                    // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                    double rating = product.AverageRating ?? 0.0;
+
+                                                    // Tính số sao đầy (làm tròn xuống giá trị)
+                                                    int fullStarss = (int)Math.Floor(rating);
+
+                                                    // Kiểm tra có cần nửa sao không (phần thập phân > 0)
+                                                    bool hasHalfStar = (rating - fullStarss) > 0;
+                                                }
+                                                @*<p> số sao: @rating</p>*@
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= fullStarss)
+                                                    {
+                                                        // In sao đầy
+                                                        <i class="fas fa-star yellow-star-tin"></i>
+                                                    }
+                                                    else if (i == fullStarss + 1 && hasHalfStar)
+                                                    {
+                                                        // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                        <i class="bi bi-star-half yellow-star-tin"></i>
+                                                        hasHalfStar = false; // Đảm bảo chỉ in một nửa sao
+                                                    }
+                                                    else
+                                                    {
+                                                        // In sao rỗng
+                                                        <i class="far fa-star yellow-star-tin"></i>
+                                                    }
+                                                }
+                                            </li>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+    document.querySelectorAll('.modal-header .btn-light-tin').forEach(function (button) {
+        button.addEventListener('click', function () {
+            // Lấy giá trị của data-bs-target
+            const targetId = this.getAttribute('data-bs-target');
+
+            // Ẩn tất cả các nội dung tab
+            document.querySelectorAll('.tab-content').forEach(function (tabContent) {
+                tabContent.classList.add('d-none');
+            });
+
+            // Hiển thị nội dung tab được chọn
+            document.getElementById(targetId).classList.remove('d-none');
+        });
+    });
+    //sk đổ màu icon trái tim
+
+    //sự kiện đổ màu like
+    document.querySelectorAll('.bi-hand-thumbs-up-tin').forEach(icon => {
+        icon.addEventListener('click', function () {
+            this.classList.toggle('liked');
+        });
+    });
+    //nút lọc đánh giá
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy nút dropdown
+        var dropdownToggle = document.getElementById('dropdownMenuButtonLight');
+
+        // Sự kiện click để mở dropdown
+        dropdownToggle.addEventListener('click', function () {
+            var dropdowncomment = document.querySelector('.dropdown-menu');
+
+            // Kiểm tra và chuyển đổi hiển thị của dropdown
+            if (dropdowncomment.classList.contains('show')) {
+                dropdowncomment.classList.remove('show');
+            } else {
+                dropdowncomment.classList.add('show');
+            }
+        });
+
+        // Đóng dropdown khi click ngoài vùng dropdown
+        window.addEventListener('click', function (event) {
+            var dropdowncomment = document.querySelector('.dropdown-menu');
+            if (!dropdownToggle.contains(event.target)) {
+                dropdowncomment.classList.remove('show');
+            }
+        });
+    });
+
+</script>
+<script>
+    function formatCurrency(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Định dạng giá hiển thị cho từng phần tử có class "price"
+        const priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            const price = parseInt(element.innerText.replace(/\D/g, '')); // Chuyển nội dung sang số và bỏ các ký tự không phải số
+            if (!isNaN(price)) {
+                element.innerText = formatCurrency(price); // Đặt lại nội dung theo định dạng
+            }
+        });
+    });
+    // hiện thị ảnh phản hồi:
+    document.getElementById('fileUpload').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Tạo thẻ div hiển thị hình ảnh
+                const previewContainer = document.getElementById('previewContainer');
+                const imagePreview = document.createElement('div');
+                imagePreview.classList.add('image-preview');
+
+                // Thêm hình ảnh
+                const img = document.createElement('img');
+                img.src = e.target.result;
+
+                // Thêm nút xóa hình ảnh
+                const removeBtn = document.createElement('button');
+                removeBtn.classList.add('btn-remove');
+                removeBtn.innerHTML = '&times;';
+                removeBtn.onclick = () => {
+                    previewContainer.removeChild(imagePreview);
+                    // Reset input file
+                    document.getElementById('fileUpload').value = '';
+                };
+
+                // Thêm hình ảnh và nút xóa vào khung preview
+                imagePreview.appendChild(img);
+                imagePreview.appendChild(removeBtn);
+                previewContainer.appendChild(imagePreview);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+</script>
+
+@*<script>
+    function showToast() {
+        var toastHTML = `<div class="toast fade hide" data-delay="3000">
+        <div class="toast-header">
+            <i class="anticon anticon-info-circle text-primary m-r-5"></i>
+            <strong class="mr-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="ml-2 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+    </div>`
+
+        $('#notification-toast').append(toastHTML)
+        $('#notification-toast .toast').toast('show');
+        setTimeout(function () {
+            $('#notification-toast .toast:first-child').remove();
+        }, 3000);
+    }</script>*@
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+

@@ -1,0 +1,188 @@
+﻿﻿@model IEnumerable<WebApplication1.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2>Thông tin duyệt đơn Hàng</h2>
+
+<div class="col-lg-8">
+    <div class="d-md-flex">
+        <div class="m-b-10">
+            <form id="statusForm" method="get" action="/Order/Index">
+                <select name="status" class="custom-select" style="min-width: 180px;" onchange="this.form.submit();">
+                    <option value="All" @(ViewBag.Status == "All" ? "selected" : "")>All</option>
+                    <option value="Rejected" @(ViewBag.Status == "Rejected" ? "selected" : "")>Rejected</option>
+                    <option value="Approved" @(ViewBag.Status == "Approved" ? "selected" : "")>Approved</option>
+                    <option value="Pending" @(ViewBag.Status == "Pending" ? "selected" : "")>Pending</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Show Entries Form -->
+<div>
+    <form id="entriesForm" method="get" action="/Order/Index" class="form-inline">
+        <label for="entriesPerPage" class="mr-2">Show:</label>
+        <select name="entriesPerPage"
+                id="entriesPerPage"
+                class="custom-select custom-select-sm form-control form-control-sm w-auto"
+                style="min-width: 120px;"
+                onchange="document.getElementById('entriesForm').submit();">
+            <option value="10" @(ViewBag.EntriesPerPage == 10 ? "selected" : "")>10</option>
+            <option value="25" @(ViewBag.EntriesPerPage == 25 ? "selected" : "")>25</option>
+        </select>
+    </form>
+</div>
+
+
+@*Xuat pdf*@
+<div class="col-lg-4 text-right" style="margin-left:700px">
+
+    <a href="@Url.Action("ExportToPDF_donhang", "Order")" class="btn btn-primary">
+        <i class="anticon anticon-file-excel m-r-5"></i>
+        <span>Xuất PDF</span>
+    </a>
+</div>
+<!-- Search Form -->
+<form action="/Order/Index" method="get" class="mb-3">
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <label class="col-form-label m-0" for="search">Search:</label>
+        </div>
+        <div class="col-auto">
+            <input type="search"
+                   class="form-control form-control-sm"
+                   placeholder="Search..."
+                   id="search"
+                   name="search"
+                   value="@Html.Raw(ViewBag.SearchResults)"
+                   aria-label="Search" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        </div>
+    </div>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Name</th>
+            <th>Order Date</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int index = 1; // Declare index variable here for loop usage
+        }
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@index</td>
+                <td>@order.Customer.FullName</td>
+                <td>@order.OrderDate.Value.ToString("dd-M-yyyy")</td>
+                <td>@order.Customer.Email</td>
+                <td>@order.Status</td>
+                <td>
+                    <div class="d-flex justify-content-start">
+                        <!-- Invoice Link -->
+                        <a href="@Url.Action("Invoice", "Order", new { id = order.OrderID })" class="btn btn-secondary btn-tone m-r-5">
+                            <i class="anticon anticon-eye"></i>
+                        </a>
+                        @if (order.Status == "Pending")
+                        {
+                            <!-- Approve Button Form -->
+                            using (Html.BeginForm("Approve", "Order", new { id = order.OrderID }, FormMethod.Post))
+                            {
+                                <button type="submit" class="btn btn-success btn-tone m-r-5">
+                                    ✔
+                                </button>
+                            }
+                            <!-- Reject Button Form -->
+                            using (Html.BeginForm("Reject", "Order", new { id = order.OrderID }, FormMethod.Post))
+                            {
+                                <button type="submit" class="btn btn-danger btn-tone m-r-5">
+                                    ✘
+                                </button>
+                            }
+                        }
+                    </div>
+                </td>
+            </tr>
+            index++; // Increment index after rendering each row
+        }
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<div class="d-flex justify-content-between" style="margin-top: 30px;">
+    <div>
+        Showing @ViewBag.StartEntry to @ViewBag.EndEntry of @ViewBag.TotalEntries entries
+    </div>
+
+    <div>
+        <ul class="pagination">
+            @* Previous Page *@
+            <li class="page-item @(ViewBag.Page == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { status = ViewBag.Status, search = ViewBag.SearchResults, entriesPerPage = ViewBag.EntriesPerPage, page = ViewBag.Page - 1 })">Prev</a>
+            </li>
+
+            @* Page Numbers *@
+            @{
+                int totalPagesToShow = 5;
+                int startPage = Math.Max(1, ViewBag.Page - totalPagesToShow / 2);
+                int endPage = Math.Min(ViewBag.NoOfPages, startPage + totalPagesToShow - 1);
+
+                if (endPage - startPage < totalPagesToShow - 1)
+                {
+                    startPage = Math.Max(1, endPage - totalPagesToShow + 1);
+                }
+            }
+
+            @if (startPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { status = ViewBag.Status, search = ViewBag.SearchResults, entriesPerPage = ViewBag.EntriesPerPage, page = 1 })">1</a>
+                </li>
+                if (startPage > 2)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                }
+            }
+
+            @for (int i = startPage; i <= endPage; i++)
+            {
+                <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { status = ViewBag.Status, search = ViewBag.SearchResults, entriesPerPage = ViewBag.EntriesPerPage, page = i })">@i</a>
+                </li>
+            }
+
+            @if (endPage < ViewBag.NoOfPages)
+            {
+                if (endPage < ViewBag.NoOfPages - 1)    
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                }
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { status = ViewBag.Status, search = ViewBag.SearchResults, entriesPerPage = ViewBag.EntriesPerPage, page = ViewBag.NoOfPages })">@ViewBag.NoOfPages</a>
+                </li>
+            }
+
+            @* Next Page *@
+            <li class="page-item @(ViewBag.Page == ViewBag.NoOfPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { status = ViewBag.Status, search = ViewBag.SearchResults, entriesPerPage = ViewBag.EntriesPerPage, page = ViewBag.Page + 1 })">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>

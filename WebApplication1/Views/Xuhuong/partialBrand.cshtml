@@ -1,0 +1,40 @@
+﻿@model List<WebApplication1.Models.Brand>
+
+@{
+    Layout = null;
+    string imageName = Session["ImageName"] as string;
+}
+
+@foreach (var item in Model)
+{
+    if (!string.IsNullOrEmpty(imageName) && item.BrandName == imageName)
+    {
+        <img style="border-radius: 10px; border: 1px solid; max-width: 100%; height: auto;" src="~/Content/img_index/@(imageName).jpg" onclick="sendImageName('@imageName'); redirectToBanHang();" />
+    }
+}
+
+<script>function sendImageName(imageName) {
+        var currentPage = window.location.pathname.split('/').pop();
+        alert('trang đang click ' + imageName);
+
+        var data = new URLSearchParams();
+        data.append('imageName', imageName);
+
+        fetch('/XuHuong/XuHuong', {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result.result); // Hiển thị kết quả trả về từ server
+
+                // Chuyển hướng đến trang BanHang sau khi nhận được phản hồi
+                window.location.href = '/XuHuong/BanHang?imageName=' + encodeURIComponent(result.result);
+            })
+            .catch(error => {
+                console.error("Error: ", error); // Xử lý lỗi
+            });
+    }</script>

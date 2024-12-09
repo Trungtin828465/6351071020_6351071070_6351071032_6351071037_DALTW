@@ -1,0 +1,1710 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.5.6.2\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.5.6.2\build\Microsoft.TypeScript.MSBuild.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DB6C1366-147C-4B72-9AAF-98C528056757}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication1</RootNamespace>
+    <AssemblyName>WebApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44384</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.71.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.71\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdiminController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Controllers\warehouseController.cs" />
+    <Compile Include="Controllers\XuhuongController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Brand.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Detail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\district.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Images_Certification.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Images_Default.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Images_Reality.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\login.cs" />
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderItem.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OTP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\province.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\register.cs" />
+    <Compile Include="Models\Supplier.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Video.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Voucher.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\wards.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Admin\assets\css\app.min.css" />
+    <Content Include="Content\Admin\assets\fonts\anticon.svg" />
+    <Content Include="Content\Admin\assets\fonts\fa-brands-400.svg" />
+    <Content Include="Content\Admin\assets\fonts\fa-regular-400.svg" />
+    <Content Include="Content\Admin\assets\fonts\fa-solid-900.svg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-1.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-10.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-11.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-2.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-3.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-4.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-5.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-6.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-7.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-8.jpg" />
+    <Content Include="Content\Admin\assets\images\avatars\thumb-9.jpg" />
+    <Content Include="Content\Admin\assets\images\logo\favicon.png" />
+    <Content Include="Content\Admin\assets\images\logo\logo-fold-white.png" />
+    <Content Include="Content\Admin\assets\images\logo\logo-fold.png" />
+    <Content Include="Content\Admin\assets\images\logo\logo-white.png" />
+    <Content Include="Content\Admin\assets\images\logo\logo.png" />
+    <Content Include="Content\Admin\assets\images\logo\logo1.jpg" />
+    <Content Include="Content\Admin\assets\images\others\adobe-thumb.png" />
+    <Content Include="Content\Admin\assets\images\others\amazon-thumb.png" />
+    <Content Include="Content\Admin\assets\images\others\cambridge-thumb.png" />
+    <Content Include="Content\Admin\assets\images\others\coffee-app-thumb.jpg" />
+    <Content Include="Content\Admin\assets\images\others\error-1.png" />
+    <Content Include="Content\Admin\assets\images\others\error-2.png" />
+    <Content Include="Content\Admin\assets\images\others\file-manager.png" />
+    <Content Include="Content\Admin\assets\images\others\img-1.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-11.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-12.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-13.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-14.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-2.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-3.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-4.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-5.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-6.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-7.jpg" />
+    <Content Include="Content\Admin\assets\images\others\img-8.jpg" />
+    <Content Include="Content\Admin\assets\images\others\login-1.jpg" />
+    <Content Include="Content\Admin\assets\images\others\login-2.png" />
+    <Content Include="Content\Admin\assets\images\others\login-3.png" />
+    <Content Include="Content\Admin\assets\images\others\music-app-thumb.jpg" />
+    <Content Include="Content\Admin\assets\images\others\nvidia-thumb.png" />
+    <Content Include="Content\Admin\assets\images\others\phillips-academy-thumb.png" />
+    <Content Include="Content\Admin\assets\images\others\product-1.jpg" />
+    <Content Include="Content\Admin\assets\images\others\product-2.jpg" />
+    <Content Include="Content\Admin\assets\images\others\product-3.jpg" />
+    <Content Include="Content\Admin\assets\images\others\sign-up-1.jpg" />
+    <Content Include="Content\Admin\assets\images\others\sign-up-2.png" />
+    <Content Include="Content\Admin\assets\images\others\thumb-1.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-10.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-11.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-12.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-13.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-14.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-15.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-16.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-2.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-3.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-4.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-5.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-6.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-7.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-8.jpg" />
+    <Content Include="Content\Admin\assets\images\others\thumb-9.jpg" />
+    <Content Include="Content\Admin\assets\images\others\weather-app-thumb.jpg" />
+    <Content Include="Content\Admin\assets\js\app.min.js" />
+    <Content Include="Content\Admin\assets\js\pages\chartist.js" />
+    <Content Include="Content\Admin\assets\js\pages\chartjs.js" />
+    <Content Include="Content\Admin\assets\js\pages\chat.js" />
+    <Content Include="Content\Admin\assets\js\pages\dashboard-crm.js" />
+    <Content Include="Content\Admin\assets\js\pages\dashboard-default.js" />
+    <Content Include="Content\Admin\assets\js\pages\dashboard-e-commerce.js" />
+    <Content Include="Content\Admin\assets\js\pages\dashboard-project.js" />
+    <Content Include="Content\Admin\assets\js\pages\datatables.js" />
+    <Content Include="Content\Admin\assets\js\pages\e-commerce-order-list.js" />
+    <Content Include="Content\Admin\assets\js\pages\e-commerce-product-edit.js" />
+    <Content Include="Content\Admin\assets\js\pages\file-manager.js" />
+    <Content Include="Content\Admin\assets\js\pages\form-elements.js" />
+    <Content Include="Content\Admin\assets\js\pages\form-validation.js" />
+    <Content Include="Content\Admin\assets\js\pages\icon.js" />
+    <Content Include="Content\Admin\assets\js\pages\mail.js" />
+    <Content Include="Content\Admin\assets\js\pages\pricing.js" />
+    <Content Include="Content\Admin\assets\js\pages\profile.js" />
+    <Content Include="Content\Admin\assets\js\pages\project-list.js" />
+    <Content Include="Content\Admin\assets\js\pages\slider.js" />
+    <Content Include="Content\Admin\assets\js\vendors.min.js" />
+    <Content Include="Content\Admin\assets\vendors\bootstrap-datepicker\bootstrap-datepicker.min.css" />
+    <Content Include="Content\Admin\assets\vendors\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Content\Admin\assets\vendors\chartist\chartist.min.js" />
+    <Content Include="Content\Admin\assets\vendors\chartjs\Chart.min.js" />
+    <Content Include="Content\Admin\assets\vendors\datatables\dataTables.bootstrap.min.css" />
+    <Content Include="Content\Admin\assets\vendors\datatables\dataTables.bootstrap.min.js" />
+    <Content Include="Content\Admin\assets\vendors\datatables\jquery.dataTables.min.js" />
+    <Content Include="Content\Admin\assets\vendors\jquery-validation\jquery.validate.min.js" />
+    <Content Include="Content\Admin\assets\vendors\nouislider\nouislider.min.css" />
+    <Content Include="Content\Admin\assets\vendors\nouislider\nouislider.min.js" />
+    <Content Include="Content\Admin\assets\vendors\quill\quill.min.js" />
+    <Content Include="Content\Admin\assets\vendors\select2\select2-spinner.gif" />
+    <Content Include="Content\Admin\assets\vendors\select2\select2.css" />
+    <Content Include="Content\Admin\assets\vendors\select2\select2.min.js" />
+    <Content Include="Content\Admin\assets\vendors\select2\select2.png" />
+    <Content Include="Content\Admin\assets\vendors\select2\select2x2.png" />
+    <Content Include="Content\Admin\font-awesome.css" />
+    <Content Include="Content\Admin\font-awesome.min.css" />
+    <Content Include="Content\Admin\imgdata\1.jpg" />
+    <Content Include="Content\Admin\imgdata\10.jpg" />
+    <Content Include="Content\Admin\imgdata\11.jpg" />
+    <Content Include="Content\Admin\imgdata\12.jpg" />
+    <Content Include="Content\Admin\imgdata\13.jpg" />
+    <Content Include="Content\Admin\imgdata\14.jpg" />
+    <Content Include="Content\Admin\imgdata\15.jpg" />
+    <Content Include="Content\Admin\imgdata\16.jpg" />
+    <Content Include="Content\Admin\imgdata\17.jpg" />
+    <Content Include="Content\Admin\imgdata\18.jpg" />
+    <Content Include="Content\Admin\imgdata\19.jpg" />
+    <Content Include="Content\Admin\imgdata\2.jpg" />
+    <Content Include="Content\Admin\imgdata\3.jpg" />
+    <Content Include="Content\Admin\imgdata\4.jpg" />
+    <Content Include="Content\Admin\imgdata\5.jpg" />
+    <Content Include="Content\Admin\imgdata\6.jpg" />
+    <Content Include="Content\Admin\imgdata\7.jpg" />
+    <Content Include="Content\Admin\imgdata\8.jpg" />
+    <Content Include="Content\Admin\imgdata\9.jpg" />
+    <Content Include="Content\Admin\Site.css" />
+    <Content Include="Content\assets\css\app.min.css" />
+    <Content Include="Content\assets\fonts\anticon.svg" />
+    <Content Include="Content\assets\fonts\fa-brands-400.svg" />
+    <Content Include="Content\assets\fonts\fa-regular-400.svg" />
+    <Content Include="Content\assets\fonts\fa-solid-900.svg" />
+    <Content Include="Content\assets\images\avatars\thumb-1.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-10.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-11.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-2.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-3.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-4.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-5.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-6.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-7.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-8.jpg" />
+    <Content Include="Content\assets\images\avatars\thumb-9.jpg" />
+    <Content Include="Content\assets\images\logo\favicon.png" />
+    <Content Include="Content\assets\images\logo\logo-fold-white.png" />
+    <Content Include="Content\assets\images\logo\logo-fold.png" />
+    <Content Include="Content\assets\images\logo\logo-white.png" />
+    <Content Include="Content\assets\images\logo\logo.png" />
+    <Content Include="Content\assets\images\others\adobe-thumb.png" />
+    <Content Include="Content\assets\images\others\amazon-thumb.png" />
+    <Content Include="Content\assets\images\others\cambridge-thumb.png" />
+    <Content Include="Content\assets\images\others\coffee-app-thumb.jpg" />
+    <Content Include="Content\assets\images\others\error-1.png" />
+    <Content Include="Content\assets\images\others\error-2.png" />
+    <Content Include="Content\assets\images\others\file-manager.png" />
+    <Content Include="Content\assets\images\others\img-1.jpg" />
+    <Content Include="Content\assets\images\others\img-11.jpg" />
+    <Content Include="Content\assets\images\others\img-12.jpg" />
+    <Content Include="Content\assets\images\others\img-13.jpg" />
+    <Content Include="Content\assets\images\others\img-14.jpg" />
+    <Content Include="Content\assets\images\others\img-2.jpg" />
+    <Content Include="Content\assets\images\others\img-3.jpg" />
+    <Content Include="Content\assets\images\others\img-4.jpg" />
+    <Content Include="Content\assets\images\others\img-5.jpg" />
+    <Content Include="Content\assets\images\others\img-6.jpg" />
+    <Content Include="Content\assets\images\others\img-7.jpg" />
+    <Content Include="Content\assets\images\others\img-8.jpg" />
+    <Content Include="Content\assets\images\others\login-1.jpg" />
+    <Content Include="Content\assets\images\others\login-2.png" />
+    <Content Include="Content\assets\images\others\login-3.png" />
+    <Content Include="Content\assets\images\others\music-app-thumb.jpg" />
+    <Content Include="Content\assets\images\others\nvidia-thumb.png" />
+    <Content Include="Content\assets\images\others\phillips-academy-thumb.png" />
+    <Content Include="Content\assets\images\others\product-1.jpg" />
+    <Content Include="Content\assets\images\others\product-2.jpg" />
+    <Content Include="Content\assets\images\others\product-3.jpg" />
+    <Content Include="Content\assets\images\others\sign-up-1.jpg" />
+    <Content Include="Content\assets\images\others\sign-up-2.png" />
+    <Content Include="Content\assets\images\others\thumb-1.jpg" />
+    <Content Include="Content\assets\images\others\thumb-10.jpg" />
+    <Content Include="Content\assets\images\others\thumb-11.jpg" />
+    <Content Include="Content\assets\images\others\thumb-12.jpg" />
+    <Content Include="Content\assets\images\others\thumb-13.jpg" />
+    <Content Include="Content\assets\images\others\thumb-14.jpg" />
+    <Content Include="Content\assets\images\others\thumb-15.jpg" />
+    <Content Include="Content\assets\images\others\thumb-16.jpg" />
+    <Content Include="Content\assets\images\others\thumb-2.jpg" />
+    <Content Include="Content\assets\images\others\thumb-3.jpg" />
+    <Content Include="Content\assets\images\others\thumb-4.jpg" />
+    <Content Include="Content\assets\images\others\thumb-5.jpg" />
+    <Content Include="Content\assets\images\others\thumb-6.jpg" />
+    <Content Include="Content\assets\images\others\thumb-7.jpg" />
+    <Content Include="Content\assets\images\others\thumb-8.jpg" />
+    <Content Include="Content\assets\images\others\thumb-9.jpg" />
+    <Content Include="Content\assets\images\others\weather-app-thumb.jpg" />
+    <Content Include="Content\assets\js\app.min.js" />
+    <Content Include="Content\assets\js\pages\chartist.js" />
+    <Content Include="Content\assets\js\pages\chartjs.js" />
+    <Content Include="Content\assets\js\pages\chat.js" />
+    <Content Include="Content\assets\js\pages\dashboard-crm.js" />
+    <Content Include="Content\assets\js\pages\dashboard-default.js" />
+    <Content Include="Content\assets\js\pages\dashboard-e-commerce.js" />
+    <Content Include="Content\assets\js\pages\dashboard-project.js" />
+    <Content Include="Content\assets\js\pages\datatables.js" />
+    <Content Include="Content\assets\js\pages\e-commerce-order-list.js" />
+    <Content Include="Content\assets\js\pages\e-commerce-product-edit.js" />
+    <Content Include="Content\assets\js\pages\file-manager.js" />
+    <Content Include="Content\assets\js\pages\form-elements.js" />
+    <Content Include="Content\assets\js\pages\form-validation.js" />
+    <Content Include="Content\assets\js\pages\icon.js" />
+    <Content Include="Content\assets\js\pages\mail.js" />
+    <Content Include="Content\assets\js\pages\pricing.js" />
+    <Content Include="Content\assets\js\pages\profile.js" />
+    <Content Include="Content\assets\js\pages\project-list.js" />
+    <Content Include="Content\assets\js\pages\slider.js" />
+    <Content Include="Content\assets\js\vendors.min.js" />
+    <Content Include="Content\assets\vendors\bootstrap-datepicker\bootstrap-datepicker.min.css" />
+    <Content Include="Content\assets\vendors\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Content\assets\vendors\chartist\chartist.min.js" />
+    <Content Include="Content\assets\vendors\chartjs\Chart.min.js" />
+    <Content Include="Content\assets\vendors\datatables\dataTables.bootstrap.min.css" />
+    <Content Include="Content\assets\vendors\datatables\dataTables.bootstrap.min.js" />
+    <Content Include="Content\assets\vendors\datatables\jquery.dataTables.min.js" />
+    <Content Include="Content\assets\vendors\jquery-validation\jquery.validate.min.js" />
+    <Content Include="Content\assets\vendors\nouislider\nouislider.min.css" />
+    <Content Include="Content\assets\vendors\nouislider\nouislider.min.js" />
+    <Content Include="Content\assets\vendors\quill\quill.min.js" />
+    <Content Include="Content\assets\vendors\select2\select2-spinner.gif" />
+    <Content Include="Content\assets\vendors\select2\select2.css" />
+    <Content Include="Content\assets\vendors\select2\select2.min.js" />
+    <Content Include="Content\assets\vendors\select2\select2.png" />
+    <Content Include="Content\assets\vendors\select2\select2x2.png" />
+    <Content Include="Content\BanHang.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Feedback\Feedback\1.jpg" />
+    <Content Include="Content\Feedback\Feedback\10.jpg" />
+    <Content Include="Content\Feedback\Feedback\11.jpg" />
+    <Content Include="Content\Feedback\Feedback\12.jpg" />
+    <Content Include="Content\Feedback\Feedback\13.jpg" />
+    <Content Include="Content\Feedback\Feedback\14.jpg" />
+    <Content Include="Content\Feedback\Feedback\15.jpg" />
+    <Content Include="Content\Feedback\Feedback\16.jpg" />
+    <Content Include="Content\Feedback\Feedback\17.jpg" />
+    <Content Include="Content\Feedback\Feedback\18.jpg" />
+    <Content Include="Content\Feedback\Feedback\19.jpg" />
+    <Content Include="Content\Feedback\Feedback\2.jpg" />
+    <Content Include="Content\Feedback\Feedback\20.jpg" />
+    <Content Include="Content\Feedback\Feedback\21.jpg" />
+    <Content Include="Content\Feedback\Feedback\22.jpg" />
+    <Content Include="Content\Feedback\Feedback\23.jpg" />
+    <Content Include="Content\Feedback\Feedback\24.jpg" />
+    <Content Include="Content\Feedback\Feedback\25.jpg" />
+    <Content Include="Content\Feedback\Feedback\26.jpg" />
+    <Content Include="Content\Feedback\Feedback\27.jpg" />
+    <Content Include="Content\Feedback\Feedback\28.jpg" />
+    <Content Include="Content\Feedback\Feedback\29.jpg" />
+    <Content Include="Content\Feedback\Feedback\3.jpg" />
+    <Content Include="Content\Feedback\Feedback\30.jpg" />
+    <Content Include="Content\Feedback\Feedback\31.jpg" />
+    <Content Include="Content\Feedback\Feedback\32.jpg" />
+    <Content Include="Content\Feedback\Feedback\33.jpg" />
+    <Content Include="Content\Feedback\Feedback\34.jpg" />
+    <Content Include="Content\Feedback\Feedback\35.jpg" />
+    <Content Include="Content\Feedback\Feedback\36.jpg" />
+    <Content Include="Content\Feedback\Feedback\37.jpg" />
+    <Content Include="Content\Feedback\Feedback\38.jpg" />
+    <Content Include="Content\Feedback\Feedback\39.jpg" />
+    <Content Include="Content\Feedback\Feedback\4.jpg" />
+    <Content Include="Content\Feedback\Feedback\40.jpg" />
+    <Content Include="Content\Feedback\Feedback\41.jpg" />
+    <Content Include="Content\Feedback\Feedback\42.jpg" />
+    <Content Include="Content\Feedback\Feedback\43.jpg" />
+    <Content Include="Content\Feedback\Feedback\44.jpg" />
+    <Content Include="Content\Feedback\Feedback\45.jpg" />
+    <Content Include="Content\Feedback\Feedback\46.jpg" />
+    <Content Include="Content\Feedback\Feedback\47.jpg" />
+    <Content Include="Content\Feedback\Feedback\48.jpg" />
+    <Content Include="Content\Feedback\Feedback\49.jpg" />
+    <Content Include="Content\Feedback\Feedback\5.jpg" />
+    <Content Include="Content\Feedback\Feedback\50.jpg" />
+    <Content Include="Content\Feedback\Feedback\51.jpg" />
+    <Content Include="Content\Feedback\Feedback\52.jpg" />
+    <Content Include="Content\Feedback\Feedback\53.jpg" />
+    <Content Include="Content\Feedback\Feedback\54.jpg" />
+    <Content Include="Content\Feedback\Feedback\55.jpg" />
+    <Content Include="Content\Feedback\Feedback\56.jpg" />
+    <Content Include="Content\Feedback\Feedback\6.jpg" />
+    <Content Include="Content\Feedback\Feedback\7.jpg" />
+    <Content Include="Content\Feedback\Feedback\8.jpg" />
+    <Content Include="Content\Feedback\Feedback\9.jpg" />
+    <Content Include="Content\GioHang.css" />
+    <Content Include="Content\imgCustomer\imgCustomer\nam1.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nam2.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nam3.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nam4.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nam5.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nam6.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nam7.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nu1.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nu2.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nu3.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nu4.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nu5.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nu6.png" />
+    <Content Include="Content\imgCustomer\imgCustomer\nu7.png" />
+    <Content Include="Content\img\Bentley\Bentley Aviator\Bentley Aviator Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Aviator\Bentley Aviator Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Aviator\Bentley Aviator Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Aviator\Bentley Aviator Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Aviator\Bentley Aviator Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Aviator\Bentley Aviator Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Aviator\Bentley Aviator.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Big Bang\Bentley Big Bang Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Big Bang\Bentley Big Bang Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Big Bang\Bentley Big Bang Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Big Bang\Bentley Big Bang Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Big Bang\Bentley Big Bang Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Big Bang\Bentley Big Bang.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Classic Fusion\Bentley Classic Fusion Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Classic Fusion\Bentley Classic Fusion Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Classic Fusion\Bentley Classic Fusion Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Classic Fusion\Bentley Classic Fusion Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Classic Fusion\Bentley Classic Fusion Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Classic Fusion\Bentley Classic Fusion Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Classic Fusion\Bentley Classic Fusion.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Elegance\Bentley Elegance Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Elegance\Bentley Elegance Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Elegance\Bentley Elegance Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Elegance\Bentley Elegance Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Elegance\Bentley Elegance Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Elegance\Bentley Elegance Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Elegance\Bentley Elegance.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Explorer\Bentley Explorer Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Explorer\Bentley Explorer Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Explorer\Bentley Explorer Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Explorer\Bentley Explorer Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Explorer\Bentley Explorer Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Explorer\Bentley Explorer Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Explorer\Bentley Explorer.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Heritage\Bentley Heritage Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Heritage\Bentley Heritage Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Heritage\Bentley Heritage Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Heritage\Bentley Heritage Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Heritage\Bentley Heritage Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Heritage\Bentley Heritage Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Heritage\Bentley Heritage.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Night Vision\Bentley Night Vision Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Night Vision\Bentley Night Vision Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Night Vision\Bentley Night Vision Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Night Vision\Bentley Night Vision Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Night Vision\Bentley Night Vision Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Night Vision\Bentley Night Vision Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Night Vision\Bentley Night Vision.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Sport\Bentley Sport Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Sport\Bentley Sport Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Sport\Bentley Sport Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Sport\Bentley Sport Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Sport\Bentley Sport Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Sport\Bentley Sport Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Sport\Bentley Sport.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Supper\Bentley Supper Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Supper\Bentley Supper Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Supper\Bentley Supper Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Supper\Bentley Supper Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Supper\Bentley Supper Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Supper\Bentley Supper Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Supper\Bentley Supper.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Urban\Bentley Urban Default\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Urban\Bentley Urban Default\2.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Urban\Bentley Urban Default\3.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Urban\Bentley Urban Default\4.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Urban\Bentley Urban Default\5.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Urban\Bentley Urban Reality\1.jpg" />
+    <Content Include="Content\img\Bentley\Bentley Urban\Bentley Urban.jpg" />
+    <Content Include="Content\img\Bentley\Bentley.jpg" />
+    <Content Include="Content\img\Casio\Casio Baby-G\Casio Baby-G Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Baby-G\Casio Baby-G Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Baby-G\Casio Baby-G Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Baby-G\Casio Baby-G Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Baby-G\Casio Baby-G Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Baby-G\Casio Baby-G Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Baby-G\Casio Baby-G.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Detail\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Detail\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Detail\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Detail\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Detail\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Feedback\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Feedback\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Edifice\Casio Edifice.jpg" />
+    <Content Include="Content\img\Casio\Casio GA-2100\Casio GA-2100 Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio GA-2100\Casio GA-2100 Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio GA-2100\Casio GA-2100 Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio GA-2100\Casio GA-2100 Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio GA-2100\Casio GA-2100 Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio GA-2100\Casio GA-2100 Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio GA-2100\Casio GA-2100.jpg" />
+    <Content Include="Content\img\Casio\Casio Hamany\Casio Hamany Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Hamany\Casio Hamany Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Hamany\Casio Hamany Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Hamany\Casio Hamany Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Hamany\Casio Hamany Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Hamany\Casio Hamany Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Hamany\Casio Hamany.jpg" />
+    <Content Include="Content\img\Casio\Casio Lavido\Casio Lavido Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Lavido\Casio Lavido Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Lavido\Casio Lavido Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Lavido\Casio Lavido Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Lavido\Casio Lavido Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Lavido\Casio Lavido Feedback\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Lavido\Casio Lavido Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Lavido\Casio Lavido.jpg" />
+    <Content Include="Content\img\Casio\Casio MTP-V002D\Casio MTP-V002D Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio MTP-V002D\Casio MTP-V002D Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio MTP-V002D\Casio MTP-V002D Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio MTP-V002D\Casio MTP-V002D Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio MTP-V002D\Casio MTP-V002D Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio MTP-V002D\Casio MTP-V002D Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio MTP-V002D\Casio MTP-V002D.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek 7820G\Casio Pro Trek 7820G Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek 7820G\Casio Pro Trek 7820G Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek 7820G\Casio Pro Trek 7820G Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek 7820G\Casio Pro Trek 7820G Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek 7820G\Casio Pro Trek 7820G Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek 7820G\Casio Pro Trek 7820G Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek 7820G\Casio Pro Trek 7820G.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek PRG-240\Casio Pro Trek PRG-240 Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek PRG-240\Casio Pro Trek PRG-240 Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek PRG-240\Casio Pro Trek PRG-240 Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek PRG-240\Casio Pro Trek PRG-240 Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek PRG-240\Casio Pro Trek PRG-240 Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek PRG-240\Casio Pro Trek PRG-240 Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Pro Trek PRG-240\Casio Pro Trek PRG-240.jpg" />
+    <Content Include="Content\img\Casio\Casio Sheen\Casio Sheen Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Sheen\Casio Sheen Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Sheen\Casio Sheen Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Sheen\Casio Sheen Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Sheen\Casio Sheen Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Sheen\Casio Sheen Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Sheen\Casio Sheen.jpg" />
+    <Content Include="Content\img\Casio\Casio Vintage\Casio Vintage Default\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Vintage\Casio Vintage Default\2.jpg" />
+    <Content Include="Content\img\Casio\Casio Vintage\Casio Vintage Default\3.jpg" />
+    <Content Include="Content\img\Casio\Casio Vintage\Casio Vintage Default\4.jpg" />
+    <Content Include="Content\img\Casio\Casio Vintage\Casio Vintage Default\5.jpg" />
+    <Content Include="Content\img\Casio\Casio Vintage\Casio Vintage Reality\1.jpg" />
+    <Content Include="Content\img\Casio\Casio Vintage\Casio Vintage.jpg" />
+    <Content Include="Content\img\Casio\Casio.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Automatic NJ0100\Citizen Automatic NJ0100 Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Automatic NJ0100\Citizen Automatic NJ0100 Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Automatic NJ0100\Citizen Automatic NJ0100 Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Automatic NJ0100\Citizen Automatic NJ0100 Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Automatic NJ0100\Citizen Automatic NJ0100 Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Automatic NJ0100\Citizen Automatic NJ0100 Feedback\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Automatic NJ0100\Citizen Automatic NJ0100 Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Automatic NJ0100\Citizen Automatic NJ0100.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Chronograph CA0695\Citizen Chronograph CA0695 Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Chronograph CA0695\Citizen Chronograph CA0695 Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Chronograph CA0695\Citizen Chronograph CA0695 Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Chronograph CA0695\Citizen Chronograph CA0695 Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Chronograph CA0695\Citizen Chronograph CA0695 Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Chronograph CA0695\Citizen Chronograph CA0695 Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Chronograph CA0695\Citizen Chronograph CA0695.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Classic Automatic\Citizen Classic Automatic Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Classic Automatic\Citizen Classic Automatic Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Classic Automatic\Citizen Classic Automatic Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Classic Automatic\Citizen Classic Automatic Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Classic Automatic\Citizen Classic Automatic Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Classic Automatic\Citizen Classic Automatic Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Classic Automatic\Citizen Classic Automatic.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive Titanium\Citizen Eco-Drive Titanium Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive Titanium\Citizen Eco-Drive Titanium Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive Titanium\Citizen Eco-Drive Titanium Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive Titanium\Citizen Eco-Drive Titanium Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive Titanium\Citizen Eco-Drive Titanium Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive Titanium\Citizen Eco-Drive Titanium Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive Titanium\Citizen Eco-Drive Titanium.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive\Citizen Eco-Drive Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive\Citizen Eco-Drive Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive\Citizen Eco-Drive Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive\Citizen Eco-Drive Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive\Citizen Eco-Drive Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive\Citizen Eco-Drive Feedback\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive\Citizen Eco-Drive Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Eco-Drive\Citizen Eco-Drive.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Elegant Lady\Citizen Elegant Lady Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Elegant Lady\Citizen Elegant Lady Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Elegant Lady\Citizen Elegant Lady Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Elegant Lady\Citizen Elegant Lady Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Elegant Lady\Citizen Elegant Lady Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Elegant Lady\Citizen Elegant Lady Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Elegant Lady\Citizen Elegant Lady.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Infinity\Citizen Infinity Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Infinity\Citizen Infinity Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Infinity\Citizen Infinity Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Infinity\Citizen Infinity Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Infinity\Citizen Infinity Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Infinity\Citizen Infinity Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Infinity\Citizen Infinity.jpg" />
+    <Content Include="Content\img\Citizen\Citizen lammidision\Citizen lammidision Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen lammidision\Citizen lammidision Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen lammidision\Citizen lammidision Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen lammidision\Citizen lammidision Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen lammidision\Citizen lammidision Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen lammidision\Citizen lammidision Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen lammidision\Citizen lammidision.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Promaster Diver\Citizen Promaster Diver Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Promaster Diver\Citizen Promaster Diver Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Promaster Diver\Citizen Promaster Diver Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Promaster Diver\Citizen Promaster Diver Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Promaster Diver\Citizen Promaster Diver Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Promaster Diver\Citizen Promaster Diver Feedback\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Promaster Diver\Citizen Promaster Diver Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Promaster Diver\Citizen Promaster Diver.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Super Titanium\Citizen Super Titanium Default\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Super Titanium\Citizen Super Titanium Default\2.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Super Titanium\Citizen Super Titanium Default\3.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Super Titanium\Citizen Super Titanium Default\4.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Super Titanium\Citizen Super Titanium Default\5.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Super Titanium\Citizen Super Titanium Reality\1.jpg" />
+    <Content Include="Content\img\Citizen\Citizen Super Titanium\Citizen Super Titanium.jpg" />
+    <Content Include="Content\img\Citizen\Citizen.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Dimesion\G-Shock Dimesion Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Dimesion\G-Shock Dimesion Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Dimesion\G-Shock Dimesion Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Dimesion\G-Shock Dimesion Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Dimesion\G-Shock Dimesion Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Dimesion\G-Shock Dimesion Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Dimesion\G-Shock Dimesion.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock DW-5600\G-Shock DW-5600 Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock DW-5600\G-Shock DW-5600 Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock DW-5600\G-Shock DW-5600 Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock DW-5600\G-Shock DW-5600 Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock DW-5600\G-Shock DW-5600 Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock DW-5600\G-Shock DW-5600 Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock DW-5600\G-Shock DW-5600.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-100\G-Shock GA-100 Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-100\G-Shock GA-100 Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-100\G-Shock GA-100 Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-100\G-Shock GA-100 Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-100\G-Shock GA-100 Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-100\G-Shock GA-100 Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-100\G-Shock GA-100.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-2100\G-Shock GA-2100 Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-2100\G-Shock GA-2100 Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-2100\G-Shock GA-2100 Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-2100\G-Shock GA-2100 Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-2100\G-Shock GA-2100 Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-2100\G-Shock GA-2100 Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-2100\G-Shock GA-2100.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-700\G-Shock GA-700 Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-700\G-Shock GA-700 Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-700\G-Shock GA-700 Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-700\G-Shock GA-700 Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-700\G-Shock GA-700 Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-700\G-Shock GA-700 Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock GA-700\G-Shock GA-700.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Gravitymaster\G-Shock Gravitymaster Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Gravitymaster\G-Shock Gravitymaster Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Gravitymaster\G-Shock Gravitymaster Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Gravitymaster\G-Shock Gravitymaster Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Gravitymaster\G-Shock Gravitymaster Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Gravitymaster\G-Shock Gravitymaster Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Gravitymaster\G-Shock Gravitymaster.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Mudmaster\G-Shock Mudmaster Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Mudmaster\G-Shock Mudmaster Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Mudmaster\G-Shock Mudmaster Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Mudmaster\G-Shock Mudmaster Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Mudmaster\G-Shock Mudmaster Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Mudmaster\G-Shock Mudmaster Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Mudmaster\G-Shock Mudmaster.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Rangeman\G-Shock Rangeman Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Rangeman\G-Shock Rangeman Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Rangeman\G-Shock Rangeman Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Rangeman\G-Shock Rangeman Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Rangeman\G-Shock Rangeman Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Rangeman\G-Shock Rangeman Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Rangeman\G-Shock Rangeman.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Seamaster\G-Shock Seamaster Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Seamaster\G-Shock Seamaster Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Seamaster\G-Shock Seamaster Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Seamaster\G-Shock Seamaster Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Seamaster\G-Shock Seamaster Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Seamaster\G-Shock Seamaster Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Seamaster\G-Shock Seamaster.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster Default\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster Default\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster Default\3.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster Default\4.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster Default\5.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster Feedback\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster Feedback\2.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster Reality\1.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock Speedmaster\G-Shock Speedmaster.jpg" />
+    <Content Include="Content\img\G-Shock\G-Shock.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Detail\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Detail\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Detail\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP89322\Olym Pianus OP89322 Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP89322\Olym Pianus OP89322 Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP89322\Olym Pianus OP89322 Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP89322\Olym Pianus OP89322 Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP89322\Olym Pianus OP89322 Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP89322\Olym Pianus OP89322 Feedback\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP89322\Olym Pianus OP89322 Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP89322\Olym Pianus OP89322.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77A\Olym Pianus OP9908-77A Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77A\Olym Pianus OP9908-77A Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77A\Olym Pianus OP9908-77A Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77A\Olym Pianus OP9908-77A Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77A\Olym Pianus OP9908-77A Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77A\Olym Pianus OP9908-77A Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77A\Olym Pianus OP9908-77A.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77D\Olym Pianus OP9908-77D Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77D\Olym Pianus OP9908-77D Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77D\Olym Pianus OP9908-77D Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77D\Olym Pianus OP9908-77D Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77D\Olym Pianus OP9908-77D Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77D\Olym Pianus OP9908-77D Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77D\Olym Pianus OP9908-77D.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77KH\Olym Pianus OP9908-77KH Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77KH\Olym Pianus OP9908-77KH Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77KH\Olym Pianus OP9908-77KH Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77KH\Olym Pianus OP9908-77KH Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77KH\Olym Pianus OP9908-77KH Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77KH\Olym Pianus OP9908-77KH Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77KH\Olym Pianus OP9908-77KH.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MB\Olym Pianus OP9908-77MB Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MB\Olym Pianus OP9908-77MB Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MB\Olym Pianus OP9908-77MB Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MB\Olym Pianus OP9908-77MB Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MB\Olym Pianus OP9908-77MB Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MB\Olym Pianus OP9908-77MB Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MB\Olym Pianus OP9908-77MB.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MS\Olym Pianus OP9908-77MS Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MS\Olym Pianus OP9908-77MS Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MS\Olym Pianus OP9908-77MS Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MS\Olym Pianus OP9908-77MS Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MS\Olym Pianus OP9908-77MS Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MS\Olym Pianus OP9908-77MS Feedback\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MS\Olym Pianus OP9908-77MS Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MS\Olym Pianus OP9908-77MS.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MT\Olym Pianus OP9908-77MT Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MT\Olym Pianus OP9908-77MT Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MT\Olym Pianus OP9908-77MT Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MT\Olym Pianus OP9908-77MT Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MT\Olym Pianus OP9908-77MT Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MT\Olym Pianus OP9908-77MT Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-77MT\Olym Pianus OP9908-77MT.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-88AMS\Olym Pianus OP9908-88AMS Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-88AMS\Olym Pianus OP9908-88AMS Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-88AMS\Olym Pianus OP9908-88AMS Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-88AMS\Olym Pianus OP9908-88AMS Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-88AMS\Olym Pianus OP9908-88AMS Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-88AMS\Olym Pianus OP9908-88AMS Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus OP9908-88AMS\Olym Pianus OP9908-88AMS.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Default\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Default\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Default\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Default\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Default\5.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Detail\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Detail\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Detail\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Detail\4.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Feedback\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Reality\1.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Reality\2.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section Reality\3.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus Section\Olym Pianus Section.jpg" />
+    <Content Include="Content\img\Olym Pianus\Olym Pianus.jpg" />
+    <Content Include="Content\img\Orient\Orient Bambino\Orient Bambino Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Bambino\Orient Bambino Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Bambino\Orient Bambino Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Bambino\Orient Bambino Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Bambino\Orient Bambino Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Bambino\Orient Bambino Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Bambino\Orient Bambino.jpg" />
+    <Content Include="Content\img\Orient\Orient Conaiti\Orient Conaiti Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Conaiti\Orient Conaiti Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Conaiti\Orient Conaiti Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Conaiti\Orient Conaiti Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Conaiti\Orient Conaiti Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Conaiti\Orient Conaiti Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Conaiti\Orient Conaiti.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Detail\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Detail\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Detail\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Detail\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive Feedback\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient Distinctive.jpg" />
+    <Content Include="Content\img\Orient\Orient Distinctive\Orient DistinctiveReality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Fama II\Orient Fama II Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Fama II\Orient Fama II Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Fama II\Orient Fama II Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Fama II\Orient Fama II Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Fama II\Orient Fama II Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Fama II\Orient Fama II Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Fama II\Orient Fama II.jpg" />
+    <Content Include="Content\img\Orient\Orient Hover\Orient Hover Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Hover\Orient Hover Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Hover\Orient Hover Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Hover\Orient Hover Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Hover\Orient Hover Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Hover\Orient Hover Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Hover\Orient Hover.jpg" />
+    <Content Include="Content\img\Orient\Orient Mako II\Orient Mako II Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Mako II\Orient Mako II Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Mako II\Orient Mako II Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Mako II\Orient Mako II Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Mako II\Orient Mako II Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Mako II\Orient Mako II Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Mako II\Orient Mako II.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retro-Future\Orient Star Retro-Future Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retro-Future\Orient Star Retro-Future Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retro-Future\Orient Star Retro-Future Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retro-Future\Orient Star Retro-Future Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retro-Future\Orient Star Retro-Future Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retro-Future\Orient Star Retro-Future Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retro-Future\Orient Star Retro-Future.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retrograde\Orient Star Retrograde Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retrograde\Orient Star Retrograde Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retrograde\Orient Star Retrograde Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retrograde\Orient Star Retrograde Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retrograde\Orient Star Retrograde Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retrograde\Orient Star Retrograde Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Star Retrograde\Orient Star Retrograde.jpg" />
+    <Content Include="Content\img\Orient\Orient Sun and Moon\Orient Sun and Moon Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Sun and Moon\Orient Sun and Moon Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Sun and Moon\Orient Sun and Moon Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Sun and Moon\Orient Sun and Moon Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Sun and Moon\Orient Sun and Moon Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Sun and Moon\Orient Sun and Moon Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Sun and Moon\Orient Sun and Moon.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\chi_tiet_1.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\chi_tiet_2.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\chi_tiet_3.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\chi_tiet_4.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\New folder\tren_tay.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\Orient Visibility Default\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\Orient Visibility Default\2.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\Orient Visibility Default\3.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\Orient Visibility Default\4.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\Orient Visibility Default\5.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\Orient Visibility Reality\1.jpg" />
+    <Content Include="Content\img\Orient\Orient Visibility\Orient Visibility.jpg" />
+    <Content Include="Content\img\Orient\Orient.jpg" />
+    <Content Include="Content\img\Seiko\Seiko 5 Sports\Seiko 5 Sports Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko 5 Sports\Seiko 5 Sports Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko 5 Sports\Seiko 5 Sports Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko 5 Sports\Seiko 5 Sports Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko 5 Sports\Seiko 5 Sports Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko 5 Sports\Seiko 5 Sports Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko 5 Sports\Seiko 5 Sports.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Astron GPS\Seiko Astron GPS Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Astron GPS\Seiko Astron GPS Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Astron GPS\Seiko Astron GPS Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Astron GPS\Seiko Astron GPS Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Astron GPS\Seiko Astron GPS Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Astron GPS\Seiko Astron GPS Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Astron GPS\Seiko Astron GPS.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Coutura\Seiko Coutura Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Coutura\Seiko Coutura Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Coutura\Seiko Coutura Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Coutura\Seiko Coutura Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Coutura\Seiko Coutura Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Coutura\Seiko Coutura Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Coutura\Seiko Coutura.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Kinetic\Seiko Kinetic Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Kinetic\Seiko Kinetic Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Kinetic\Seiko Kinetic Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Kinetic\Seiko Kinetic Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Kinetic\Seiko Kinetic Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Kinetic\Seiko Kinetic Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Kinetic\Seiko Kinetic.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Lavio\Seiko Lavio Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Lavio\Seiko Lavio Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Lavio\Seiko Lavio Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Lavio\Seiko Lavio Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Lavio\Seiko Lavio Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Lavio\Seiko Lavio Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Lavio\Seiko Lavio.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage Automatic\Seiko Presage Automatic Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage Automatic\Seiko Presage Automatic Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage Automatic\Seiko Presage Automatic Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage Automatic\Seiko Presage Automatic Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage Automatic\Seiko Presage Automatic Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage Automatic\Seiko Presage Automatic Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage Automatic\Seiko Presage Automatic.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage SRPB41J1\Orient Visibility Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage SRPB41J1\Orient Visibility Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage SRPB41J1\Orient Visibility Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage SRPB41J1\Orient Visibility Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage SRPB41J1\Orient Visibility Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage SRPB41J1\Orient Visibility Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Presage SRPB41J1\Seiko Presage SRPB41J1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Prospex Diver\Seiko Prospex Diver Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Prospex Diver\Seiko Prospex Diver Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Prospex Diver\Seiko Prospex Diver Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Prospex Diver\Seiko Prospex Diver Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Prospex Diver\Seiko Prospex Diver Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Prospex Diver\Seiko Prospex Diver Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Prospex Diver\Seiko Prospex Diver.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Supper Sports\Seiko Supper Sports Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Supper Sports\Seiko Supper Sports Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Supper Sports\Seiko Supper Sports Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Supper Sports\Seiko Supper Sports Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Supper Sports\Seiko Supper Sports Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Supper Sports\Seiko Supper Sports Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Supper Sports\Seiko Supper Sports.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Zimtal\Seiko Zimtal Default\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Zimtal\Seiko Zimtal Default\2.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Zimtal\Seiko Zimtal Default\3.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Zimtal\Seiko Zimtal Default\4.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Zimtal\Seiko Zimtal Default\5.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Zimtal\Seiko Zimtal Reality\1.jpg" />
+    <Content Include="Content\img\Seiko\Seiko Zimtal\Seiko Zimtal.jpg" />
+    <Content Include="Content\img\Seiko\Seiko.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Couturier\Tissot Couturier Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Couturier\Tissot Couturier Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Couturier\Tissot Couturier Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Couturier\Tissot Couturier Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Couturier\Tissot Couturier Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Couturier\Tissot Couturier Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Couturier\Tissot Couturier.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Everytime\Tissot Everytime Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Everytime\Tissot Everytime Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Everytime\Tissot Everytime Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Everytime\Tissot Everytime Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Everytime\Tissot Everytime Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Everytime\Tissot Everytime Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Everytime\Tissot Everytime.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Heritage\Tissot Heritage Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Heritage\Tissot Heritage Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Heritage\Tissot Heritage Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Heritage\Tissot Heritage Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Heritage\Tissot Heritage Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Heritage\Tissot Heritage Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Heritage\Tissot Heritage.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\chi-tiet_1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\chi-tiet_2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\chi-tiet_3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\chi-tiet_4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\New folder\tren_tay.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\Tissot Hilane Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\Tissot Hilane Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\Tissot Hilane Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\Tissot Hilane Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\Tissot Hilane Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\Tissot Hilane Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Hilane\Tissot Hilane.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Le Locle\Tissot Le Locle Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Le Locle\Tissot Le Locle Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Le Locle\Tissot Le Locle Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Le Locle\Tissot Le Locle Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Le Locle\Tissot Le Locle Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Le Locle\Tissot Le Locle Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Le Locle\Tissot Le Locle.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRS 516\Tissot PRS 516 Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRS 516\Tissot PRS 516 Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRS 516\Tissot PRS 516 Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRS 516\Tissot PRS 516 Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRS 516\Tissot PRS 516 Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRS 516\Tissot PRS 516 Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRS 516\Tissot PRS 516.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRX\Tissot PRX Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRX\Tissot PRX Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRX\Tissot PRX Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRX\Tissot PRX Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRX\Tissot PRX Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRX\Tissot PRX Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot PRX\Tissot PRX.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Quickster\Tissot Quickster Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Quickster\Tissot Quickster Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Quickster\Tissot Quickster Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Quickster\Tissot Quickster Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Quickster\Tissot Quickster Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Quickster\Tissot Quickster Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot Quickster\Tissot Quickster.jpg" />
+    <Content Include="Content\img\Tissot\Tissot T-Race\Tissot T-Race Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot T-Race\Tissot T-Race Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot T-Race\Tissot T-Race Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot T-Race\Tissot T-Race Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot T-Race\Tissot T-Race Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot T-Race\Tissot T-Race Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot T-Race\Tissot T-Race.jpg" />
+    <Content Include="Content\img\Tissot\Tissot V8\Tissot V8 Default\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot V8\Tissot V8 Default\2.jpg" />
+    <Content Include="Content\img\Tissot\Tissot V8\Tissot V8 Default\3.jpg" />
+    <Content Include="Content\img\Tissot\Tissot V8\Tissot V8 Default\4.jpg" />
+    <Content Include="Content\img\Tissot\Tissot V8\Tissot V8 Default\5.jpg" />
+    <Content Include="Content\img\Tissot\Tissot V8\Tissot V8 Reality\1.jpg" />
+    <Content Include="Content\img\Tissot\Tissot V8\Tissot V8.jpg" />
+    <Content Include="Content\img\Tissot\Tissot.jpg" />
+    <Content Include="Content\img_customer\thumb-1.jpg" />
+    <Content Include="Content\img_customer\thumb-10.jpg" />
+    <Content Include="Content\img_customer\thumb-11.jpg" />
+    <Content Include="Content\img_customer\thumb-2.jpg" />
+    <Content Include="Content\img_customer\thumb-3.jpg" />
+    <Content Include="Content\img_customer\thumb-4.jpg" />
+    <Content Include="Content\img_customer\thumb-5.jpg" />
+    <Content Include="Content\img_customer\thumb-6.jpg" />
+    <Content Include="Content\img_customer\thumb-7.jpg" />
+    <Content Include="Content\img_customer\thumb-8.jpg" />
+    <Content Include="Content\img_customer\thumb-9.jpg" />
+    <Content Include="Content\img_default\1.png" />
+    <Content Include="Content\img_default\2.png" />
+    <Content Include="Content\img_default\3.png" />
+    <Content Include="Content\img_default\4.png" />
+    <Content Include="Content\img_default\5.png" />
+    <Content Include="Content\img_default\6.png" />
+    <Content Include="Content\img_default\authentic.png" />
+    <Content Include="Content\img_default\Bentley\1.jpg" />
+    <Content Include="Content\img_default\Bentley\2.jpg" />
+    <Content Include="Content\img_default\Bentley\3.jpg" />
+    <Content Include="Content\img_default\Bentley\4.jpg" />
+    <Content Include="Content\img_default\Bentley\5.jpg" />
+    <Content Include="Content\img_default\button_img3.png" />
+    <Content Include="Content\img_default\button_img4.png" />
+    <Content Include="Content\img_default\cam_ket.png" />
+    <Content Include="Content\img_default\casio.jpg" />
+    <Content Include="Content\img_default\casio2.jpg" />
+    <Content Include="Content\img_default\casio3.jpg" />
+    <Content Include="Content\img_default\Casio\1.jpg" />
+    <Content Include="Content\img_default\Casio\2.jpg" />
+    <Content Include="Content\img_default\Casio\3.jpg" />
+    <Content Include="Content\img_default\Casio\4.jpg" />
+    <Content Include="Content\img_default\Casio\5.jpg" />
+    <Content Include="Content\img_default\chung_nhan.jpeg" />
+    <Content Include="Content\img_default\Citizen\1.jpg" />
+    <Content Include="Content\img_default\Citizen\2.jpg" />
+    <Content Include="Content\img_default\Citizen\3.jpg" />
+    <Content Include="Content\img_default\Citizen\4.jpg" />
+    <Content Include="Content\img_default\Citizen\5.jpg" />
+    <Content Include="Content\img_default\G-Shock\1.jpg" />
+    <Content Include="Content\img_default\G-Shock\2.jpg" />
+    <Content Include="Content\img_default\G-Shock\3.jpg" />
+    <Content Include="Content\img_default\G-Shock\4.jpg" />
+    <Content Include="Content\img_default\G-Shock\5.jpg" />
+    <Content Include="Content\img_default\huong_dan_chon_size_1.png" />
+    <Content Include="Content\img_default\huong_dan_chon_size_2.png" />
+    <Content Include="Content\img_default\item1.jpg" />
+    <Content Include="Content\img_default\item2.jpg" />
+    <Content Include="Content\img_default\item3.jpg" />
+    <Content Include="Content\img_default\item4.jpg" />
+    <Content Include="Content\img_default\item5.jpg" />
+    <Content Include="Content\img_default\Olym Pianus\1.jpg" />
+    <Content Include="Content\img_default\Olym Pianus\2.jpg" />
+    <Content Include="Content\img_default\Olym Pianus\3.jpg" />
+    <Content Include="Content\img_default\Olym Pianus\4.jpg" />
+    <Content Include="Content\img_default\Olym Pianus\5.jpg" />
+    <Content Include="Content\img_default\Orient\1.jpg" />
+    <Content Include="Content\img_default\Orient\2.jpg" />
+    <Content Include="Content\img_default\Orient\3.jpg" />
+    <Content Include="Content\img_default\Orient\4.jpg" />
+    <Content Include="Content\img_default\Orient\5.jpg" />
+    <Content Include="Content\img_default\panel1.png" />
+    <Content Include="Content\img_default\panel2.png" />
+    <Content Include="Content\img_default\panel3.png" />
+    <Content Include="Content\img_default\Seiko\1.jpg" />
+    <Content Include="Content\img_default\Seiko\2.jpg" />
+    <Content Include="Content\img_default\Seiko\3.jpg" />
+    <Content Include="Content\img_default\Seiko\4.jpg" />
+    <Content Include="Content\img_default\Seiko\5.jpg" />
+    <Content Include="Content\img_default\Tissot\1.jpg" />
+    <Content Include="Content\img_default\Tissot\2.jpg" />
+    <Content Include="Content\img_default\Tissot\3.jpg" />
+    <Content Include="Content\img_default\Tissot\4.jpg" />
+    <Content Include="Content\img_default\Tissot\5.jpg" />
+    <Content Include="Content\img_default\type1.jpg" />
+    <Content Include="Content\img_default\type2.jpg" />
+    <Content Include="Content\img_default\type3.jpg" />
+    <Content Include="Content\img_default\type4.jpg" />
+    <Content Include="Content\img_default\type5.jpg" />
+    <Content Include="Content\img_index\anh_footer.jpg" />
+    <Content Include="Content\img_index\anh_logo.jpg" />
+    <Content Include="Content\img_index\anh_watchstore.jpg" />
+    <Content Include="Content\img_index\Bentley.jpg" />
+    <Content Include="Content\img_index\Casio.jpg" />
+    <Content Include="Content\img_index\Citizen.jpg" />
+    <Content Include="Content\img_index\co_dien_1.jpg" />
+    <Content Include="Content\img_index\co_dien_2.jpg" />
+    <Content Include="Content\img_index\co_dien_3.jpg" />
+    <Content Include="Content\img_index\DonGian.jpg" />
+    <Content Include="Content\img_index\G-Shock.jpg" />
+    <Content Include="Content\img_index\gioi_thieu_cua_hang.png" />
+    <Content Include="Content\img_index\GMT_master.png" />
+    <Content Include="Content\img_index\hublot.png" />
+    <Content Include="Content\img_index\LichLam.jpg" />
+    <Content Include="Content\img_index\Logo_breguets.jpg" />
+    <Content Include="Content\img_index\logo_footer.jpg" />
+    <Content Include="Content\img_index\mua_he_1.jpg" />
+    <Content Include="Content\img_index\mua_he_2.jpg" />
+    <Content Include="Content\img_index\mua_he_3.jpg" />
+    <Content Include="Content\img_index\Olym Pianus.jpg" />
+    <Content Include="Content\img_index\omera.png" />
+    <Content Include="Content\img_index\Orient.jpg" />
+    <Content Include="Content\img_index\sang_trong_1.jpg" />
+    <Content Include="Content\img_index\sang_trong_2.jpg" />
+    <Content Include="Content\img_index\sang_trong_3.jpg" />
+    <Content Include="Content\img_index\Seiko.jpg" />
+    <Content Include="Content\img_index\shock.jpg" />
+    <Content Include="Content\img_index\TinhTe.jpg" />
+    <Content Include="Content\img_index\Tissot.jpg" />
+    <Content Include="Content\reponsives.css" />
+    <Content Include="Content\ResetPassWord\css\main.css" />
+    <Content Include="Content\ResetPassWord\css\util.css" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\ResetPassWord\fonts\iconic\css\material-design-iconic-font.css" />
+    <Content Include="Content\ResetPassWord\fonts\iconic\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\ResetPassWord\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Content\SQL\SQL_1.sql" />
+    <Content Include="Content\SQL\SQL_2.sql" />
+    <Content Include="Content\test.css" />
+    <Content Include="Content\ThongBao.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\icons\default\icons.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\models\dom\model.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\accordion\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\emoticons\js\emojiimages.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\emoticons\js\emojiimages.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\emoticons\js\emojis.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\ar.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\bg_BG.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\ca.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\cs.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\da.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\de.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\el.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\en.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\es.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\eu.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\fa.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\fi.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\fr_FR.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\he_IL.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\hi.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\hr.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\hu_HU.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\id.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\it.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\ja.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\kk.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\ko_KR.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\ms.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\nb_NO.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\nl.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\pl.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\pt_BR.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\pt_PT.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\ro.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\ru.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\sk.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\sl_SI.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\sv_SE.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\th_TH.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\tr.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\uk.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\vi.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\zh_CN.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\js\i18n\keynav\zh_TW.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\quickbars\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\dark\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\dark\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\default\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\default\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\document\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\document\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\tinymce-5-dark\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\tinymce-5-dark\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\tinymce-5\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\tinymce-5\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\writer\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\content\writer\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide-dark\content.inline.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide-dark\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide-dark\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide-dark\skin.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide-dark\skin.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide-dark\skin.shadowdom.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide-dark\skin.shadowdom.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide\content.inline.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide\content.inline.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide\skin.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide\skin.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide\skin.shadowdom.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\oxide\skin.shadowdom.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5-dark\content.inline.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5-dark\content.inline.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5-dark\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5-dark\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5-dark\skin.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5-dark\skin.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5\content.inline.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5\content.inline.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5\content.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5\content.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5\skin.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5\skin.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5\skin.shadowdom.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\skins\ui\tinymce-5\skin.shadowdom.min.css" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\themes\silver\theme.min.js" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\tinymce.min.js" />
+    <Content Include="Content\video_index.webm" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\logo.webp" />
+    <Content Include="Content\Admin\assets\fonts\anticon.eot" />
+    <Content Include="Content\Admin\assets\fonts\anticon.ttf" />
+    <Content Include="Content\Admin\assets\fonts\anticon.woff" />
+    <Content Include="Content\Admin\assets\fonts\anticond41d.eot" />
+    <Content Include="Content\Admin\assets\fonts\fa-brands-400.eot" />
+    <Content Include="Content\Admin\assets\fonts\fa-brands-400.ttf" />
+    <Content Include="Content\Admin\assets\fonts\fa-brands-400.woff" />
+    <Content Include="Content\Admin\assets\fonts\fa-brands-400.woff2" />
+    <Content Include="Content\Admin\assets\fonts\fa-brands-400d41d.eot" />
+    <Content Include="Content\Admin\assets\fonts\fa-regular-400.eot" />
+    <Content Include="Content\Admin\assets\fonts\fa-regular-400.ttf" />
+    <Content Include="Content\Admin\assets\fonts\fa-regular-400.woff" />
+    <Content Include="Content\Admin\assets\fonts\fa-regular-400.woff2" />
+    <Content Include="Content\Admin\assets\fonts\fa-regular-400d41d.eot" />
+    <Content Include="Content\Admin\assets\fonts\fa-solid-900.eot" />
+    <Content Include="Content\Admin\assets\fonts\fa-solid-900.ttf" />
+    <Content Include="Content\Admin\assets\fonts\fa-solid-900.woff" />
+    <Content Include="Content\Admin\assets\fonts\fa-solid-900.woff2" />
+    <Content Include="Content\Admin\assets\fonts\fa-solid-900d41d.eot" />
+    <Content Include="Content\img\Bentley\Bentley Big Bang\Bentley Big Bang Default\5.webp" />
+    <Content Include="Content\assets\fonts\anticon.eot" />
+    <Content Include="Content\assets\fonts\anticon.ttf" />
+    <Content Include="Content\assets\fonts\anticon.woff" />
+    <Content Include="Content\assets\fonts\anticond41d.eot" />
+    <Content Include="Content\assets\fonts\fa-brands-400.eot" />
+    <Content Include="Content\assets\fonts\fa-brands-400.ttf" />
+    <Content Include="Content\assets\fonts\fa-brands-400.woff" />
+    <Content Include="Content\assets\fonts\fa-brands-400.woff2" />
+    <Content Include="Content\assets\fonts\fa-brands-400d41d.eot" />
+    <Content Include="Content\assets\fonts\fa-regular-400.eot" />
+    <Content Include="Content\assets\fonts\fa-regular-400.ttf" />
+    <Content Include="Content\assets\fonts\fa-regular-400.woff" />
+    <Content Include="Content\assets\fonts\fa-regular-400.woff2" />
+    <Content Include="Content\assets\fonts\fa-regular-400d41d.eot" />
+    <Content Include="Content\assets\fonts\fa-solid-900.eot" />
+    <Content Include="Content\assets\fonts\fa-solid-900.ttf" />
+    <Content Include="Content\assets\fonts\fa-solid-900.woff" />
+    <Content Include="Content\assets\fonts\fa-solid-900.woff2" />
+    <Content Include="Content\assets\fonts\fa-solid-900d41d.eot" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\CHANGELOG.md" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\langs\README.md" />
+    <Content Include="Content\tinymce_7.5.1\tinymce\js\tinymce\license.md" />
+    <Content Include="Content\Font\NotoSans.ttf" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Content\ResetPassWord\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Content\ResetPassWord\fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Content\ResetPassWord\fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Content\ResetPassWord\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="Content\ResetPassWord\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <None Include="Properties\PublishProfiles\tinnhonmy123-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\trungtin0972-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\trungtin0972-001-site1 - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Xuhuong\Chi_tiet.cshtml" />
+    <Content Include="Views\Xuhuong\BanHang.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Xuhuong\Xuhuong.cshtml" />
+    <Content Include="Views\Xuhuong\GioHang.cshtml" />
+    <Content Include="Views\Account\ProfileUser.cshtml" />
+    <Content Include="Views\Account\EditProfileUser.cshtml" />
+    <Content Include="Views\Xuhuong\AddOrder.cshtml" />
+    <Content Include="Views\Xuhuong\HistoryOrder.cshtml" />
+    <Content Include="Views\Xuhuong\Find.cshtml" />
+    <Content Include="Views\Adimin\Index.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Chart\Index.cshtml" />
+    <Content Include="Views\Chart\Index2.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Invoice.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageAdmin.cshtml" />
+    <Content Include="Views\Order\Index2.cshtml" />
+    <Content Include="Views\Xuhuong\partialBrand.cshtml" />
+    <Content Include="Views\Adimin\qlAdmin.cshtml" />
+    <Content Include="Views\Adimin\Edit.cshtml" />
+    <Content Include="Views\Adimin\Delete.cshtml" />
+    <Content Include="Views\warehouse\Index.cshtml" />
+    <Content Include="Views\Xuhuong\OrderDetails.cshtml" />
+    <Content Include="Views\Sales\Index.cshtml" />
+    <Content Include="Views\Xuhuong\_FeedbackPartial.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ConfirmOTP.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Adimin\Register.cshtml" />
+    <Content Include="Views\Xuhuong\GioiThieu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\img\Bentley\Bentley Big Bang\Bentley Big Bang Feedback\" />
+    <Folder Include="Content\img\Bentley\Casio MTP-V002D - Copy %289%29 - Copy - Copy\Orient Visibility Default\" />
+    <Folder Include="Content\img\Bentley\Casio MTP-V002D - Copy %289%29 - Copy - Copy\Orient Visibility Reality\" />
+    <Folder Include="Content\img\Casio\Casio MTP-V002D - Copy %285%29 - Copy\Orient Visibility Default\" />
+    <Folder Include="Content\img\Casio\Casio MTP-V002D - Copy %285%29 - Copy\Orient Visibility Reality\" />
+    <Folder Include="Content\img\Citizen\Casio MTP-V002D - Copy %289%29 - Copy - Copy - Copy\Orient Visibility Default\" />
+    <Folder Include="Content\img\Citizen\Casio MTP-V002D - Copy %289%29 - Copy - Copy - Copy\Orient Visibility Reality\" />
+    <Folder Include="Content\img\G-Shock\Casio MTP-V002D - Copy %286%29 - Copy - Copy - Copy\Orient Visibility Default\" />
+    <Folder Include="Content\img\G-Shock\Casio MTP-V002D - Copy %286%29 - Copy - Copy - Copy\Orient Visibility Reality\" />
+    <Folder Include="Content\img\G-Shock\G-Shock Dimesion\G-Shock Dimesion Feedback\" />
+    <Folder Include="Content\img\G-Shock\G-Shock Seamaster\G-Shock Seamaster Feedback\" />
+    <Folder Include="Content\img\Olym Pianus\Casio MTP-V002D - Copy %289%29 - Copy - Copy - Copy - Copy\Orient Visibility Default\" />
+    <Folder Include="Content\img\Olym Pianus\Casio MTP-V002D - Copy %289%29 - Copy - Copy - Copy - Copy\Orient Visibility Reality\" />
+    <Folder Include="Content\img\Olym Pianus\Olym Pianus Infinity\Olym Pianus Infinity Feedback\" />
+    <Folder Include="Content\img\Olym Pianus\Olym Pianus OP9908-88AMS\Olym Pianus OP9908-88AMS Feedback\" />
+    <Folder Include="Content\img\Orient\Orient Visibility - Copy %287%29 - Copy\Orient Visibility Default\" />
+    <Folder Include="Content\img\Orient\Orient Visibility - Copy %287%29 - Copy\Orient Visibility Reality\" />
+    <Folder Include="Content\img\Seiko\Casio MTP-V002D - Copy %285%29 - Copy - Copy\Orient Visibility Default\" />
+    <Folder Include="Content\img\Seiko\Casio MTP-V002D - Copy %285%29 - Copy - Copy\Orient Visibility Reality\" />
+    <Folder Include="Content\img\Tissot\Casio MTP-V002D - Copy %284%29 - Copy - Copy\Orient Visibility Default\" />
+    <Folder Include="Content\img\Tissot\Casio MTP-V002D - Copy %284%29 - Copy - Copy\Orient Visibility Reality\" />
+    <Folder Include="Content\img_admin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Content\tinymce_7.5.1\tinymce\js\tinymce\tinymce.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58612</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44384/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.5.6.2\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.5.6.2\build\Microsoft.TypeScript.MSBuild.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.5.6.2\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.5.6.2\build\Microsoft.TypeScript.MSBuild.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.5.6.2\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.5.6.2\build\Microsoft.TypeScript.MSBuild.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

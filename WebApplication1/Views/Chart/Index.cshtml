@@ -1,0 +1,109 @@
+﻿@model WebApplication1.Models.Customer
+
+@{
+    ViewBag.Title = "Biểu đồ Doanh thu và Số lượng sản phẩm";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<h2>Biểu đồ Doanh thu và Số lượng sản phẩm 2024</h2>
+
+
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span>Chọn năm cần thống kê</span>
+    </button>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="@Url.Action("Index2", "Chart")">2023</a>
+        <a class="dropdown-item" href="@Url.Action("Index", "Chart")">2024</a>
+    </div>
+</div>
+<canvas id="revenueChart" width="800" height="400"></canvas>
+
+<!-- Thêm thư viện Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+
+    // Lấy dữ liệu từ ViewBag
+    var labels = @Html.Raw(Json.Encode(ViewBag.Dates));
+    var totalQuantities = @Html.Raw(Json.Encode(ViewBag.TotalQuantities));
+    var totalRevenues = @Html.Raw(Json.Encode(ViewBag.TotalRevenues));
+
+    // Tạo biểu đồ
+    var revenueChart = new Chart(ctx, {
+        type: 'bar', // Loại biểu đồ cột cho doanh thu
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Tổng Doanh thu (VNĐ)',
+                    data: totalRevenues,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    barPercentage: 0.6, // Tăng độ rộng cột
+                    yAxisID: 'y1' // Sử dụng y-axis bên phải
+                },
+                {
+                    label: 'Tổng Số lượng sản phẩm',
+                    data: totalQuantities,
+                    type: 'line', // Thêm biểu đồ đường cho số lượng
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: true,
+                    tension: 0.4, // Làm mềm đường
+                    yAxisID: 'y2' // Sử dụng y-axis bên trái
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y1: {
+                    beginAtZero: true,
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Doanh thu (VNĐ)'
+                    }
+                },
+                y2: {
+                    beginAtZero: true,
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'Số lượng sản phẩm'
+                    },
+                    grid: {
+                        drawOnChartArea: false // Loại bỏ lưới của y2 để tránh rối
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Tháng - Năm'
+                    }
+                }
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 14 // Tăng kích thước chữ
+                        }
+                    }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false // Hiển thị cả hai dữ liệu khi hover
+                }
+            }
+        }
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>

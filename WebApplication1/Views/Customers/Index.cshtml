@@ -1,0 +1,224 @@
+﻿﻿@model IEnumerable<WebApplication1.Models.Customer>
+
+@{
+    ViewBag.Title = "Danh sách khách hàng"; // Adjusted title for clarity
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="page-header">
+    <h2 class="header-title">Danh sách khách hàng</h2> <!-- Changed from đơn hàng to khách hàng -->
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" href="#">Ứng dụng</a>
+            <a class="breadcrumb-item" href="#">Thương mại điện tử</a>
+            <span class="breadcrumb-item active">Danh sách khách hàng</span> <!-- Updated to match title -->
+        </nav>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <form id="CustomerFilterForm" method="get" action="/Customers/Index">
+                            <select name="gender" class="custom-select" style="min-width: 180px;" onchange="this.form.submit();">
+                                <option value="Gioi tinh" @(ViewBag.Gender == "Gioi tinh" ? "selected=\"selected\"" : "")>Gioi tinh</option>
+                                <option value="Nam" @(ViewBag.Gender == "Nam" ? "selected=\"selected\"" : "")>Nam</option>
+                                <option value="Nữ" @(ViewBag.Gender == "Nữ" ? "selected=\"selected\"" : "")>Nữ</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <a href="@Url.Action("Create", "Customers")" class="btn btn-primary">
+
+                    <span>Create New</span>
+                </a>
+                <a href="@Url.Action("ExportToPDF", "Customers")" class="btn btn-primary">
+                    <i class="anticon anticon-file-excel m-r-5"></i>
+                    <span>Xuất PDF</span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Search Form -->
+        <form action="@Url.Action("Index", "Customers")" method="get" class="mb-3">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label m-0" for="search">Search:</label>
+                </div>
+                <div class="col-auto">
+                    <input type="search"
+                           class="form-control form-control-sm w-200"
+                           placeholder="search"
+                           id="search"
+                           name="search"
+                           value="@ViewBag.SearchTerm"
+                           aria-label="Search Customers"> <!-- Adjusted aria-label for clarity -->
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-hover e-commerce-table">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.First().CustomerID)</th>
+                                <th>Ảnh đại diện</th>
+                                <th>@Html.DisplayNameFor(model => model.First().FullName)</th>
+
+                                <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Phone)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Address)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Gender)</th>
+                                <th>Actions</th> <!-- Actions header -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int index = 0;  // Initialize the index before the loop starts
+                            }
+
+                            @foreach (var item in Model)
+                            {
+                                index++;
+                                if (item.check_Remove == 1)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerID)</td> <!-- Display the current index -->
+                                        <td>
+                                            <div class="avatar avatar-icon">
+
+
+                                                <img src="~/Content/img_customer/@Html.DisplayFor(modelItem => item.ImgCustomer)" alt="Customer Avatar">
+
+                                            </div>
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => item.FullName)
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                                        <td>
+                                            <div class="d-flex justify-content-start">
+                                                <!-- Use flexbox to align items -->
+                                                <a href="@Url.Action("Edit", "Customers", new { Id = item.CustomerID })" class="btn btn-success btn-tone m-r-5">
+                                                    <i class="anticon anticon-edit"></i>
+                                                </a>
+                                                <a href="@Url.Action("Details", "Customers", new { Id = item.CustomerID })" class="btn btn-secondary btn-tone m-r-5">
+                                                    <i class="anticon anticon-eye"></i>
+                                                </a>
+                                                <a href="@Url.Action("Delete", "Customers", new { Id = item.CustomerID })" class="btn btn-danger btn-tone m-r-5">
+                                                    <i class="anticon anticon-delete"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    // Increment index after each item is processed
+                                }
+                            }
+                        </tbody>
+
+
+                        <tfoot>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.First().CustomerID)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().FullName)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Phone)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Address)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Gender)</th>
+                                <th>Actions</th> <!-- Actions footer -->
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <!-- Pagination -->
+
+
+                    <div class="d-flex justify-content-between" style="margin-top: 30px;">
+                        <div>
+                            Showing @ViewBag.StartEntry to @ViewBag.EndEntry of @ViewBag.TotalEntries entries
+                        </div>
+
+                        <div>
+                            <ul class="pagination">
+                                @* Previous Page *@
+                                <li class="page-item @(ViewBag.Page == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, page = ViewBag.Page - 1, search = ViewBag.SearchTerm, gender = ViewBag.Gender })">Prev</a>
+                                </li>
+
+                                @* Page Numbers *@
+                                @{
+                                    int totalPagesToShow = 5;
+                                    int startPage = Math.Max(1, ViewBag.Page - totalPagesToShow / 2);
+                                    int endPage = Math.Min(ViewBag.NoOfPages, startPage + totalPagesToShow - 1);
+
+                                    if (endPage - startPage < totalPagesToShow - 1)
+                                    {
+                                        startPage = Math.Max(1, endPage - totalPagesToShow + 1);
+                                    }
+                                }
+
+                                @if (startPage > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, page = 1, search = ViewBag.SearchTerm, gender = ViewBag.Gender })">1</a>
+                                    </li>
+                                    if (startPage > 2)
+                                    {
+                                        <li class="page-item disabled">
+                                            <span class="page-link">...</span>
+                                        </li>
+                                    }
+                                }
+
+                                @for (int i = startPage; i <= endPage; i++)
+                                {
+                                    <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                                        <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, page = i, search = ViewBag.SearchTerm, gender = ViewBag.Gender })">@i</a>
+                                    </li>
+                                }
+
+                                @if (endPage < ViewBag.NoOfPages)
+                                {
+                                    if (endPage < ViewBag.NoOfPages - 1)
+                                    {
+                                        <li class="page-item disabled">
+                                            <span class="page-link">...</span>
+                                        </li>
+                                    }
+                                    <li class="page-item">
+                                        <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, page = ViewBag.NoOfPages, search = ViewBag.SearchTerm, gender = ViewBag.Gender })">@ViewBag.NoOfPages</a>
+                                    </li>
+                                }
+
+                                @* Next Page *@
+                                <li class="page-item @(ViewBag.Page == ViewBag.NoOfPages ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, page = ViewBag.Page + 1, search = ViewBag.SearchTerm, gender = ViewBag.Gender })">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

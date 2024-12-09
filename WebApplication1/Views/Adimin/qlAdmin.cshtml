@@ -1,0 +1,155 @@
+﻿@model IEnumerable<WebApplication1.Models.Admin>
+@{
+    ViewBag.Title = "qlAdmin";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2>Thong tin admin</h2>
+
+<div class="page-header">
+    <h2 class="header-title">Danh sách Admin</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" href="#">Ứng dụng</a>
+            <a class="breadcrumb-item" href="#">Quản lý</a>
+            <span class="breadcrumb-item active">Danh sách Admin</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <form id="AdminFilterForm" method="get" action="/Adimin/qlAdmin">
+                            <select name="role" class="custom-select" style="min-width: 180px;" onchange="this.form.submit();">
+                                <option value="Role" @(ViewBag.Role == "Role" ? "selected=\"selected\"" : "")>Role</option>
+                                <option value="Quản trị viên" @(ViewBag.Role == "Quản trị viên" ? "selected=\"selected\"" : "")>Quản trị viên</option>
+                                <option value="Quản lý" @(ViewBag.Role == "Quản lý" ? "selected=\"selected\"" : "")>Quản lý</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            @if (ViewBag.Rolee == "Quản trị viên")
+            {
+
+
+                <div class="col-lg-4 text-right">
+                    <a href="@Url.Action("Register", "Adimin")" class="btn btn-primary">
+                        <i class="anticon anticon-plus m-r-5"></i>
+                        <span>Create New Admin</span>
+                    </a>
+                </div>
+            }
+        </div>
+
+        <!-- Search Form -->
+        <form action="@Url.Action("qlAdmin", "Adimin")" method="get" class="mb-3">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label m-0" for="search">Search:</label>
+                </div>
+                <div class="col-auto">
+                    <input type="search"
+                           class="form-control form-control-sm w-200"
+                           placeholder="Search by name, email..."
+                           id="search"
+                           name="search"
+                           value="@ViewBag.SearchTerm"
+                           aria-label="Search Admins">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-hover e-commerce-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <a href="@Url.Action("qlAdmin", new { SortColumn = "AdminID", IconClass = ViewBag.IconClass == "fa-sort-asc" ? "fa-sort-desc" : "fa-sort-asc", page = ViewBag.Page, entriesPerPage = ViewBag.EntriesPerPage })">
+                                        @Html.DisplayNameFor(model => model.First().AdminID)
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="@Url.Action("qlAdmin", new { SortColumn = "FullName", IconClass = ViewBag.IconClass == "fa-sort-asc" ? "fa-sort-desc" : "fa-sort-asc", page = ViewBag.Page, entriesPerPage = ViewBag.EntriesPerPage })">
+                                        @Html.DisplayNameFor(model => model.First().FullName)
+                                    </a>
+                                </th>
+                                <th>@Html.DisplayNameFor(model => model.First().ImgAdmin)</th>
+
+                                <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Phone)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Role)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Gender)</th>
+                                @*<th>@Html.DisplayNameFor(model => model.First().CreatedAt)</th>*@
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var admin in Model)
+                            {
+                                if (admin.check_Remove == 1)
+                                {
+                                    <tr>
+                                        <td>@admin.AdminID</td>
+                                        <td>@admin.FullName</td>
+                                        <td>
+                                            <div class="avatar avatar-image">
+                                                <img src="~/Content/img_Admin/@admin.ImgAdmin" />/@admin.ImgAdmin
+                                            </div>
+                                        </td>
+                                        <td>@admin.Email</td>
+                                        <td>@admin.Phone</td>
+                                        <td>@admin.Role</td>
+                                        <td>@admin.Gender</td>
+                                        @*<td>@admin.CreatedAt.Value.ToString("dd/MM/yyyy")</td>*@
+                                        <td>
+                                            <a href="@Url.Action("Edit", "Adimin", new { id = admin.AdminID })" class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="@Url.Action("Delete", "Adimin", new { id = admin.AdminID })" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-between" style="margin-top: 30px;">
+                        <div>
+                            Showing @ViewBag.StartEntry to @ViewBag.EndEntry of @ViewBag.TotalEntries entries
+                        </div>
+                        <div>
+                            <ul class="pagination">
+                                <li class="page-item @(ViewBag.Page == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("qlAdmin", new { page = ViewBag.Page - 1, search = ViewBag.SearchTerm, SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, role = ViewBag.Role })">Prev</a>
+                                </li>
+                                @for (int i = 1; i <= ViewBag.NoOfPages; i++)
+                                {
+                                    <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                                        <a class="page-link" href="@Url.Action("qlAdmin", new { page = i, search = ViewBag.SearchTerm, SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, role = ViewBag.Role })">@i</a>
+                                    </li>
+                                }
+                                <li class="page-item @(ViewBag.Page == ViewBag.NoOfPages ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("qlAdmin", new { page = ViewBag.Page + 1, search = ViewBag.SearchTerm, SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, role = ViewBag.Role })">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

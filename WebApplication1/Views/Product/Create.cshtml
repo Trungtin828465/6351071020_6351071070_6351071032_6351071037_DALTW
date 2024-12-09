@@ -1,0 +1,431 @@
+﻿@using WebApplication1.Models
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2>Create Product</h2>
+<!-- Make sure the enctype is multipart/form-data for file upload -->
+<form action="/Product/Create" method="post" enctype="multipart/form-data">
+    <div class="app" style="margin-left:-250px; margin-top:-90px">
+        <div class="layout">
+
+
+            <div class="page-container">
+
+
+                <div class="main-content">
+
+                    <div class="page-header no-gutters has-tab">
+                        <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+                            <div class="media align-items-center m-b-15">
+                                <div class="avatar avatar-image rounded" style="height: 70px; width: 70px">
+                                    <img src="~/Content/assets/images/others/thumb-16.jpg" alt="">
+                                </div>
+                                <div class="m-l-15">
+                                    <h4 class="m-b-0">Skinny Men Blazer</h4>
+                                    <p class="text-muted m-b-0">Code: #5325</p>
+                                </div>
+                            </div>
+                            <div class="m-b-15">
+                                <button type="submit"
+                                        class="btn btn-primary"
+                                        onclick="return confirmCreateProduct()">
+                                    <i class="anticon anticon-save"></i>
+                                    <span>Save</span>
+                                </button>
+                            </div>
+
+                        </div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">Basic Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#product-edit-option">
+                                    Detailed Images
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#product-edit-description">Description</a>
+                            </li>
+                        </ul>
+                    </div>
+                    @*------------*@
+                    <div class="tab-content m-t-15">
+                        <div class="tab-pane fade show active" id="product-edit-basic">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="ProductName">Product Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="ProductName"
+                                                   name="ProductName"
+                                                   placeholder="Enter product name"
+                                                   required />
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Price Field -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="Price">Price</label>
+                                        <div class="col-sm-10">
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="Price"
+                                                   name="Price"
+                                                   placeholder="Enter product price"
+                                                   step="0.01"
+                                                   required />
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Category Field -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="CategoryID">Category</label><br />
+                                        <div class="col-sm-10">
+                                            <!-- Dropdown for Category -->
+                                            <select class="custom-select" id="CategoryID" name="CategoryID" required>
+                                                <option value="">-- Select Category --</option>
+                                                @if (ViewBag.Categorie != null)
+                                                {
+                                                    foreach (var category in ViewBag.Categorie as IEnumerable<Category>)
+                                                    {
+                                                        <option value="@category.CategoryID">@category.CategoryName</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option value="">No categories available</option>
+                                                }
+                                            </select>
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Brand Field -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="BrandID">Brand</label>
+                                        <div class="col-sm-10">
+                                            <!-- Dropdown for Brand -->
+                                            <select class="custom-select" id="BrandID" name="BrandID" required>
+                                                <option value="">-- Select Brand --</option>
+                                                @if (ViewBag.Brands != null)
+                                                {
+                                                    foreach (var brand in ViewBag.Brands as IEnumerable<Brand>)
+                                                    {
+                                                        <option value="@brand.BrandID">@brand.BrandName</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option value="">No brands available</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <!-- Supplier Dropdown Field -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="SupplierID">Supplier</label><br />
+                                        <div class="col-sm-10">
+
+                                            <select class="custom-select" id="SupplierID" name="SupplierID" required>
+                                                <option value="">-- Select Supplier --</option>
+                                                @if (ViewBag.Suppliers != null)
+                                                {
+                                                    foreach (var supplier in ViewBag.Suppliers as IEnumerable<Supplier>)
+                                                    {
+                                                        <option value="@supplier.SupplierID">@supplier.ContactName</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option value="">No suppliers available</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <!-- CreatedAt Field -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="CreatedAt">Created At</label><br />
+                                        <div class="col-sm-10">
+                                            <input type="date"
+                                                   class="form-control"
+                                                   id="CreatedAt"
+                                                   name="CreatedAt"
+                                                   required />
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Image Upload Field -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="Image">Product Image</label>
+                                        <div class="col-sm-10">
+                                            <input type="file"
+                                                   class="form-control-file"
+                                                   id="ImageUrl"
+                                                   name="ImageUrl"
+                                                   accept="image/*"
+                                                   required />
+                                        </div>
+                                    </div>
+
+                                    <!-- Product so luong -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="Price">StockQuantity</label>
+                                        <div class="col-sm-10">
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="StockQuantity"
+                                                   name="StockQuantity"
+                                                   placeholder="Enter Stock quantity"
+                                                   step="0.01"
+                                                   required />
+                                        </div>
+                                    </div>
+                                    <!--discount-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="Price">Discount</label>
+                                        <div class="col-sm-10">
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="Discount"
+                                                   name="Discount"
+                                                   placeholder="Enter Discount"
+                                                   step="0.01"
+                                                   required />
+                                        </div>
+                                    </div>
+                                    <!--thong tin sp-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="Description">Description</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="Description" name="Description" placeholder="Enter product Description " required>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @*----ANH-----*@
+                        <div class="tab-pane fade" id="product-edit-option">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <!-- Product Image Upload Field -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label font-weight-semibold" for="ImageUrl">Product Image 1</label>
+                                            <div class="col-sm-10">
+                                                <input type="file"
+                                                       class="form-control-file"
+                                                       id="Img1"
+                                                       name="Image1"
+                                                       accept="image/*"
+                                                       required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- Product Image Upload Field -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label font-weight-semibold" for="ImageUrl">Product Image 2</label>
+                                            <div class="col-sm-10">
+                                                <input type="file"
+                                                       class="form-control-file"
+                                                       id="Img2"
+                                                       name="Image2"
+                                                       accept="image/*"
+                                                       required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- Product Image Upload Field -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label font-weight-semibold" for="ImageUrl">Product Image 3</label>
+                                            <div class="col-sm-10">
+                                                <input type="file"
+                                                       class="form-control-file"
+                                                       id="Img3"
+                                                       name="Image3"
+                                                       accept="image/*"
+                                                       required />
+                                            </div>
+                                        </div>
+                                    </div><div class="form-group">
+                                        <!-- Product Image Upload Field -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label font-weight-semibold" for="ImageUrl">Product Image 4</label>
+                                            <div class="col-sm-10">
+                                                <input type="file"
+                                                       class="form-control-file"
+                                                       id="Img4"
+                                                       name="Image4"
+                                                       accept="image/*"
+                                                       required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- Product Image Upload Field -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label font-weight-semibold" for="ImageUrl">Product Image 5</label>
+                                            <div class="col-sm-10">
+                                                <input type="file"
+                                                       class="form-control-file"
+                                                       id="Img5"
+                                                       name="Image5"
+                                                       accept="image/*"
+                                                       required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- Product Image Upload Field -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label font-weight-semibold" for="ImageUrl">Detail Image</label>
+                                            <div class="col-sm-10">
+                                                <input type="file"
+                                                       class="form-control-file"
+                                                       id="ImgDetail"
+                                                       name="ImageDetail"
+                                                       accept="image/*"
+                                                       required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label font-weight-semibold" for="ProductName">URL Video</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="URLVideo"
+                                                   name="URLVideo"
+                                                   placeholder="Enter product Video"
+                                                   required />
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        @*----Thong tin sp--*@
+                        <div class="tab-pane fade" id="product-edit-description">
+                            <!--gioi tinh-->
+                            <div class="form-group row">
+
+                                <label class="col-sm-2 col-form-label font-weight-semibold" for="GenderObject">GenderObject</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="GenderObject" name="GenderObject" required>
+                                        <option value="" disabled selected>-- Select a GenderObject --</option>
+                                        <option value="1">Nam</option>
+                                        <option value="2">Nữ</option>
+                                        <option value="3">cả Nam và Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--khang nc-->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label font-weight-semibold" for="Waterproof">Waterproof</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="Waterproof" name="Waterproof" placeholder="Enter product Waterproof (ATM)" required>
+                                </div>
+                            </div>
+                            <!--độ dày-->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label font-weight-semibold" for="Thickness">Thickness</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="Thickness" name="Thickness" placeholder="Enter product Thickness (mm)" required>
+                                </div>
+                            </div>
+                            <!--size mặt-->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label font-weight-semibold" for="FaceSize">Thickness</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="FaceSize" name="FaceSize" placeholder="Enter product FaceSize (mm)" required>
+                                </div>
+                            </div>
+                            <!--chat lieu kinh-->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label font-weight-semibold" for="GlassMaterial">Thickness</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="GlassMaterial" name="GlassMaterial" placeholder="Enter product GlassMaterial">
+                                </div>
+                            </div>
+                            <!--chat lieu day-->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label font-weight-semibold" for="Material">Thickness</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Material" name="Material" placeholder="Enter product Material">
+                                </div>
+                            </div>
+                            <!--loai may-->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label font-weight-semibold" for="Typeof">Typeof</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Typeof" name="Typeof" placeholder="Enter product Typeof">
+                                </div>
+                            </div>
+                            <!--xuất xứ-->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label font-weight-semibold" for="Origin">Origin</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Origin" name="Origin" placeholder="Enter product Origin">
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
+    <script>
+        function confirmCreateProduct() {
+            return confirm("Bạn có chắc chắn muốn tạo sản phẩm mới không?");
+        }
+    </script>
+
+    <!-- Core Vendors JS -->
+    <script src="assets/js/vendors.min.js"></script>
+
+    <!-- page js -->
+    <script src="assets/vendors/select2/select2.min.js"></script>
+    <script src="assets/vendors/quill/quill.min.js"></script>
+    <script src="assets/js/pages/e-commerce-product-edit.js"></script>
+
+    <!-- Core JS -->
+    <script src="assets/js/app.min.js"></script>
+
+</form>

@@ -1,0 +1,72 @@
+﻿@model WebApplication1.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="page-header no-gutters">
+    <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+        <div class="media align-items-center m-b-15">
+            <div class="avatar avatar-image rounded" style="height: 70px; width: 70px">
+                <img src="~/Content/img/@Model.Brand.BrandName/@Model.ProductName/@Model.ImageUrl" alt="Product Image">
+            </div>
+            <div class="m-l-15">
+                <h4 class="m-b-0">Delete Product</h4>
+                <p class="text-muted m-b-0">Are you sure you want to delete this product?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Begin form for deleting product -->
+@if (Model != null)
+{
+    using (Html.BeginForm("Delete", "Product", FormMethod.Post))
+    {
+        @* Hidden field for ProductID *@
+        <input type="hidden" name="id" value="@Model.ProductID" />
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Product Details</h4>
+                <table class="table">
+                    <tr>
+                        <th>Product Name</th>
+                        <td>@Model.ProductName</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>@Model.Price.ToString("C") </td>
+                    </tr>
+                    <tr>
+                        <th>Brand</th>
+                        <td>@Model.Brand.BrandName </td>
+                    </tr>
+                    <tr>
+                        <th>CategoryName</th>
+                        <td>@Model.Category.CategoryName </td>
+                    </tr>
+                    <tr>
+                        <th>CreatedAt</th>
+                        <td>@Model.CreatedAt</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            
+            <button type="submit"
+                    class="btn btn-danger btn-sm"
+                    title="Delete"
+                    onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm không?')">
+                <i class="bi bi-trash3"></i> Delete
+            </button>
+            <a href="@Url.Action("Index", "Product")" class="btn btn-dark">Cancel</a>
+        </div>
+    }
+}
+else
+{
+    <p>Product not found.</p>
+}

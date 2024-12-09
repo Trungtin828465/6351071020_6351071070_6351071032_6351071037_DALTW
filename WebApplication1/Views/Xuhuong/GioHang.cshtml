@@ -1,0 +1,517 @@
+﻿@model IEnumerable<WebApplication1.Models.OrderItem>
+@{
+    decimal subtotal = (decimal)Model.Where(item => item.Order?.Customer?.Email == Session["UserEmail"]?.ToString().Trim() && item.Order.OrderStatus == 0)
+                        .Sum(item => item.Product.Price * (100 - item.Product.Discount) / 100 * item.Quantity);
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Nếu sử dụng Bootstrap 4 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="~/Content/GioHang.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" style="background-color: #ffffff;">
+                <div style="margin-bottom:20px">
+                    <a href="#"> <i class="bi bi-chevron-left"></i>@Html.ActionLink("Mua thêm sản phẩm khác", "Xuhuong")</a>
+                    <span>Giỏ hàng của bạn</span>
+                </div>
+                @foreach (var item in Model)
+                {
+                    if (item.Order != null && item.Order.Customer != null)
+                    {
+                        string userAccountEmail = Session["UserEmail"]?.ToString().Trim();
+                        if (userAccountEmail != null && userAccountEmail.Equals(item.Order.Customer.Email.Trim(), StringComparison.OrdinalIgnoreCase) && item.Order.OrderStatus == 0)
+                        {
+                            <div class="cart-order product" data-orderitemid="@item.OrderItemID">
+                                <div class="left">
+                                    <a href="@Url.Action("DeleteOrderItem", "XuHuong", new { id = item.OrderItemID})" class="btn btn-danger btn-sm">X</a>
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = item.ProductID })" style="margin-top: 20px">
+                                        <img class="item-img" src="~/Content/img/@(item.Product.Brand.BrandName)/@(item.Product.ProductName)/@(item.Product.ProductName).jpg" />
+                                    </a>
+                                </div>
+                                <div class="right">
+                                    <div class="item-info">
+                                        <h3>@item.Product.ProductName</h3>
+                                    </div>
+                                    <div class="item-meta">
+                                        <div class="item-price" style="display: inline-flex; flex-direction: column; width: 100%; justify-content: center; align-items: center; margin-bottom: 16px;">
+                                            <span class="price_current" content="@(item.Product.Price * (100 - item.Product.Discount)/100)">
+                                                @*@(item.Product.Price * (100 - item.Product.Discount) / 100 * item.Quantity)*@
+
+                                                @string.Format("{0:0,0} đ", item.Product.Price * (100 - item.Product.Discount) / 100 * item.Quantity)
+                                            </span>
+                                        </div>
+                                        <div class="item-quantity">
+                                            <button class="decrease">-</button>
+                                            <span class="count">@item.Quantity</span>
+                                            <button class="increase">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+                <div class="bot-item" style="height: 40px; display: flex; justify-content: space-between; border-bottom: 1px solid #E0E0E0; margin: 0 10%;">
+                    <span style="font-weight: bold; white-space: nowrap; margin-top:10px">Tổng tiền tạm tính</span>
+                    <div>
+                        <p class="total-price d-inline First-price price" value="@subtotal" id="BUY"> @string.Format("{0:0,0} VNĐ", subtotal)</p>
+                    </div>
+                </div>
+
+                @using (Html.BeginForm("Accept", "Xuhuong", FormMethod.Post))
+                {
+                    <div class="form-container">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Họ và Tên</label>
+                                    @Html.TextBox("HoTen", "", new { @class = "form-control", placeholder = "Họ và Tên" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    @Html.TextBox("SoDienThoai", "", new { @class = "form-control", placeholder = "Số điện thoại" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBox("Email", "", new { @class = "form-control", placeholder = "Email" })
+                        </div>
+                        <div class="row">
+                            <!-- Dropdown Tỉnh/Thành phố -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Tỉnh/Thành phố: ", htmlAttributes: new { @class = "form-label" })
+                                    @Html.DropDownList("Tinh",
+                                        ViewBag.Provinces as SelectList,
+                                        "Chọn Tỉnh/Thành phố",
+                                        new { @class = "form-input", id = "provinceDropdown" })
+                                </div>
+                            </div>
+                            <!-- Dropdown Quận/Huyện -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Quận/Huyện")
+                                    @Html.DropDownList("QuanHuyen",
+                                        new SelectList(ViewBag.Districts ?? new List<SelectListItem>(), "Value", "Text"),
+                                        "Chọn Quận/Huyện",
+                                        new { @class = "form-control", id = "districtDropdown" })
+                                </div>
+                            </div>
+                            <!-- Dropdown Phường/Xã -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Phường/Xã")
+                                    @Html.DropDownList("PhuongXa",
+                                        new SelectList(ViewBag.Wards ?? new List<SelectListItem>(), "Value", "Text"),
+                                        "Chọn Phường/Xã",
+                                        new { @class = "form-control", id = "wardsDropdown" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Địa chỉ -->
+                        <div class="form-group">
+                            @Html.TextBox("DiaChi", "", new { @class = "form-control", placeholder = "Số nhà, tên đường..." })
+                        </div>
+
+                        <!-- Ghi chú -->
+                        <div class="form-group">
+                            @Html.TextArea("GhiChu", "", new { @class = "form-control", placeholder = "Ghi chú thêm (nếu có)", rows = 3 })
+                        </div>
+
+
+                        <!-- Mã giảm giá -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.TextBox("MaGiamGia", "", new { @class = "form-control", id = "voucherInput", placeholder = "Chọn hoặc nhập mã" })
+                                <button type="button" class="btn btn-secondary checkVoucherButton">Dùng mã giảm giá</button>
+                            </div>
+                        </div>
+
+                        <!-- Phương thức thanh toán -->
+                        <div class="section-title">Phương thức thanh toán</div>
+                        <div class="form-check">
+                            @Html.RadioButton("Thanh_toan", "COD", true, new { id = "COD" })
+                            <label for="COD">Thanh toán tiền mặt khi nhận hàng (COD)</label>
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButton("Thanh_toan", "BankTransfer", false, new { id = "BankTransfer" })
+                            <label for="BankTransfer">Chuyển khoản ngân hàng</label>
+                        </div>
+
+                        <!-- Tổng thanh toán và nút đặt hàng -->
+                        <div class="order-total mt-3">
+                            <span>Cần thanh toán:</span>
+                            <span id="finalTotal" class="total-price price" style="color: #ED1C24; font-size: 22px; font-weight: bold;"> @string.Format("{0:0,0} VNĐ", subtotal)</span>
+
+
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <input type="submit" value="Đặt Hàng" class="btn-primary w-100" style="margin-top: 10px;" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+    // Khi chọn tỉnh
+    $('#provinceDropdown').change(function () {
+        var provinceId = $(this).val(); // Lấy giá trị tỉnh đã chọn
+
+        if (provinceId) {
+            // Gửi yêu cầu AJAX để lấy danh sách quận/huyện
+            $.ajax({
+                url: '@Url.Action("GetDistricts", "XuHuong")',
+                type: 'GET',
+                data: { provinceId: provinceId },
+                success: function (data) {
+                    var districtDropdown = $('#districtDropdown');
+                    districtDropdown.empty(); // Xóa các mục hiện tại
+
+                    // Thêm "Chọn Quận/Huyện" vào đầu
+                    districtDropdown.append('<option value="">Chọn Quận/Huyện</option>');
+
+                    // Thêm các quận/huyện vào dropdown
+                    $.each(data, function (index, district) {
+                        districtDropdown.append('<option value="' + district.district_id + '">' + district.name_district + '</option>');
+                    });
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi tải dữ liệu quận/huyện.');
+                }
+            });
+        } else {
+            // Nếu không chọn tỉnh, xóa danh sách quận/huyện
+            $('#districtDropdown').empty().append('<option value="">Chọn Quận/Huyện</option>');
+        }
+
+        // Xóa danh sách phường/xã khi thay đổi tỉnh
+        $('#wardsDropdown').empty().append('<option value="">Chọn Phường/Xã</option>');
+    });
+
+    // Khi chọn quận
+    $('#districtDropdown').change(function () {
+        var districtId = $(this).val(); // Lấy giá trị quận đã chọn
+
+        if (districtId) {
+            // Gửi yêu cầu AJAX để lấy danh sách phường/xã
+            $.ajax({
+                url: '@Url.Action("GetWards", "XuHuong")',
+                type: 'GET',
+                data: { districtId: districtId },
+                success: function (data) {
+                    var wardsDropdown = $('#wardsDropdown');
+                    wardsDropdown.empty(); // Xóa các mục hiện tại
+
+                    // Thêm "Chọn Phường/Xã" vào đầu
+                    wardsDropdown.append('<option value="">Chọn Phường/Xã</option>');
+
+                    // Thêm các phường/xã vào dropdown
+                    $.each(data, function (index, ward) {
+                        wardsDropdown.append('<option value="' + ward.wards_id + '">' + ward.wards_name + '</option>');
+                    });
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi tải dữ liệu phường/xã.');
+                }
+            });
+        } else {
+            // Nếu không chọn quận, xóa danh sách phường/xã
+            $('#wardsDropdown').empty().append('<option value="">Chọn Phường/Xã</option>');
+        }
+    });
+
+    // Kiểm tra form trước khi submit
+    $("form").on("submit", function (e) {
+        let isValid = true;
+        let errorMessage = "";
+
+        // Danh sách kiểm tra
+        const requiredFields = [
+            { id: "HoTen", message: "Vui lòng nhập họ và tên." },
+            { id: "SoDienThoai", message: "Vui lòng nhập số điện thoại." },
+            { id: "Email", message: "Vui lòng nhập email." },
+            { id: "provinceDropdown", message: "Vui lòng chọn tỉnh/thành phố." },
+            { id: "districtDropdown", message: "Vui lòng chọn quận/huyện." },
+            { id: "wardsDropdown", message: "Vui lòng chọn phường/xã." },
+            { id: "DiaChi", message: "Vui lòng nhập địa chỉ." }
+        ];
+
+        // Kiểm tra từng trường
+        for (let field of requiredFields) {
+            const value = $("#" + field.id).val().trim();
+            if (!value) {
+                isValid = false;
+                errorMessage = field.message;
+                $("#" + field.id).focus();
+                break; // Chỉ hiển thị lỗi đầu tiên
+            }
+        }
+
+        // Nếu có lỗi
+        if (!isValid) {
+            e.preventDefault(); // Ngăn submit form
+            alert(errorMessage);
+        }
+    });
+});
+
+    </script>
+
+
+    <script>
+        function formatCurrency(value, locale = 'vi-VN', currency = 'VND') {
+            return new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: currency
+            }).format(value);
+        }
+
+        //Tính
+    $(document).ready(function() {
+        // Khi chọn tỉnh
+        $('#provinceDropdown').change(function() {
+            var provinceId = $(this).val(); // Lấy giá trị tỉnh đã chọn
+
+            if (provinceId) {
+                // Gửi yêu cầu AJAX để lấy danh sách quận/huyện
+                $.ajax({
+                    url: '@Url.Action("GetDistricts", "XuHuong")',
+                    type: 'GET',
+                    data: { provinceId: provinceId },
+                    success: function(data) {
+                        var districtDropdown = $('#districtDropdown');
+                        districtDropdown.empty(); // Xóa các mục hiện tại
+
+                        // Thêm "Chọn Quận/Huyện" vào đầu
+                        districtDropdown.append('<option value="">Chọn Quận/Huyện</option>');
+
+                        // Thêm các quận/huyện vào dropdown
+                        $.each(data, function(index, district) {
+                            districtDropdown.append('<option value="' + district.district_id + '">' + district.name_district + '</option>');
+                        });
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi tải dữ liệu quận/huyện.');
+                    }
+                });
+            } else {
+                // Nếu không chọn tỉnh, xóa danh sách quận/huyện
+                $('#districtDropdown').empty().append('<option value="">Chọn Quận/Huyện</option>');
+            }
+
+            // Xóa danh sách phường/xã khi thay đổi tỉnh
+            $('#wardsDropdown').empty().append('<option value="">Chọn Phường/Xã</option>');
+        });
+
+        // Khi chọn quận
+        $('#districtDropdown').change(function() {
+            var districtId = $(this).val(); // Lấy giá trị quận đã chọn
+
+            if (districtId) {
+                // Gửi yêu cầu AJAX để lấy danh sách phường/xã
+                $.ajax({
+                    url: '@Url.Action("GetWards", "XuHuong")',
+                    type: 'GET',
+                    data: { districtId: districtId },
+                    success: function(data) {
+                        var wardsDropdown = $('#wardsDropdown');
+                        wardsDropdown.empty(); // Xóa các mục hiện tại
+
+                        // Thêm "Chọn Phường/Xã" vào đầu
+                        wardsDropdown.append('<option value="">Chọn Phường/Xã</option>');
+
+                        // Thêm các phường/xã vào dropdown
+                        $.each(data, function(index, ward) {
+                            wardsDropdown.append('<option value="' + ward.wards_id + '">' + ward.wards_name + '</option>');
+                        });
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi tải dữ liệu phường/xã.');
+                    }
+                });
+            } else {
+                // Nếu không chọn quận, xóa danh sách phường/xã
+                $('#wardsDropdown').empty().append('<option value="">Chọn Phường/Xã</option>');
+            }
+        });
+    });
+//Tăng Value
+    $(document).ready(function () {
+    $(".increase").on("click", function () {
+        const button = $(this);
+        const orderItemID = button.closest(".product").data("orderitemid");
+
+        $.ajax({
+            url: '@Url.Action("IncreaseQuantity", "Xuhuong")',
+            type: 'POST',
+            data: { orderItemId: orderItemID },
+            success: function (result) {
+                if (result.success) {
+                    button.siblings(".count").text(result.newQuantity);
+
+                    const priceElement = button.closest(".product").find(".price_current");
+                    //priceElement.text(result.newPrice + "₫");
+                    priceElement.text(formatCurrency(result.newPrice));
+
+                } else {
+                    alert("Failed to update quantity.");
+                }
+            },
+            error: function () {
+                alert("An error occurred. Please try again.");
+            }
+        });
+    });
+});
+//Giảm Value
+$(document).ready(function () {
+$(".decrease").on("click", function () {
+    const button = $(this);
+    const orderItemID = button.closest(".product").data("orderitemid");
+
+    $.ajax({
+        url: '@Url.Action("DecreaseQuantity", "Xuhuong")',
+        type: 'POST',
+        data: { orderItemId: orderItemID },
+        success: function (result) {
+            if (result.success) {
+                if (result.showConfirmation) {
+                    if (confirm("Số lượng tối thiểu 1. Bạn muốn xóa?")) {
+                        deleteOrderItem(orderItemID);
+                    }
+                } else {
+                    button.siblings(".count").text(result.newQuantity);
+                    const priceElement = button.closest(".product").find(".price_current");
+                    priceElement.text(formatCurrency(result.newPrice));
+
+                    //priceElement.text(result.newPrice + "₫");
+                }
+            } else {
+                alert("Không thể cập nhật số lượng.");
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi. Vui lòng thử lại.");
+        }
+    });
+});
+//Xóa OrderItem
+function deleteOrderItem(orderItemID) {
+    $.ajax({
+        url: '@Url.Action("DeleteOrderItem", "Xuhuong")',
+        type: 'POST',
+        data: { id: orderItemID },
+        success: function () {
+            location.reload(); // Refresh the page to reflect the item removal
+        },
+        error: function () {
+            alert("Xóa sản phẩm không thành công. Vui lòng thử lại.");
+        }
+    });
+}
+});
+//Tính
+    $(document).ready(function () {
+        function updateTotals() {
+            let subtotal = 0;
+
+            // Calculate subtotal by summing each product's price times quantity
+            $('.product').each(function () {
+                const price = parseFloat($(this).find('.price_current').attr('content'));
+                const quantity = parseInt($(this).find('.count').text());
+                subtotal += price * quantity;
+            });
+
+            // Update displayed subtotal and total
+            $('#BUY').text(formatCurrency(subtotal));
+            $('#finalTotal').text(formatCurrency(subtotal));
+
+        }
+
+        // Increase quantity
+        $('.increase').click(function () {
+            const quantityElem = $(this).siblings('.count');
+            let quantity = parseInt(quantityElem.text());
+            quantity++;
+            quantityElem.text(quantity);
+            updateTotals();
+        });
+
+        // Decrease quantity
+        $('.decrease').click(function () {
+            const quantityElem = $(this).siblings('.count');
+            let quantity = parseInt(quantityElem.text());
+            if (quantity > 1) { // Prevent quantity going below 1
+                quantity--;
+                quantityElem.text(quantity);
+                updateTotals();
+            }
+        });
+        updateTotals();
+    });
+
+//check Voucher
+        document.querySelector('.checkVoucherButton').addEventListener('click', function () {
+            const voucherCode = document.getElementById('voucherInput').value.trim();
+
+            // Recalculate the updated subtotal based on the current product quantities and prices
+            let updatedSubtotal = 0;
+            $('.product').each(function () {
+                const price = parseFloat($(this).find('.price_current').attr('content'));
+                const quantity = parseInt($(this).find('.count').text());
+                updatedSubtotal += price * quantity;
+            });
+
+            if (voucherCode) {
+                fetch('/XuHuong/checkVoucher', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ code: voucherCode, subtotal: updatedSubtotal })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            if (data.typeVoucher === "P") {  // Check if the voucher type is "P"
+                                alert('Mã giảm giá hợp lệ! Giảm: ' + data.discount + '%');
+                                $('#finalTotal').text(updatedSubtotal * (100 - data.discount) / 100 + '₫');
+                            } else {
+                                alert('Mã giảm giá hợp lệ! Giảm: ' + data.discount + '₫');
+                            }
+                        } else {
+                            alert('Voucher Error: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Lỗi:', error);
+                        alert('Đã xảy ra lỗi, vui lòng thử lại!');
+                    });
+            } else {
+                alert('Vui lòng nhập mã giảm giá!');
+            }
+        });
+    </script>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+        alert('@TempData["ErrorMessage"]');
+        </script>
+    }
+</body>

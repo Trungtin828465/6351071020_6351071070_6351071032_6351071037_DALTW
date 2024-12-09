@@ -1,0 +1,103 @@
+﻿@model IEnumerable<WebApplication1.Models.Product>
+@{
+    ViewBag.Title = "Find";
+    Layout = null;
+}
+<link href="~/Content/BanHang.css" rel="stylesheet" />
+
+@if (!Model.Any())
+{
+    <p>Không tìm thấy sản phẩm nào phù hợp.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+
+            <div class="col-md-3">
+                <div class="card card-tin" style="width: 100%;">
+                    <div class="image-container" style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                        <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                            <img class="img_card" src="~/Content/img/@product.Brand.BrandName/@product.ProductName/@product.ImageUrl" alt="Product Image" style="max-width: 100%; height: 180px;" />
+                        </a>
+                    </div>
+                    <i class="bi bi-heart heart-icon heart-icon-tin"></i>
+                    <div class="card-body">
+                        <div>
+                            <strong style="font-size: 18px;">@product.ProductName</strong>
+                            <p class="card-text price" style="color: red;">@discountedPrice</p>
+                            <p class="card-text price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price VND</p>
+                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                            <div>
+                                <p>Average Rating: @product.AverageRating</p>
+
+                                @{
+                                    double rating = product.AverageRating ?? 0.0;
+                                    int fullStars = (int)Math.Floor(rating);
+                                    bool hasHalfStar = (rating - fullStars) >= 0.5;
+                                }
+
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= fullStars)
+                                    {
+                                        <i class="fas fa-star yellow-star-tin"></i>
+                                    }
+                                    else if (i == fullStars + 1 && hasHalfStar)
+                                    {
+                                        <i class="bi bi-star-half yellow-star-tin"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-star yellow-star-tin"></i>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div class="pagination" style="display: flex; justify-content: center; margin-top: 20px;">
+    <!-- Nút "Trang trước" -->
+    @if (ViewBag.CurrentPage > 1)
+    {
+        <a href="@Url.Action("BanHang", new { page = ViewBag.CurrentPage - 1})">&laquo;</a>
+    }
+
+    <!-- Nút số trang -->
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        <a href="@Url.Action("BanHang", new { page = i})" class="@(ViewBag.CurrentPage == i ? "active" : "")">@i</a>
+    }
+
+    <!-- Nút "Trang sau" -->
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("BanHang", new { page = ViewBag.CurrentPage + 1})">&raquo;</a>
+    }
+</div>
+
+
+<script>
+    function formatCurrency(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Định dạng giá hiển thị cho từng phần tử có class "price"
+        const priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            const price = parseInt(element.innerText.replace(/\D/g, '')); // Chuyển nội dung sang số và bỏ các ký tự không phải số
+            if (!isNaN(price)) {
+                element.innerText = formatCurrency(price); // Đặt lại nội dung theo định dạng
+            }
+        });
+    });
+</script>

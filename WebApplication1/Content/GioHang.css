@@ -1,0 +1,345 @@
+﻿.form-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.discount-section, .payment-section, .order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin: 20px 0;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.btn-primary {
+    background-color: #ED1C24;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background-color: #c4161b;
+    }
+
+.section-title {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.price_old {
+    color: #999;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration-line: line-through;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.input-validation-error {
+    border-color: red;
+}
+
+.validation-summary-errors {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.col-md-6 {
+    flex: 0 0 40%;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Style cho phần giới tính */
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-check-inline {
+    margin-right: 20px;
+}
+
+.form-check-input {
+    width: 16px;
+    height: 16px;
+}
+
+/* Style cho các input */
+.form-control {
+    height: 45px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s;
+}
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+/* Style cho Dropdown */
+.form-inline .form-group {
+    flex: 1;
+    min-width: 0;
+}
+
+.form-row .form-group {
+    margin-bottom: 15px;
+}
+
+/* Style cho input với placeholder */
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 0.8;
+}
+
+/* Style cho textarea */
+textarea.form-control {
+    resize: vertical;
+}
+
+/* Checkbox người nhận khác */
+.form-check-label {
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+/* Input mã giảm giá */
+.input-group .form-control {
+    border-radius: 5px 0 0 5px;
+}
+
+.input-group .btn {
+    border-radius: 0 5px 5px 0;
+}
+
+/* Phương thức thanh toán */
+.section-title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.form-radio label {
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+/* Tổng thanh toán */
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    margin-top: 20px;
+}
+
+/* Nút đặt hàng */
+.btn-primary {
+    height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        box-shadow: 0 0 10px rgba(0, 91, 187, 0.5);
+    }
+
+.item-img {
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ECECEC;
+}
+
+.cart-order {
+    display: flex;
+    margin: 0 20px;
+}
+
+.item-info h3 {
+    color: #333333;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+    padding: 0 0 0 15px !important;
+}
+
+.item-info {
+    width: 70%;
+    padding-right: 20px;
+}
+
+.item-meta {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.item-price {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.bot-item {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #E0E0E0;
+    margin: 0 10%;
+}
+
+.item-quantity {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 4px 0 0 4px;
+}
+
+.decrease, .increase {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    height: 32px;
+    width: 32px;
+    padding: 0;
+    text-align: center;
+    border: 1px solid #CFCFCF;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+.item-price span {
+    display: block;
+    font-weight: 600;
+    font-size: 18px;
+    color: #e30019;
+}
+
+.total-price {
+    display: block;
+    font-weight: 600;
+    font-size: 21px;
+    color: #e30019;
+}
+
+.count {
+    background: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    height: 32px;
+    width: 50px;
+    padding: 5px 0 0 0;
+    text-align: center;
+    border: 1px solid #CFCFCF;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+.btn {
+    margin-top: calc(50% - 15px);
+    height: 30px;
+}
+
+.left {
+    display: flex;
+    width: 120px;
+}
+
+.right {
+    display: flex;
+    width: calc(100% - 98px);
+    margin-left: 8px;
+    padding-top: 12px;
+}
+
+.checkVoucherButton {
+    margin-top: 0;
+    height: 45px;
+    padding-top: 10px 3px 3px 0;
+}
+
+
+@media (max-width: 768px) {
+    .bot-item {
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #E0E0E0;
+        margin: 0%;
+    }
+}
+
+@media (max-width: 480px) {
+    .bot-item {
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #E0E0E0;
+        margin: 0%;
+    }
+}

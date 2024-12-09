@@ -1,0 +1,206 @@
+﻿﻿@model WebApplication1.Models.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+
+<div class="page-header no-gutters has-tab">
+    <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+        <div class="media align-items-center m-b-15">
+            <div class="avatar avatar-image rounded" style="height: 70px; width: 70px">
+                <img src="~/Content//img/@Model.Brand.BrandName/@Model.ProductName/@Model.ImageUrl" />
+            </div>
+            <div class="m-l-15">
+                <h4 class="m-b-0">@Model.ProductName</h4>
+                <p class="text-muted m-b-0">Code: #@Model.ProductID</p>
+            </div>
+        </div>
+        <div class="m-b-15">
+            <a href="@Url.Action("Edit", "Product", new { id = Model.ProductID })" class="btn btn-primary btn-tone m-r-5">
+                <i class="anticon anticon-edit"></i>
+                <span>Edit</span>
+            </a>
+        </div>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#product-overview">Overview</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#product-images">Product Images</a>
+        </li>
+    </ul>
+</div>
+<div class="container-fluid">
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-overview">
+            <div class="row">
+                <!-- Ratings Card -->
+                <div class="col-sm-6 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <i class="font-size-40 text-success anticon anticon-smile"></i>
+                                <div class="m-l-15">
+                                    <p class="m-b-0 text-muted">@Model.AverageRating đánh giá trung bình</p>
+                                    <div class="star-rating m-t-5">
+                                        @for (int i = 5; i >= 1; i--)
+                                        {
+                                            <input type="radio" id="star3-@i" name="rating-3" value="@i" disabled @(i == 5 ? "checked" : "") />
+                                            <label for="star3-@i" title="@i star"></label>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales Card -->
+                <div class="col-sm-6 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <i class="font-size-40 text-primary anticon anticon-shopping-cart"></i>
+                                <div class="m-l-15">
+                                    <p class="m-b-0 text-muted">Số lượng bán</p>
+                                    <h3 class="m-b-0 ls-1">@ViewBag.TotalQuantitySold</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews Card -->
+                <div class="col-sm-6 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <i class="font-size-40 text-primary anticon anticon-message"></i>
+                                <div class="m-l-15">
+                                    <p class="m-b-0 text-muted">Đánh giá</p>
+                                    <h3 class="m-b-0 ls-1">@ViewBag.a</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Stock Card -->
+                <div class="col-sm-6 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <i class="font-size-40 text-primary anticon anticon-stock"></i>
+                                <div class="m-l-15">
+                                    <p class="m-b-0 text-muted">Hang co san</p>
+                                    <h3 class="m-b-0 ls-1">@Model.StockQuantity</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basic Info Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Basic Info</h4>
+
+                    <table class="product-info-table m-t-20">
+                        <tbody>
+                            <tr>
+                                <td>Price:</td>
+                                <td class="text-dark font-weight-semibold">@Model.Price</td>
+                            </tr>
+                            <tr>
+                                <td>Brand:</td>
+                                <td>@Model.Brand.BrandName</td>
+                            </tr>
+                            <tr>
+                                <td>CategoryName:</td>
+                                <td>@Model.Category.CategoryName</td>
+                            </tr>
+                            <tr>
+                                <td>CreatedAt:</td>
+                                <td class="text-dark font-weight-semibold">@Model.CreatedAt</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <!-- Option Info Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Option Info</h4>
+                    <div class="table-responsive">
+                        <table class="product-info-table m-t-20">
+                            <tbody>
+                                <tr>
+                                    <td>Thương hiệu:</td>
+                                    <td>@Model.Brand.BrandName</td>
+                                </tr>
+                                <tr>
+                                    <td>Đối tượng:</td>
+                                    <td>@ViewBag.detail.GenderObject</td>
+                                </tr>
+                                <tr>
+                                    <td>Chất liệu kính:</td>
+                                    <td>@ViewBag.detail.GlassMaterial</td>
+                                </tr>
+                                <tr>
+                                    <td>Size mặt:</td>
+                                    <td>@ViewBag.detail.FaceSize</td>
+                                </tr>
+                                <tr>
+                                    <td>Kháng nước:</td>
+                                    <td>@ViewBag.detail.Waterproof</td>
+                                </tr>
+                                <tr>
+                                    <td>Xuất xứ:</td>
+                                    <td>@ViewBag.detail.Origin</td>
+                                </tr>
+                                <tr>
+                                    <td>Loại máy:</td>
+                                    <td>@ViewBag.detail.Typeof</td>
+                                </tr>
+                                <tr>
+                                    <td>Chất liệu dây:</td>
+                                    <td>@ViewBag.detail.Material</td>
+                                </tr>
+                                <tr>
+                                    <td>Độ dày:</td>
+                                    <td>@ViewBag.detail.Thickness</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Images Tab -->
+        <div class="tab-pane fade" id="product-images">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap">
+                        @foreach (var item in ViewBag.ProductImage)
+                        {
+                            <div class="m-2">
+                                <img src="~/Content/img_default/@Model.Brand.BrandName/@item.Hinh" class="img-fluid" style="width: 230px; height: 250px; object-fit: cover;" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<a href="@Url.Action("Index", "Product")" class="btn btn-primary btn-tone m-r-5">Back to list</a>

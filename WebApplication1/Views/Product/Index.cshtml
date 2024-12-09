@@ -1,0 +1,241 @@
+﻿@model List<WebApplication1.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+<div class="page-header">
+    <h2 class="header-title">Thông tin sản phẩm</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="@Url.Action("Index", "Adimin")" class="breadcrumb-item">
+                <i class="anticon anticon-home m-r-5"></i>Home
+            </a>
+            <a class="breadcrumb-item" href="#">Quản lý sản phẩm</a>
+            <a class="breadcrumb-item" href="#">Thông tin sản phẩm</a>
+        </nav>
+    </div>
+</div>
+<div class="col-lg-8">
+    <div class="d-md-flex">
+        <div class="m-b-10 m-r-15">
+            <form id="categoryy" method="get" action="/Product/Index">
+                <select name="status" class="custom-select" style="min-width: 180px;" onchange="this.form.submit();">
+                    <option value="Category" @(ViewBag.Category == "Category" ? "selected" : "")>Category</option>
+                    <option value="Đồng hồ nam" @(ViewBag.Category == "Đồng hồ nam" ? "selected" : "")>Đồng hồ nam</option>
+                    <option value="Đồng hồ nữ" @(ViewBag.Category == "Đồng hồ nữ" ? "selected" : "")>Đồng hồ nữ</option>
+                    <option value="Đồng hồ unisex" @(ViewBag.Category == "Đồng hồ unisex" ? "selected" : "")>Đồng hồ unisex</option>
+                    <option value="Đồng hồ thể thao" @(ViewBag.Category == "Đồng hồ thể thao" ? "selected" : "")>Đồng hồ thể thao</option>
+                    <option value="Đồng hồ thời trang" @(ViewBag.Category == "Đồng hồ thời trang" ? "selected" : "")>Đồng hồ thời trang</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Show Entries Form -->
+<div>
+    <form id="entriesForm" method="get" action="/Product/Index" class="form-inline">
+        <label for="entriesPerPage" class="mr-2">Show:</label>
+        <select name="entriesPerPage"
+                id="entriesPerPage"
+                aria-controls="data-table"
+                class="custom-select custom-select-sm form-control  form-control-sm w-auto"
+                style="min-width: 120px;"
+                onchange="document.getElementById('entriesForm').submit();">
+            <option value="10" @(ViewBag.EntriesPerPage == 10 ? "selected" : "")>10</option>
+            <option value="25" @(ViewBag.EntriesPerPage == 25 ? "selected" : "")>25</option>
+
+        </select>
+        <span class="ml-2">entries</span>
+    </form>
+
+
+</div>
+
+<div class="col-lg-12 text-right">
+    <button class="btn btn-primary btn-tone m-r-5" onclick="window.location.href='/Product/Create'">
+        <i class="anticon anticon-plus-circle m-r-5"></i>
+        <span>Add Product</span>
+    </button>
+</div>
+
+@{
+    string iconClass = ViewBag.IconClass == "fa-sort-desc" ? "fa-sort-asc" : "fa-sort-desc";
+    int totalEntries = ViewBag.TotalEntries; // Total number of entries
+    int entriesPerPage = ViewBag.EntriesPerPage; // Number of entries per page
+    int currentPage = ViewBag.Page; // Current page number
+
+    int startEntry = (currentPage - 1) * entriesPerPage + 1; // First entry on the current page
+    int endEntry = Math.Min(currentPage * entriesPerPage, totalEntries); // Last entry on the current page
+    int index = 1;
+}
+
+
+<!-- Search Form -->
+<form action="/Product/Index" method="get" class="mb-3">
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <label class="col-form-label m-0" for="search">Search:</label>
+        </div>
+        <div class="col-auto">
+            <input type="search"
+                   class="form-control form-control-sm w-200"
+                   placeholder="search"
+                   id="search"
+                   name="search"
+                   value="@ViewBag.search"
+                   aria-label="Search Products">
+        </div>
+    </div>
+</form>
+
+<!-- Product List Table -->
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <a href="@Url.Action("Index", new { SortColumn = "Id", IconClass = iconClass, page = 1 })" style="color: black;">
+                        Id <i class="fa @iconClass"></i>
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="@Url.Action("Index", new { SortColumn = "ProductName", IconClass = iconClass, page = 1 })" style="color: black;">
+                        Name <i class="fa @iconClass"></i>
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="@Url.Action("Index", new { SortColumn = "UnitPrice", IconClass = iconClass, page = 1 })" style="color: black;">
+                        Unit Price <i class="fa @iconClass"></i>
+                    </a>
+                </th>
+                <th scope="col">Brand</th>
+                <th scope="col">CategoryName</th>
+                <th scope="col">CreatedAt</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+
+                if (item.Check_Remove == 1)
+                {
+                    <tr>
+                        <th scope="row">@index</th>
+                        <td>
+                            <a href="@Url.Action("Detail", "Product", new { Id = item.ProductID })" class="d-flex align-items-center text-decoration-none">
+                                <img src="~/Content/img/@item.Brand.BrandName/@item.ProductName/@item.ImageUrl" class="img-fluid me-2" alt="@item.ProductName" style="width: 50px; height: auto;" />
+                                <span class="text-dark">@item.ProductName</span>
+                            </a>
+                        </td>
+
+                        <td>
+                            @item.Price.ToString("C")
+                        </td>
+                        <td>@(item.Brand != null ? item.Brand.BrandName : "No Brand")</td>
+
+
+                        <td>@(item.Category != null ? item.Category.CategoryName : "No Category")</td>
+
+
+                        <td>@(item.CreatedAt.HasValue ? item.CreatedAt.Value.ToString("dd/M/yyyy") : "N/A")</td>
+
+                        <td>
+                            <a href="@Url.Action("Edit", "Product", new { Id = item.ProductID })" class="btn btn-success btn-tone m-r-5">
+                                <i class="anticon anticon-edit"></i>
+                            </a>
+                            <a href="@Url.Action("Delete", "Product", new { Id = item.ProductID })" class="btn btn-danger btn-tone m-r-5">
+                                <i class="anticon anticon-delete"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            }
+<tfoot>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col"> Unit Price</th>
+                <th scope="col">Brand</th>
+                <th scope="col">CategoryName</th>
+                <th scope="col">CreatedAt</th>
+
+            </tr>
+        </tfoot>
+        </tbody>
+    </table>
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between" style="margin-top: 30px;">
+        <div>
+
+            Showing @startEntry to @endEntry of @ViewBag.TotalEntries entries
+        </div>
+
+        <div>
+            <ul class="pagination">
+                @* Previous Page *@
+                <li class="page-item @(ViewBag.Page == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = ViewBag.Page - 1 })">Prev</a>
+                </li>
+
+                @* Page Numbers *@
+                @{
+                    int PrevPage = ViewBag.Page > 1 ? ViewBag.Page - 1 : 1;
+                    int NextPage = ViewBag.Page < ViewBag.NoOfPages ? ViewBag.Page + 1 : ViewBag.NoOfPages;
+                    int totalPagesToShow = 5;
+                    int startPage = Math.Max(1, ViewBag.Page - totalPagesToShow / 2);
+                    int endPage = Math.Min(ViewBag.NoOfPages, startPage + totalPagesToShow - 1);
+
+                    if (endPage - startPage < totalPagesToShow - 1)
+                    {
+                        startPage = Math.Max(1, endPage - totalPagesToShow + 1);
+                    }
+                }
+
+                @if (startPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = 1 })">1</a>
+                    </li>
+                    if (startPage > 2)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    }
+                }
+
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = i })">@i</a>
+                    </li>
+                }
+
+                @if (endPage < ViewBag.NoOfPages)
+                {
+                    if (endPage < ViewBag.NoOfPages - 1)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    }
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = ViewBag.NoOfPages })">@ViewBag.NoOfPages</a>
+                    </li>
+                }
+
+                @* Next Page *@
+                <li class="page-item @(ViewBag.Page == ViewBag.NoOfPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = NextPage })">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

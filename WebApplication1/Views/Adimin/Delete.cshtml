@@ -1,0 +1,66 @@
+﻿@model WebApplication1.Models.Admin
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<!-- Begin form for deleting product -->
+@if (Model != null)
+{
+    using (Html.BeginForm("Delete", "Adimin", FormMethod.Post))
+    {
+        @* Hidden field for ProductID *@
+        <input type="hidden" name="id" value="@Model.AdminID" />
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Product Details</h4>
+                <table class="table">
+                    <tr>
+                        <th>Admin Name</th>
+                        <td>@Model.FullName</td>
+                    </tr>
+                    <tr>
+                        <th>Tài khoảng</th>
+                        <td>@Model.Adminname</td>
+                    </tr>
+                    <tr>
+                        <th>Matak khẩu</th>
+                        <td>@Model.Password </td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>@Model.Email </td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>@Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <th>Quyền</th>
+                        <td>@Model.Role</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit"
+                    class="btn btn-danger btn-sm"
+                    title="Delete"
+                    onclick="return confirm('Bạn có chắc chắn muốn xóa Admin này không?')">
+                <i class="bi bi-trash3"></i> Delete
+            </button>
+            <a href="@Url.Action("qlAdmin", "Adimin")" class="btn btn-dark">Cancel</a>
+        </div>
+
+    }
+}
+else
+{
+    <p>Product not found.</p>
+}

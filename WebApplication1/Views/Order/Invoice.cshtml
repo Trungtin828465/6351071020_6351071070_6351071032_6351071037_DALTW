@@ -1,0 +1,112 @@
+﻿@model WebApplication1.Models.Order
+
+@{
+    ViewBag.Title = "Invoice";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div id="invoice" class="p-h-30">
+    <div class="m-t-15 lh-2">
+        <div class="float-right">
+            <h2>INVOICE</h2>
+        </div>
+    </div>
+
+    <div class="row m-t-20 lh-2">
+        <div class="col-sm-9">
+            <h3 class="p-l-10 m-t-10">Thông tin hóa đơn:</h3>
+            <div class="inline-block">
+                <address class="p-l-7">
+                    <span class="text-dark" title="Customer Name">Tên khách hàng: </span>
+                    <span class="font-weight-semibold text-dark">@Model.Customer.FullName</span><br>
+                    <span class="text-dark" title="Address">Địa chỉ: </span>
+                    <span>@Model.ReceiverAddress</span><br>
+                    <span class="text-dark" title="Phone">Phone: </span>
+                    <span>@Model.ReceiverPhone</span>
+                </address>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="m-t-80">
+                <div class="text-dark text-uppercase d-inline-block">
+                    <span class="font-weight-semibold text-dark">Invoice No :</span>
+                </div>
+                <div class="float-right">#@Model.OrderID</div>
+            </div>
+            <div class="text-dark text-uppercase d-inline-block">
+                <span class="font-weight-semibold text-dark">Date :</span>
+            </div>
+            <div class="float-right">@Model.OrderDate.Value.ToString("dd-M-yyyy")</div>
+        </div>
+    </div>
+    <div class="m-t-20">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.OrderItem != null && Model.OrderItem.Any())
+                    {
+                        int index = 1;
+                        foreach (var item in Model.OrderItem)
+                        {
+                            <tr>
+                                <th>@index</th>
+                                <td>@item.Product.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td class="price">@item.UnitPrice</td> <!-- Định dạng tiền tệ -->
+                                <td class="price">@(item.Quantity * item.UnitPrice)</td> <!-- Định dạng tiền tệ -->
+                            </tr>
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row m-t-30 lh-1-8">
+            <div class="col-sm-12">
+                <div class="float-right text-right">
+
+                    <p>VAT (5%): @String.Format("{0:C}", Model.OrderItem.Sum(item => item.Quantity * item.UnitPrice) * 0.05M)</p>
+                    <hr>
+                    <h3 class="price">
+                        <span class="font-weight-semibold text-dark ">Total :</span>
+                        @((Model.OrderItem.Sum(item => item.Quantity * item.UnitPrice)-(Model.OrderItem.Sum(item => item.Quantity * item.UnitPrice) * 0.10M)))
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-v-20">
+            <div class="col-sm-6 text-right">
+                <small><span class="font-weight-semibold text-dark">Phone:</span> (123) 456-7890</small>
+                <br>
+                <small>support@themenate.com</small>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function formatCurrency(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Định dạng giá hiển thị cho từng phần tử có class "price"
+        const priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            const price = parseInt(element.innerText.replace(/\D/g, '')); // Chuyển nội dung sang số và bỏ các ký tự không phải số
+            if (!isNaN(price)) {
+                element.innerText = formatCurrency(price); // Đặt lại nội dung theo định dạng
+            }
+        });
+    });
+</script>

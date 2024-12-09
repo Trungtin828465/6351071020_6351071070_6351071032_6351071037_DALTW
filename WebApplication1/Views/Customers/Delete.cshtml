@@ -1,0 +1,56 @@
+﻿﻿@model WebApplication1.Models.Customer
+
+@{
+    ViewBag.Title = "Delete Customer";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2>Delete Customer</h2>
+
+<div class="page-header no-gutters">
+    <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+        <div class="media align-items-center m-b-15">
+            <div class="avatar avatar-image rounded" style="height: 70px; width: 70px;">
+                <img src="~/Content/img_customer/@Model.ImgCustomer" alt="Customer Image" />
+            </div>
+            <div class="m-l-15">
+                <h4 class="m-b-0">Delete Customer</h4>
+                <p class="text-muted m-b-0">Are you sure you want to delete this customer?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.FullName)</dt>
+        <dd>@Html.DisplayFor(model => model.FullName)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.Email)</dd>
+        @*<dt>@Html.DisplayNameFor(model => model.Password)</dt>
+            <dd>@Html.DisplayFor(model => model.Password)</dd>*@
+
+        @*<dt>@Html.DisplayNameFor(model => model.Images)</dt>
+            <dd>@Html.DisplayFor(model => model.Images)</dd>*@
+
+        <dt>@Html.DisplayNameFor(model => model.Phone)</dt>
+        <dd>@Html.DisplayFor(model => model.Phone)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Gender)</dt>
+        <dd>@Html.DisplayFor(model => model.Gender)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Address)</dt>
+        <dd>@Html.DisplayFor(model => model.Address)</dd>
+    </dl>
+</div>
+
+<!-- Delete Confirmation Form -->
+@using (Html.BeginForm("Delete", "Customers", new { id = Model.CustomerID }, FormMethod.Post, new { onsubmit = "return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions mt-3">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary ml-2" })
+    </div>
+}

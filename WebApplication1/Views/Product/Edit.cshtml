@@ -1,0 +1,120 @@
+﻿@model WebApplication1.Models.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<!-- Begin form for editing product -->
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <h2>Edit Product</h2>
+    <!-- Hidden field for Product ID -->
+    @Html.HiddenFor(model => model.ProductID)
+
+    <div class="page-header no-gutters has-tab">
+        <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+            <div class="media align-items-center m-b-15">
+                <div class="avatar avatar-image rounded" style="height: 70px; width: 70px">
+                    <img src="~/Content/img/@Model.Brand.BrandName/@Model.ProductName/@Model.ImageUrl" alt="">
+                </div>
+                <div class="m-l-15">
+                    <h4 class="m-b-0">@Model.ProductName</h4>
+                    <p class="text-muted m-b-0">Code: @Model.ProductID</p>
+                </div>
+            </div>
+            <div class="m-b-15">
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-tone m-r-5">
+                    <i class="anticon anticon-save"></i>
+                    <span>Save</span>
+                </button>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">Basi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#product-edit-option">
+                    Detailed Images
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade active show" id="product-edit-basic">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Product Name -->
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productName">Product Name</label>
+                        @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control", placeholder = "Enter product name" })
+                    </div>
+
+                    <!-- Product Price -->
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productPrice">Price</label>
+                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", type = "number", step = "0.01", placeholder = "Enter product price" })
+                    </div>
+
+                    <!-- Brand Dropdown -->
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="brandId">Brand</label>
+                        @Html.DropDownListFor(model => model.BrandID, new SelectList(ViewBag.Brands, "BrandID", "BrandName"), "Select a Brand", new { @class = "form-control" })
+                    </div>
+
+                    <!-- Category Dropdown -->
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="categoryId">Category</label>
+                        @*<p> trống data</p>*@
+                        @Html.DropDownListFor(model => model.CategoryID, new SelectList(ViewBag.Categorie, "CategoryID", "CategoryName"), "Select a Category", new { @class = "form-control" })
+                    </div>
+
+                    <!-- Supplier ID -->
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="supplierId">Supplier</label>
+                        @Html.TextBoxFor(model => model.SupplierID, new { @class = "form-control", type = "number", placeholder = "Enter supplier ID" })
+                    </div>
+
+                    <!--  -->
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="StockQuantity">StockQuantity</label>
+                        @Html.TextBoxFor(model => model.StockQuantity, new { @class = "form-control", type = "number", placeholder = "Enter stockQuanniti" })
+                    </div>
+
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="Discount">Discount</label>
+                        @Html.TextBoxFor(model => model.Discount, new { @class = "form-control", type = "number", placeholder = "Enter Discount" })
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="imageUpload">Product Image</label>
+                        <input type="file" name="ImageUrl" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="tab-pane fade" id="product-edit-option">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="StockQuantity">DEtaik</label>-->
+                        @*@Html.TextBoxFor(model => model, new { @class = "form-control", type = "number", placeholder = "Enter stockQuanniti" })*@
+                    <!--</div>
+                </div>
+
+            </div>
+
+        </div>-->
+
+
+        <!-- Back to list button -->
+        <a href="@Url.Action("Index", "Product")" class="btn btn-primary btn-tone m-r-5">Back to list</a>
+    </div>
+}

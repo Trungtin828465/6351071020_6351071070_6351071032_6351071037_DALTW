@@ -1,0 +1,525 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.nav-menu {
+    display: flex;
+    list-style-type: none;
+    padding: 0 0 0 0;
+    align-items: center;
+    background-color: #65635e;
+}
+
+    .nav-menu > li {
+        padding: 10px 15px;
+        position: relative;
+    }
+
+
+        .nav-menu > li > a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 650px;
+    /*    Full width to accommodate columns */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+    .dropdown-content .row {
+        display: flex;
+        justify-content: space-between;
+        /*        Spread columns evenly */
+        padding: 10px;
+    }
+
+    .dropdown-content b {
+        color: white;
+    }
+
+    .dropdown-content .column {
+        flex: 1;
+        /*        All columns take equal width */
+        margin-right: 10px;
+    }
+
+        .dropdown-content .column:last-child {
+            margin-right: 0;
+            /*            No margin on the last column */
+        }
+
+    .dropdown-content a {
+        color: white;
+        padding: 8px 10px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+v
+Search Bar and Icons
+.search-container {
+    display: none;
+    display: flex;
+    align-items: center;
+}
+
+
+.search-container input {
+    /*        padding: 5px;*/
+    margin-right: 5px;
+}
+
+.icon-links a {
+    color: black;
+    margin-left: 10px;
+}
+
+.logout-menu.hidden {
+    display: none;
+}
+
+.logout-menu {
+    position: absolute;
+    top: 30px;
+    background-color: #444;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+    .logout-menu a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 10px;
+        display: block;
+    }
+
+        .logout-menu a:hover {
+            background-color: #555;
+        }
+
+.icon-links a {
+    color: black;
+    margin-left: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        background-color: #333;
+    }
+
+        .nav-menu > li {
+            display: block;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+    .dropdown-content {
+        position: relative;
+        background-color: #333;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%
+    }
+
+        /*         Keep columns in a row even on smaller screens */
+        .dropdown-content .row {
+            flex-wrap: nowrap;
+        }
+
+        .dropdown-content .column {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #555;
+            }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .tieude {
+        color: white;
+    }
+}
+
+@media (min-width: 768px) {
+    .nav-menu {
+        flex-wrap: wrap; /* Cho phép tự động xuống dòng nếu cần */
+        background-color: #65635e;
+        justify-content: center;
+    }
+
+        .nav-menu > li {
+            padding: 10px 15px;
+            position: relative;
+        }
+
+            .nav-menu > li > a {
+                color: white;
+                text-decoration: none;
+                font-size: 16px;
+            }
+}
+z
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.nav-menu {
+    display: flex;
+    list-style-type: none;
+    padding: 0 5% 0 5%;
+    align-items: center;
+    background-color: #65635e;
+}
+
+    .nav-menu > li {
+        padding: 10px 15px;
+        position: relative;
+    }
+
+
+        .nav-menu > li > a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 650px;
+    /*    Full width to accommodate columns */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+    .dropdown-content .row {
+        display: flex;
+        justify-content: space-between;
+        /*        Spread columns evenly */
+        padding: 10px;
+    }
+
+    .dropdown-content b {
+        color: white;
+    }
+
+    .dropdown-content .column {
+        flex: 1;
+        /*        All columns take equal width */
+        margin-right: 10px;
+    }
+
+        .dropdown-content .column:last-child {
+            margin-right: 0;
+            /*            No margin on the last column */
+        }
+
+    .dropdown-content a {
+        color: white;
+        padding: 8px 10px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+v
+Search Bar and Icons
+.search-container {
+    display: none;
+    display: flex;
+    align-items: center;
+}
+
+
+.search-container input {
+    /*        padding: 5px;*/
+    margin-right: 5px;
+}
+
+.icon-links a {
+    color: black;
+    margin-left: 10px;
+}
+
+.logout-menu.hidden {
+    display: none;
+}
+
+.logout-menu {
+    position: absolute;
+    top: 30px;
+    background-color: #444;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+    .logout-menu a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 10px;
+        display: block;
+    }
+
+        .logout-menu a:hover {
+            background-color: #555;
+        }
+
+.icon-links a {
+    color: black;
+    margin-left: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        background-color: #333;
+    }
+
+        .nav-menu > li {
+            display: block;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+    .dropdown-content {
+        position: relative;
+        background-color: #333;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%
+    }
+
+        /*         Keep columns in a row even on smaller screens */
+        .dropdown-content .row {
+            flex-wrap: nowrap;
+        }
+
+        .dropdown-content .column {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #555;
+            }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .tieude {
+        color: white;
+    }
+}
+
+@media (min-width: 768px) {
+    .nav-menu {
+        flex-wrap: wrap; /* Cho phép tự động xuống dòng nếu cần */
+        background-color: #65635e;
+        justify-content: center;
+    }
+
+        .nav-menu > li {
+            padding: 10px 15px;
+            position: relative;
+        }
+
+            .nav-menu > li > a {
+                color: white;
+                text-decoration: none;
+                font-size: 16px;
+            }
+}
+
+/*@media screen and (max-width: 767px) {*/
+/*    Điều chỉnh cho màn hình nhỏ hơn 768px */
+/*.nav-menu {
+        flex-wrap: wrap;*/
+
+/*        Cho phép xuống dòng khi không đủ chỗ */
+/*justify-content: flex-start;*/
+/*        Canh trái các phần tử */
+/*}
+
+        .nav-menu > li {
+            margin-right: 35px;*/
+
+/*                chỉnh khoảng cách giữa các phần tử menu */
+/*}
+
+    .dropdown-content {
+        display: none;*/
+/*        Ẩn dropdown trong màn hình nhỏ */
+/*position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);  
+        background-color: white;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        z-index: 10;
+        min-width: 768px;*/
+/*        Điều chỉnh độ rộng của dropdown */
+/*white-space: nowrap;
+    }*/
+
+/*     Ẩn menu logout khi ở chế độ mobile */
+/*.logout-menu {
+        display: none;
+    }
+}*/
+
+/* Các phần khác vẫn giữ nguyên khi màn hình lớn hơn 768px */
+/*@media screen and (min-width: 768px) {
+    .nav-menu {
+        flex-wrap: nowrap;*/
+/*        Không cho xuống dòng khi màn hình lớn */
+/*justify-content: center;*/
+/*        Canh giữa nội dung */
+/*}
+
+        .nav-menu > li {
+            position: relative;
+            margin-right: 35px;
+        }
+
+            .nav-menu > li > a {
+                text-decoration: none;
+                color: black;
+                padding: 10px;
+                font-size: 18px;
+            }
+
+    .dropdown-content {
+        display: none;*/
+/*        Ẩn dropdown khi không hover */
+/*position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%); 
+        background-color: white;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        z-index: 10;
+        min-width: 768px;
+        white-space: nowrap;
+    }
+        .dropdown-content .row {
+            display: flex;
+        }
+
+        .dropdown-content .column {
+            margin-right: 30px;
+            width: 256px;
+        }
+
+        .dropdown-content b {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .dropdown-content hr {
+            margin: 10px 0;
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 5px 0;
+            text-decoration: none;
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+             Hover state 
+            .dropdown-content a:hover {
+                background-color: #f0f0f0;*/
+/*                Change background color on hover */
+/*color: red;*/
+/*                Change text color on hover */
+/*}*/
+/*     Show dropdown on hover */
+/*.dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .logout-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        z-index: 20;
+    }
+
+        .logout-menu.hidden {
+            display: none;
+        }
+
+    .logout-button {
+        display: block;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: black;
+        margin-bottom: 5px;
+    }
+
+        .logout-button:hover {
+            color: red;
+        }
+}*/

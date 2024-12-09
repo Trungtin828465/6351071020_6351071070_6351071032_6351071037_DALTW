@@ -1,0 +1,54 @@
+﻿﻿@{
+    Layout = null;
+}
+
+@model WebApplication1.Models.OTP
+
+<head>
+    <link href="~/Content/ResetPassword/css/util.css" rel="stylesheet" />
+    <link href="~/Content/ResetPassword/fonts/iconic/css/material-design-iconic-font.min.css" rel="stylesheet" />
+    <link href="~/Content/ResetPassword/css/main.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="~/Content/Admin/assets/images/logo/favicon.png">
+
+</head>
+
+<style>
+    .text-danger {
+        color: red;
+        font-weight: bold;
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+    }
+</style>
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+        <div class="wrap-login100">
+            @Html.ActionLink(" ", "ResetPassword", "Account", null, new { @class = "fas fa-arrow-left", style = "color:white; text-decoration: none;" })
+
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "login100-form validate-form" }))
+            {
+                <span class="login100-form-title p-b-34 p-t-27">
+                    confirm otp
+                </span>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <p></p>
+                <div class="wrap-input100 validate-input" style=" margin-top: 20px !important; display:flex ">
+                    <i class="fa fa-envelope" style="color:white;margin-top: 15px "></i>  <!-- Hình bức thư -->
+                    @Html.TextBoxFor(model => model.OTPCode, new { @class = "form-control input100", type = "otp", placeholder = "Nhập mã OTP", style = "padding: 0 5px 0 15px;" })
+                    @Html.ValidationMessageFor(model => model.OTPCode, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button id="forgot_btn" type="submit" class="login100-form-btn">
+                        Submit
+                    </button>
+                </div>
+
+                <div class="text-center p-t-90">
+                    @Html.ActionLink("Sign In", "Login", "Account")
+                </div>
+            }
+        </div>
+    </div>
+</div>

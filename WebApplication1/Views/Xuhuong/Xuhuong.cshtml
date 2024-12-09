@@ -1,0 +1,793 @@
+﻿@model WebApplication1.Controllers.XuhuongController.YourViewModel
+﻿
+@{
+    ViewBag.Title = "Xuhuong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Nếu sử dụng Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="~/Content/reponsive.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="~/Content/test.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<article>
+   
+
+    </script>
+
+    <!--VIDEO-->
+    <div style="display: flex; justify-content: center">
+        <video src="https://media.rolex.com/video/upload/c_limit,w_1920/f_auto:video/q_auto:best/v1/rolexcom/new-watches/2024/hub-new-watches/videos/cover/watches-new-watches-2024-hub-cover-autoplay"
+               width="100%"
+               autoplay
+               muted
+               loop></video>
+    </div>
+
+    <div class="nhan-hang">
+        <img style="width:15%" src="~/Content/img_index/Casio.jpg" onclick="sendImageName('Casio'), redirectToBanHang()" />
+        <img style="width:15%" src="~/Content/img_index/Seiko.jpg" onclick="sendImageName('Seiko'), redirectToBanHang()" />
+        <img style="width:15%" src="~/Content/img_index/Orient.jpg" onclick="sendImageName('Orient'), redirectToBanHang()" />
+        <img style="width:15%" src="~/Content/img_index/Bentley.jpg" onclick="sendImageName('Bentley'), redirectToBanHang()" />
+    </div>
+    <div class="nhan-hang">
+        <img style="width:15%" src="~/Content/img_index/G-Shock.jpg" onclick="sendImageName('G-Shock'), redirectToBanHang()" />
+        <img style="width:15%" src="~/Content/img_index/Citizen.jpg" onclick="sendImageName('Citizen'), redirectToBanHang()" />
+        <img style="width:15%" src="~/Content/img_index/Olym Pianus.jpg" onclick="sendImageName('Olym Pianus'), redirectToBanHang()" />
+        <img style="width:15%" src="~/Content/img_index/Tissot.jpg" onclick="sendImageName('Tissot'), redirectToBanHang()" />
+    </div>
+
+    <script>
+        function sendImageName(imageName) {
+            var currentPage = window.location.pathname.split('/').pop();
+            //alert('trang đang click ' + imageName);
+
+            var data = new URLSearchParams();
+            data.append('imageName', imageName);
+
+            fetch('/XuHuong/XuHuong', {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.result); // Hiển thị kết quả trả về từ server
+
+                    // Chuyển hướng đến trang BanHang sau khi nhận được phản hồi
+                    window.location.href = '/XuHuong/BanHang?imageName=' + encodeURIComponent(result.result);
+                })
+                .catch(error => {
+                    console.error("Error: ", error); // Xử lý lỗi
+                });
+        }
+
+    </script>
+
+
+    <!--Gu nao cung co-->
+    <div>
+        <p class="gunaocungco" style="width:100%; margin-top: 50px">
+            Gu nào cũng có
+        </p>
+    </div>
+    <!--Lich lam don gian tinh te-->
+    <div class="body-anh d-flex justify-content-center"
+         style="margin-left: 50px; border-radius: 5px;">
+        <div>
+            <img class="anh1" src="~/Content/img_index/DonGian.jpg" alt="Don gian" />
+            <p class="caption">ĐƠN GIẢN</p>
+        </div>
+        <div>
+            <img class="anh2" src="~/Content/img_index/TinhTe.jpg" alt="Tinh te" />
+            <p class="caption" style="margin-left: 1px">TINH TẾ</p>
+        </div>
+        <div>
+            <img class="anh3" src="~/Content/img_index/LichLam.jpg" alt="Lich Lam" />
+            <p class="caption" style="margin-left: 1px">LỊCH LÃM</p>
+        </div>
+    </div>
+    <!--GMT-->
+    <div style="margin-top: 50px">
+        <!--Cổ điển-->
+        <div>
+            <!--gu nao cung co -- co dien-->
+            <div>
+                <p class="gunaocungco" style="width: 100%; margin-top: 50px; margin-left:20px">
+                    Cổ điển
+                </p>
+            </div>
+            <!--Lich lam don gian tinh te -- co dien -->
+            <div class="body-anh d-flex justify-content-center"
+                 style="margin-left: 50px">
+                <div>
+                    <img class="anh1" src="~/Content/img_index/co_dien_1.jpg" alt="Don gian" />
+                </div>
+                <div>
+                    <img class="anh2" src="~/Content/img_index/co_dien_3.jpg" alt="Tinh te" />
+                </div>
+                <div>
+                    <img class="anh3" src="~/Content/img_index/co_dien_2.jpg" alt="Lich Lam" />
+                </div>
+            </div>
+            <!--vẻ đẹp của sự tinh tế-->
+            <div>
+                <p class="vedep">
+                    Vẻ đẹp của sự tinh tế, đẳng cấp <br />
+                    vượt thời gian.
+                </p>
+            </div>
+            <div class="anhtext">
+                <div class="anhgmt">
+                    <img src="~/Content/img_index/GMT_master.png"
+                         width="800px"
+                         height="500px"
+                         alt="GMT" />
+                </div>
+                <div class="textgmt" d-flex justify-content-center>
+                    <p>Miếng đệm Cerachrom Công nghệ tiên tiến</p>
+                    <p>Kết hợp vành đồng hồ xoay hai màu và kim‑24 giờ</p>
+                    <p>Chức năng GMT Hai múi giờ cùng lúc</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Mot so san pham-->
+    <div class="heading heading-effect text-center mb-4">
+        <h2>
+            <span>Một số sản phẩm Casio</span>
+        </h2>
+    </div>
+
+    <section class="slider-product-one">
+        <div class="container1">
+            <div class="slider-container">
+                <div class="slider-wrapper">
+                    <div class="slider-wrapper-content">
+
+                        <!-- Khối div đầu tiên: In ra 4 sản phẩm Casio đầu tiên -->
+                        <div class="slider-items">
+                            @{
+                                // Lấy danh sách 4 sản phẩm đầu tiên của thương hiệu "Casio"
+                                var casioProductsFirstFour = Model.Product
+                                    .Where(p => p.Brand.BrandName == "Casio" && p.StockQuantity > 0)
+                                    .Take(4)
+                                    .ToList();
+                            }
+                            @foreach (var product in casioProductsFirstFour)
+                            {
+                                var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+                                var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+
+                                <div class="slider-item">
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                        <img src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt=""/>
+                                    </a>
+                                    <div class="slider-text">
+                                        <li class="">@product.ProductName</li>
+                                        <li>
+                                            <a class="price" href="" style="text-decoration: none;">@discountedPrice <sup>d</sup> </a>
+                                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        </li>
+                                        <li class="price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price<sup>d</sup></li>
+                                        <li>
+                                            @{
+                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                double rating = product.AverageRating ?? 0.0;
+
+                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                int fullStars = (int)Math.Floor(rating);
+
+                                                // Kiểm tra có cần nửa sao không (phần thập phân >= 0.5)
+                                                bool hasHalfStar = (rating - fullStars) >0;
+                                            }
+
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= fullStars)
+                                                {
+                                                    // In sao đầy
+                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                }
+                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                {
+                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                }
+                                                else
+                                                {
+                                                    // In sao rỗng
+                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                }
+                                            }
+
+                                        </li>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Khối div thứ hai: In ra 4 sản phẩm Casio tiếp theo -->
+                        <div class="slider-items">
+                            @{
+                                // Lấy danh sách 4 sản phẩm tiếp theo của thương hiệu "Casio", bỏ qua 4 sản phẩm đầu
+                                var casioProductsNextFour = Model.Product
+                                    .Where(p => p.Brand.BrandName == "Casio"&&p.StockQuantity > 0)
+                                    .Skip(4)
+                                    .Take(4)
+                                    .ToList();
+                            }
+                            @foreach (var product in casioProductsNextFour)
+                            {
+                                var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+                                var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+
+                                <div class="slider-item">
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                        <img src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="" />
+                                    </a>
+                                    <div class="slider-text">
+                                        <li class="">@product.ProductName</li>
+                                        <li>
+                                            <a class="price" href="" style="text-decoration: none;">@discountedPrice <sup>d</sup> </a>
+                                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        </li>
+                                        <li class="price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price<sup>d</sup></li>
+                                        <li>
+                                            @{
+                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                double rating = product.AverageRating ?? 0.0;
+
+                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                int fullStars = (int)Math.Floor(rating);
+
+                                                // Kiểm tra có cần nửa sao không (phần thập phân >= 0.5)
+                                                bool hasHalfStar = (rating - fullStars) >0;
+                                            }
+                                   
+                                            @for (int i = 1; i <= 5; i++)
+                                            { 
+                                                if (i <= fullStars)
+                                                {
+                                                    // In sao đầy
+                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                }
+                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                {
+                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                }
+                                                else
+                                                {
+                                                    // In sao rỗng
+                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                }
+                                            }
+
+                                        </li>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="slider-controls">
+                        <i class="fa-solid fa-chevron-left fa-chevron-left-one"></i>
+                        <i class="fa-solid fa-chevron-right fa-chevron-right-one"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Second Slider -->
+    <div class="heading heading-effect text-center mb-4">
+        <h2>
+            <span>Một số sản phẩm Tissot</span>
+        </h2>
+    </div>
+    <section class="slider-product-two">
+        <div class="container2">
+            <div class="slider-container">
+                <div class="slider-wrapper">
+                    <div class="slider-wrapper-content">
+                        <div class="slider-items">
+                            @{
+                                var TissotProductsFirstFour = Model.Product
+                                    .Where(p => p.Brand.BrandName == "Tissot" && p.StockQuantity > 0)
+                                    .Take(4)
+                                    .ToList();
+                            }
+                            @foreach (var product in TissotProductsFirstFour)
+                            {
+                                var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+                                var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+
+                                <div class="slider-item">
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                        <img src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="" />
+                                    </a>
+                                    <div class="slider-text">
+                                        <li class="">@product.ProductName</li>
+                                        <li>
+                                            <a class="price" href="" style="text-decoration: none;">@discountedPrice <sup>d</sup> </a>
+                                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        </li>
+                                        <li class="price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price<sup>d</sup></li>
+                                        <li>
+                                            @{
+                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                double rating = product.AverageRating ?? 0.0;
+
+                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                int fullStars = (int)Math.Floor(rating);
+
+                                                // Kiểm tra có cần nửa sao không (phần thập phân >= 0.5)
+                                                bool hasHalfStar = (rating - fullStars) > 0;
+                                            }
+
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= fullStars)
+                                                {
+                                                    // In sao đầy
+                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                }
+                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                {
+                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                }
+                                                else
+                                                {
+                                                    // In sao rỗng
+                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                }
+                                            }
+
+                                        </li>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+
+                        <!-- Khối div thứ hai: In ra 4 sản phẩm Tissot tiếp theo -->
+                        <div class="slider-items">
+                            @{
+                                // Lấy danh sách 4 sản phẩm tiếp theo của thương hiệu "Casio", bỏ qua 4 sản phẩm đầu
+                                var TissotProductsNextFour = Model.Product
+                                    .Where(p => p.Brand.BrandName == "Tissot" && p.StockQuantity > 0)
+                                    .Skip(4)
+                                    .Take(4)
+                                    .ToList();
+                            }
+                            @foreach (var product in TissotProductsNextFour)
+                            {
+                                var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+                                var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+
+                                <div class="slider-item">
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                        <img src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="" />
+                                    </a>
+                                    <div class="slider-text">
+                                        <li class="">@product.ProductName</li>
+                                        <li>
+                                            <a class="price" href="" style="text-decoration: none;">@discountedPrice <sup>d</sup> </a>
+                                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        </li>
+                                        <li class="price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price<sup>d</sup></li>
+                                        <li>
+                                            @{
+                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                double rating = product.AverageRating ?? 0.0;
+
+                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                int fullStars = (int)Math.Floor(rating);
+
+                                                // Kiểm tra có cần nửa sao không (phần thập phân >= 0.5)
+                                                bool hasHalfStar = (rating - fullStars) >0;
+                                            }
+
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= fullStars)
+                                                {
+                                                    // In sao đầy
+                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                }
+                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                {
+                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                }
+                                                else
+                                                {
+                                                    // In sao rỗng
+                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                }
+                                            }
+
+                                        </li>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <i class="fa-solid fa-chevron-left fa-chevron-left-two"></i>
+                        <i class="fa-solid fa-chevron-right fa-chevron-right-two"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Third slider-->
+    <div class="heading heading-effect text-center mb-4">
+        <h2>
+            <span>Một số sản phẩm của Orient</span>
+        </h2>
+    </div>
+    <section class="slider-product-third">
+        <div class="container2">
+            <div class="slider-container">
+                <div class="slider-wrapper">
+                    <div class="slider-wrapper-content">
+                        <div class="slider-items">
+                            @{
+                                var OrientProductsFirstFour = Model.Product
+                                    .Where(p => p.Brand.BrandName == "Orient" && p.StockQuantity > 0)
+                                    .Take(4)
+                                    .ToList();
+                            }
+                            @foreach (var product in OrientProductsFirstFour)
+                            {
+                                var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+                                var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+
+                                <div class="slider-item">
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                        <img src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="" />
+                                    </a>
+                                    <div class="slider-text">
+                                        <li class="">@product.ProductName</li>
+                                        <li>
+                                            <a class="price" href="" style="text-decoration: none;">@discountedPrice <sup>d</sup> </a>
+                                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        </li>
+                                        <li class="price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price<sup>d</sup></li>
+                                        <li>
+                                            @{
+                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                double rating = product.AverageRating ?? 0.0;
+
+                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                int fullStars = (int)Math.Floor(rating);
+
+                                                // Kiểm tra có cần nửa sao không (phần thập phân >= 0.5)
+                                                bool hasHalfStar = (rating - fullStars) > 0;
+                                            }
+                                          
+
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= fullStars)
+                                                {
+                                                    // In sao đầy
+                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                }
+                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                {
+                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                }
+                                                else
+                                                {
+                                                    // In sao rỗng
+                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                }
+                                            }
+
+                                        </li>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="slider-items">
+                            @{
+                                var OrientProductsNextFour = Model.Product
+                                    .Where(p => p.Brand.BrandName == "Orient" && p.StockQuantity > 0)
+                                    .Skip(4)
+                                    .Take(4)
+                                    .ToList();
+                            }
+                            @foreach (var product in OrientProductsNextFour)
+                            {
+                                var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+                                var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+
+                                <div class="slider-item">
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                        <img src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="" />
+                                    </a>
+                                    <div class="slider-text">
+                                        <li class="">@product.ProductName</li>
+                                        <li>
+                                            <a class="price" href="" style="text-decoration: none;">@discountedPrice <sup>d</sup> </a>
+                                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        </li>
+                                        <li class="price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price<sup>d</sup></li>
+                                        <li>
+                                            @{
+                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                double rating = product.AverageRating ?? 0.0;
+
+                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                int fullStars = (int)Math.Floor(rating);
+
+                                                // Kiểm tra có cần nửa sao không (phần thập phân >= 0.5)
+                                                bool hasHalfStar = (rating - fullStars) >0;
+                                            }
+
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= fullStars)
+                                                {
+                                                    // In sao đầy
+                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                }
+                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                {
+                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                }
+                                                else
+                                                {
+                                                    // In sao rỗng
+                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                }
+                                            }
+
+                                        </li>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <i class="fa-solid fa-chevron-left fa-chevron-left-third"></i>
+                        <i class="fa-solid fa-chevron-right fa-chevron-right-third"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--4-->
+    <div class="heading heading-effect text-center mb-4">
+        <h2>
+            <span>Một số sản phẩm của Seiko</span>
+        </h2>
+    </div>
+    <section class="slider-product-fourth">
+        <div class="container2">
+            <div class="slider-container">
+                <div class="slider-wrapper">
+                    <div class="slider-wrapper-content">
+                        <div class="slider-items">
+                            @{
+                                // Lấy danh sách 4 sản phẩm đầu tiên của thương hiệu "Seiko
+                                var SeikoProductsFirstFour = Model.Product
+                                                        .Where(p => p.Brand.BrandName == "Seiko" && p.StockQuantity > 0)
+                                                        .Take(4)
+                                                        .ToList();
+                            }
+                            @foreach (var product in SeikoProductsFirstFour)
+                            {
+                                var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+                                var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+
+                                <div class="slider-item">
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                        <img src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="" />
+                                    </a>
+                                    <div class="slider-text">
+                                        <li class="">@product.ProductName</li>
+                                        <li>
+                                            <a class="price" href="" style="text-decoration: none;">@discountedPrice <sup>d</sup> </a>
+                                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        </li>
+                                        <li class="price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price<sup>d</sup></li>
+                                        <li>
+                                            @{
+                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                double rating = product.AverageRating ?? 0.0;
+
+                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                int fullStars = (int)Math.Floor(rating);
+
+                                                // Kiểm tra có cần nửa sao không (phần thập phân >= 0.5)
+                                                bool hasHalfStar = (rating - fullStars) > 0;
+                                            }
+
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= fullStars)
+                                                {
+                                                    // In sao đầy
+                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                }
+                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                {
+                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                }
+                                                else
+                                                {
+                                                    // In sao rỗng
+                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                }
+                                            }
+
+                                        </li>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="slider-items">
+                            @{
+                                // Lấy danh sách 4 sản phẩm tiếp theo của thương hiệu "Seiko", bỏ qua 4 sản phẩm đầu
+                                var SeikoProductsNextFour = Model.Product
+                                    .Where(p => p.Brand.BrandName == "Seiko" && p.StockQuantity > 0)
+                                    .Skip(4)
+                                    .Take(4)
+                                    .ToList();
+                            }
+                            @foreach (var product in SeikoProductsNextFour)
+                            {
+                                var discountedPrice = product.Price - (product.Price * product.Discount / 100);
+                                var brandName = Model.Brand.FirstOrDefault(b => b.BrandID == product.BrandID)?.BrandName ?? "Unknown Brand";
+
+                                <div class="slider-item">
+                                    <a href="@Url.Action("Chi_tiet", "XuHuong", new { id = product.ProductID })">
+                                        <img src="~/Content/img/@brandName/@product.ProductName/@product.ImageUrl" alt="" />
+                                    </a>
+                                    <div class="slider-text">
+                                        <li class="">@product.ProductName</li>
+                                        <li>
+                                            <a class="price" href="" style="text-decoration: none;">@discountedPrice <sup>d</sup> </a>
+                                            <span style="background-color: rgb(249, 233, 226); color: rgb(239, 85, 85); display: inline-block; margin-left: 10px;">-@product.Discount%</span>
+                                        </li>
+                                        <li class="price" style="color: rgb(153, 153, 153); text-decoration: line-through; display: inline-block;">@product.Price<sup>d</sup></li>
+                                        <li>
+                                            @{
+                                                // Lấy giá trị AverageRating và ép kiểu double (nếu cần)
+                                                double rating = product.AverageRating ?? 0.0;
+
+                                                // Tính số sao đầy (làm tròn xuống giá trị)
+                                                int fullStars = (int)Math.Floor(rating);
+
+                                                // Kiểm tra có cần nửa sao không (phần thập phân >= 0.5)
+                                                bool hasHalfStar = (rating - fullStars) > 0;
+                                            }
+
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= fullStars)
+                                                {
+                                                    // In sao đầy
+                                                    <i class="fas fa-star yellow-star-tin"></i>
+                                                }
+                                                else if (i == fullStars + 1 && hasHalfStar)
+                                                {
+                                                    // In nửa sao (chỉ một lần ngay sau các sao đầy)
+                                                    <i class="bi bi-star-half yellow-star-tin"></i>
+                                                }
+                                                else
+                                                {
+                                                    // In sao rỗng
+                                                    <i class="far fa-star yellow-star-tin"></i>
+                                                }
+                                            }
+
+                                        </li>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <i class="fa-solid fa-chevron-left fa-chevron-left-fourth"></i>
+                        <i class="fa-solid fa-chevron-right fa-chevron-right-fourth"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Cua hang dong ho- footer-->
+    <div class=" container-fluid strwatchst1 ">
+        <div class="row">
+
+
+            <div class="col-md-4 strwatchst1__r">
+                <figure class="figure__hover wow zoomIn">
+                    <img class="lazy after-lazy"
+                         alt="WatchStore.vn"
+                         width="500"
+                         height="400"
+                         src="~/Content/img_index/anh_footer.jpg" />
+                </figure>
+            </div>
+            <div class="col-md-8 strwatchst1__l">
+                <div class="strwatchsr1__logo">
+                    <img class="lazy after-lazy"
+                         alt="WatchStore.vn"
+                         width="160px"
+                         height="120px"
+                         src="~/Content/img_index/anh_watchstore.jpg" />
+                </div>
+                <div class="tong" style="margin-top: -80px">
+                    <div class="strwatchsr1__title" style="background-color: black">
+                        Cửa hàng đồng hồ chính hãngc
+                    </div>
+                    <div class="strwatchsr1__des" style="background-color: black">
+                        <p style="background-color: black">
+                            Được thành lập vào năm 2020, trải qua 4 năm hoạt động và phát
+                            triển, WatchStore trở thành đại lý ủy quyền cho rất nhiều thương
+                            hiệu đến từ Nhật Bản và Thụy Sỹ chuyên bán đồng hồ chính
+                            hãng.<br />&nbsp;
+                        </p>
+                        <p style="background-color: black">
+                            Chính sách bảo hành 5 năm cùng với các chương trình giảm giá tốt
+                            sẽ giúp bạn mua sắm dễ dàng. Với đội ngũ nhân viên tận tình, am
+                            hiểu về đồng hồ, Tiệm Đồng Hồ WatchStore rất vui được phục vụ
+                            quý khách. WatchStore hứa sẽ hoàn thiện hơn mỗi ngày để mang đến
+                            trải nghiệm tuyệt vời nhất có thể cho mọi khách hàng. Chúc quý
+                            khách mọi điều tốt lành!
+                        </p>
+                    </div>
+                </div>
+                @*<div class="view__more3" style="background-color: rgb(0, 0, 0)">
+                    <a title="xem thêm">Xem thêm</a>
+                </div>*@
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function formatCurrency(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Định dạng giá hiển thị cho từng phần tử có class "price"
+            const priceElements = document.querySelectorAll(".price");
+
+            priceElements.forEach(function (element) {
+                const price = parseInt(element.innerText.replace(/\D/g, '')); // Chuyển nội dung sang số và bỏ các ký tự không phải số
+                if (!isNaN(price)) {
+                    element.innerText = formatCurrency(price); // Đặt lại nội dung theo định dạng
+                }
+            });
+        });
+    </script>
+    <script src="~/Scripts/js.js"></script>
+
+</article>
