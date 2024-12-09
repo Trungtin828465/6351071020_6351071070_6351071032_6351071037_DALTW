@@ -234,7 +234,7 @@ namespace admin4.Controllers
 
                         string fileNameReality = Path.GetFileName(ImageDetail.FileName);
                         string filePathReality = Path.Combine(newDirectoryPathRelity, fileName);
-                        ImageDetail.SaveAs(filePath);
+                        //ImageDetail.SaveAs(filePath);
 
                         var realityImage = new Images_Reality
                         {
