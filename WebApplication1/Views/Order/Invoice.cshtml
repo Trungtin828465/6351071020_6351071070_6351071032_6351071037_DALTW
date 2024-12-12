@@ -11,6 +11,11 @@
             <h2>INVOICE</h2>
         </div>
     </div>
+    <a href="@Url.Action("ExportToPDF_chitietdonhang", "Order", new { orderId = Model.OrderID })" class="btn btn-primary">
+        <i class="anticon anticon-file-excel m-r-5"></i>
+        <span>Xuất PDF</span>
+    </a>
+
 
     <div class="row m-t-20 lh-2">
         <div class="col-sm-9">
@@ -18,7 +23,7 @@
             <div class="inline-block">
                 <address class="p-l-7">
                     <span class="text-dark" title="Customer Name">Tên khách hàng: </span>
-                    <span class="font-weight-semibold text-dark">@Model.Customer.FullName</span><br>
+                    <span class="font-weight-semibold text-dark">@Model.ReceiverName</span><br>
                     <span class="text-dark" title="Address">Địa chỉ: </span>
                     <span>@Model.ReceiverAddress</span><br>
                     <span class="text-dark" title="Phone">Phone: </span>
@@ -39,13 +44,14 @@
             <div class="float-right">@Model.OrderDate.Value.ToString("dd-M-yyyy")</div>
         </div>
     </div>
+
     <div class="m-t-20">
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Items</th>
+                        <th>STT</th>
+                        <th>Product Name</th>
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Total</th>
@@ -61,8 +67,10 @@
                                 <th>@index</th>
                                 <td>@item.Product.ProductName</td>
                                 <td>@item.Quantity</td>
-                                <td class="price">@item.UnitPrice</td> <!-- Định dạng tiền tệ -->
-                                <td class="price">@(item.Quantity * item.UnitPrice)</td> <!-- Định dạng tiền tệ -->
+                                <td class="">
+                                    @String.Format("{0:C}", (item.Product.Price * (1 - (Convert.ToDecimal(item.Product.Discount) / 100))))
+                                </td>
+                                <td class="price">@item.UnitPrice </td> <!-- Định dạng tiền tệ -->
                             </tr>
                             index++;
                         }
@@ -74,12 +82,21 @@
             <div class="col-sm-12">
                 <div class="float-right text-right">
 
-                    <p>VAT (5%): @String.Format("{0:C}", Model.OrderItem.Sum(item => item.Quantity * item.UnitPrice) * 0.05M)</p>
-                    <hr>
-                    <h3 class="price">
-                        <span class="font-weight-semibold text-dark ">Total :</span>
-                        @((Model.OrderItem.Sum(item => item.Quantity * item.UnitPrice)-(Model.OrderItem.Sum(item => item.Quantity * item.UnitPrice) * 0.10M)))
-                    </h3>
+                    <p>Tổng hóa đơn: @String.Format("{0:C}", ViewBag.TotalAmount)</p>
+                    @if (ViewBag.TotalAmount != ViewBag.TotalOrder)
+                    {
+                        <p>Voucher: @String.Format("{0:C}", ViewBag.TotalOrder - ViewBag.TotalAmount)</p>
+                        <h3>
+                            <p class="font-weight-semibold text-dark">Tổng Tiền:  @String.Format("{0:C}", ViewBag.TotalAmount)</p>
+
+                        </h3>
+                    }
+                    else
+                    {
+                    <h3>
+                        <p class="font-weight-semibold text-dark">Tổng Tiền:  @String.Format("{0:C}", ViewBag.TotalAmount)</p>
+
+                    </h3>}
                 </div>
             </div>
         </div>

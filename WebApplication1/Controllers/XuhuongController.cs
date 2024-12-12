@@ -12,6 +12,8 @@ using WebApplication1.Models;
 using System.Data.Entity;
 using Antlr.Runtime.Tree;
 using Org.BouncyCastle.Asn1.X509;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 
 namespace WebApplication1.Controllers
